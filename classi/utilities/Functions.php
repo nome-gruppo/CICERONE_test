@@ -1,11 +1,8 @@
 <?php
 namespace classi\utilities;
 
-<<<<<<< HEAD
-=======
 require_once 'Date.php';
 
->>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 class Functions
 {
 
@@ -15,8 +12,8 @@ class Functions
     /**
      * La funzione code_control controlla che la variabile $code sia una
      * stringa numerica e che la sua lunghezza sia pari a $size
-     * La funzione restituisce una variabile booleana vera se la stringa Ë composta da soli numeri
-     * e la sua lunghezza Ë corretta, falso altrimenti
+     * La funzione restituisce una variabile booleana vera se la stringa √® composta da soli numeri
+     * e la sua lunghezza √® corretta, falso altrimenti
      *
      * @param mixed $code
      *            stringa numerica da controllare
@@ -41,14 +38,14 @@ class Functions
 
     /**
      * La funzione delete_from_array controlla che un elemento sia contenuto nell'array
-     * e, se la ricerca dovesse risultare positiva, l'elemeto verr‡ eliminato
+     * e, se la ricerca dovesse risultare positiva, l'elemeto verr√† eliminato
      *
      * @param mixed $array
      *            array in cui effettuare la ricerca
      * @param mixed $element
      *            elemento da eliminare dall'array
-     * @return array|mixed array restituito dalla funzione. Questo sar‡ privo di $element in caso di ricerca positiva,
-     *         altrimenti sar‡ uguale all'array passato come paramentro
+     * @return array|mixed array restituito dalla funzione. Questo sar√† privo di $element in caso di ricerca positiva,
+     *         altrimenti sar√† uguale all'array passato come paramentro
      */
     public function delete_from_array($array, $element)
     {
@@ -62,12 +59,10 @@ class Functions
             return $array;
         }
     }
-<<<<<<< HEAD
-=======
 
     /**La funzione StringToDate converte una stringa nel formato dd/mm/yyyy in
      * una variabile di tipo \classi\utilities\Date assegnando gli attributi come segue:
-     * 
+     *
      * day = dd
      * month = mm
      * year = yyyy
@@ -89,7 +84,7 @@ class Functions
         }
     }
     /**
-     * 
+     *
      * @param Date $date
      * @return string
      */
@@ -98,11 +93,10 @@ class Functions
         array_push($pieces,$date->getYear());
         array_push($pieces,$date->getMonth());
         array_push($pieces,$date->getDay());
-        
+
         return implode('-', $pieces);
-        
+
     }
->>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 }
 ?>
  
