@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 session_start();
 $nome= $_SESSION["nome"];
 $cognome=$_SESSION['cognome'];
@@ -9,6 +10,16 @@ $citta=$_SESSION['citta'];
 $lingua=$_SESSION['lingua'];
 $lingua2=$_SESSION['lingua2'];
 $lingua3=$_SESSION['lingua3'];
+=======
+namespace classi\users;
+require_once '../classi/users/Cicerone.php';
+
+$cicerone = new Cicerone();
+
+session_start();
+
+$cicerone = unserialize($_SESSION['cicerone']);
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 ?>
 
 
@@ -33,7 +44,11 @@ $lingua3=$_SESSION['lingua3'];
       <ul class="nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+<<<<<<< HEAD
           <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $nome; ?></a>
+=======
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $cicerone->getName(); ?></a>
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
           <ul class="dropdown-menu">
             <li><a href="#">Il mio profilo</a></li>
             <li><a href="#">Another action</a></li>

@@ -2,15 +2,26 @@
 namespace classi\users;
 
 require_once 'User.php';
+<<<<<<< HEAD
 
 use classi\activities\Activity;
 use classi\activities\Review;
+=======
+require_once '..\classi\utilities\Date.php';
+
+use classi\activities\Activity;
+use classi\activities\Review;
+use classi\utilities\Date;
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 
 class Turista extends User
 {
 
+<<<<<<< HEAD
     private $idTurista;
 
+=======
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
     private $activitiesDone = array();
 
     private $myReview = array();
@@ -162,9 +173,15 @@ class Turista extends User
      * {@inheritdoc}
      * @see \classi\users\User::setBirthDate()
      */
+<<<<<<< HEAD
     public function setBirthDate($day, $month, $year)
     {
         // TODO Auto-generated method stub
+=======
+    public function setBirthDate(Date $birthDate)
+    {
+       parent::setBirthDate($birthDate);
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
     }
 
     /**
@@ -216,6 +233,31 @@ class Turista extends User
     {
         parent::setSurname($surname);
     }
+<<<<<<< HEAD
+=======
+    /**
+     * {@inheritDoc}
+     * @see \classi\users\User::getId()
+     */
+    public function getId()
+    {
+        // TODO Auto-generated method stub
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \classi\users\User::setId()
+     */
+    public function setId($id)
+    {
+        parent::setId($id);
+        
+    }
+
+
+
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
     
     
 }

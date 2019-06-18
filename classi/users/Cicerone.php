@@ -1,6 +1,7 @@
 <?php
 namespace classi\users;
 
+<<<<<<< HEAD
 use classi\activities\Activity;
 use classi\utilities\Functions;
 
@@ -11,6 +12,18 @@ class Cicerone extends User
 
     // numero massimo di inserzioni inseribili da cicerone non premium
     private $idCicerone;
+=======
+require_once 'User.php';
+require_once '..\classi\utilities\Date.php';
+
+use classi\activities\Activity;
+use classi\utilities\Functions;
+use classi\utilities\Date;
+class Cicerone extends User
+{
+
+    const MAX_ACTIVITY = 3;    // numero massimo di inserzioni inseribili da cicerone non premium
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 
     private $premiumDate = null;
 
@@ -20,6 +33,11 @@ class Cicerone extends User
 
     public function __construct()
     {}
+<<<<<<< HEAD
+=======
+    
+    
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 
     public function addActivity(\classi\activities\Activity $activity)
     {
@@ -124,9 +142,15 @@ class Cicerone extends User
      * {@inheritDoc}
      * @see \classi\users\User::setBirthDate()
      */
+<<<<<<< HEAD
     public function setBirthDate($day, $month, $year)
     {
         // TODO Auto-generated method stub
+=======
+    public function setBirthDate(Date $birthDate)
+    {
+        parent::setBirthDate($birthDate);
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
         
     }
 
@@ -179,6 +203,29 @@ class Cicerone extends User
         // TODO Auto-generated method stub
         
     }
+<<<<<<< HEAD
+=======
+    /**
+     * {@inheritDoc}
+     * @see \classi\users\User::getId()
+     */
+    public function getId()
+    {
+        // TODO Auto-generated method stub
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \classi\users\User::setId()
+     */
+    public function setId($id)
+    {
+        parent::setId($id);
+    }
+
+
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 
     
     
