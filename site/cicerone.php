@@ -42,7 +42,7 @@ $cicerone=$_SESSION["cicerone"];
   <h1>Benvenuto nell'area riservata!</h1></br></br>
   <div class="text-center">
     <a href="formAttivita.php" class="btn btn-primary" .btn{font-size: 30px;}>
-      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>    CREA ATIVITÁ</a>
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>    CREA ATTIVITÀ</a>
   </div>
 
 
