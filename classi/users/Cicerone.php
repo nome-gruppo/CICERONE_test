@@ -39,7 +39,7 @@ class Cicerone extends User
     
 >>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 
-    public function addActivity(\classi\activities\Activity $activity)
+    public function addActivity(Activity $activity)
     {
         //se cicerone non premium
         if (premiumDate == null) {
@@ -53,7 +53,7 @@ class Cicerone extends User
         }
     }
     
-    public function removeActivity(\classi\activities\Activity $activity){
+    public function removeActivity(Activity $activity){
         $functions = new Functions();
         
         $functions->delete_from_array($yhis->myActivity, $activity);
