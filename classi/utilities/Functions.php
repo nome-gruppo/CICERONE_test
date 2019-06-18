@@ -1,8 +1,11 @@
 <?php
 namespace classi\utilities;
 
+<<<<<<< HEAD
+=======
 require_once 'Date.php';
 
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 class Functions
 {
 
@@ -59,6 +62,8 @@ class Functions
             return $array;
         }
     }
+<<<<<<< HEAD
+=======
 
     /**La funzione StringToDate converte una stringa nel formato dd/mm/yyyy in
      * una variabile di tipo \classi\utilities\Date assegnando gli attributi come segue:
@@ -97,6 +102,7 @@ class Functions
         return implode('-', $pieces);
         
     }
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 }
 ?>
  

@@ -1,7 +1,11 @@
 <?php
+<<<<<<< HEAD
+use classi\utilities\Database;
+=======
 namespace classi\users;
 use classi\utilities\Database;
 use classi\utilities\Functions;
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 ?>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script
@@ -11,12 +15,36 @@ use classi\utilities\Functions;
 <?php
 require_once '../classi/users/Turista.php';
 require_once '../classi/utilities/Database.php';
+<<<<<<< HEAD
+=======
 require_once '../classi/utilities/Functions.php';
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 
 // connessione database
 $database = new Database();
 $link = $database->getConnetion();
 
+<<<<<<< HEAD
+$turista = new classi\users\Turista();
+
+if ((isset($_POST["invia_dati_turista"]))) {
+
+    
+    $turista->setName($_POST['nome']);
+    $turista->setSurname($_POST['cognome']);
+    $turista->setContact($_POST['mail'], $_POST['telefono']);
+    $turista->setAddress($_POST['paese'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
+ 
+    // campi password temporanei per il controllo
+    $password1 = trim($_POST['password']);
+    $password2 = trim($_POST['password2']);
+
+    // controllo campi vuoti
+    if ($turista->getName() == "" || $turista->getSurname() == ""|| $password1 == "" ||
+    $password2 == "" || $turista->getContact()->getEmail() == ""|| $turista->getContact()->getPhone_num() == "" ||
+    $turista->getAddress()->getNation() == "" || $turista->getAddress()->getCounty() == "" || $turista->getAddress()->getCity() == "" ||
+    $turista->getAddress()->getStreet() == ""|| $turista->getAddress()->getCAP() == ""){
+=======
 $turista = new Turista(); //classi\users\Turista()
 
 if ((isset($_POST["invia_dati_turista"]))) {
@@ -39,6 +67,7 @@ if ((isset($_POST["invia_dati_turista"]))) {
         $password2 == "" || $turista->getContact()->getEmail() == ""|| $turista->getContact()->getPhone_num() == "" || $turista->getBirthDate() == NULL ||
         $turista->getAddress()->getNation() == "" || $turista->getAddress()->getCounty() == "" || $turista->getAddress()->getCity() == "" ||
         $turista->getAddress()->getStreet() == ""|| $turista->getAddress()->getCAP() == ""){
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
         
         echo "<div class='alert alert-danger' role='alert'>
           <a href='formRegistrazioneTurista.html' class='alert-link'>Non tutti i campi sono stati compilati! Click per riprovare</a>
@@ -52,6 +81,15 @@ if ((isset($_POST["invia_dati_turista"]))) {
     } else {
         
         $turista->setPassword(sha1(md5(sha1($password1))));  
+<<<<<<< HEAD
+       
+ 
+        $query = "INSERT into turista(nome, cognome, data_nascita, telefono, mail, password, nazione,provincia,citta,indirizzo,cap) 
+                    values ('{$turista->getName()}', '{$turista->getSurname()}','2019-2-27','{$turista->getContact()->getPhone_num()}','{$turista->getContact()->getEmail()}',
+                            '{$turista->getPassword()}', '{$turista->getAddress()->getNation()}', '{$turista->getAddress()->getCounty()}', '{$turista->getAddress()->getCity()}',
+                            '{$turista->getAddress()->getStreet()}', '{$turista->getAddress()->getCAP()}')";
+        $result = mysqli_query($link, $query) or die("Errore di registrazione!");
+=======
         
         var_dump($turista);
         var_dump($functions->writeDateDb($turista->getBirthDate()));
@@ -62,6 +100,7 @@ if ((isset($_POST["invia_dati_turista"]))) {
      
         $result = mysqli_query($link, $query) or die("Errore di registrazione!");
         
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
         if ($result) {
             echo "<div class='alert alert-success' role='alert'>
             <a href='turista.php' class='alert-link'>Registrazione effettuata con successo! Click per entrare</a>

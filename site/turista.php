@@ -1,4 +1,16 @@
 <?php
+<<<<<<< HEAD
+require_once '../classi/users/Turista.php';
+session_start();
+
+$turista = new classi\users\Turista();
+
+$turista->setName($_SESSION["nome"]);
+$turista->setSurname($_SESSION['cognome']);
+$turista->setContact($_SESSION['mail'], $_SESSION['telefono']);
+$turista->setPassword($_SESSION['password']);
+
+=======
 namespace classi\users;
 require_once '../classi/users/Turista.php';
 
@@ -9,6 +21,7 @@ session_start();
 $turista = unserialize($_SESSION['turista']);
 
 var_dump($turista);
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 ?>
 
 <html lang="it">

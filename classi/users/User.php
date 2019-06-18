@@ -1,14 +1,20 @@
 <?php 
 namespace classi\users;
 require_once 'Contact.php';
+<<<<<<< HEAD
+=======
 require_once '..\classi\utilities\Date.php';
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 require_once '..\classi\utilities\Place.php';
 use classi\payments\PaymentInterface;
 use classi\utilities\Date;
 use classi\utilities\Place;
 
 class User {
+<<<<<<< HEAD
+=======
     private $id;
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
     private $name;
     private $surname;
     private $address;
@@ -102,14 +108,24 @@ class User {
         return $this->payment;
     }
 
+<<<<<<< HEAD
+    public function setAddress($nation, $county,$city, $street, $CAP)
+=======
     public function setAddress($nation, $county, $city, $street, $CAP)
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
     {
         $this->address = new Place($nation, $county, $city, $street, $CAP);
     }
 
+<<<<<<< HEAD
+    public function setBirthDate( $day,  $month,  $year)
+    {
+        $this->birthDate = new Date($day, $month, $year);
+=======
     public function setBirthDate(Date $birthDate)
     {
         $this->birthDate = $birthDate;
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
     }
 
     public function setContact( $email,  $phone_num)
@@ -122,6 +138,8 @@ class User {
     {
         $this->payment = $payment;      //TODO
     }
+<<<<<<< HEAD
+=======
     /**
      * @return int
      */
@@ -138,6 +156,7 @@ class User {
         $this->id = $id;
     }
 
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 
 }
 

@@ -16,6 +16,8 @@ class Date {
             trigger_error('errore di tipo');
         }
     }
+<<<<<<< HEAD
+=======
     /**
      * @return int
      */
@@ -42,5 +44,6 @@ class Date {
 
     
     
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 }
 
