@@ -16,5 +16,34 @@ class Date {
             trigger_error('errore di tipo');
         }
     }
+<<<<<<< HEAD
+=======
+    /**
+     * @return int
+     */
+    public function getDay()
+    {
+        return $this->day;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMonth()
+    {
+        return $this->month;
+    }
+
+    /**
+     * @return int
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    
+    
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 }
 

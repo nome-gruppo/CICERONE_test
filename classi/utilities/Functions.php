@@ -1,6 +1,11 @@
 <?php
 namespace classi\utilities;
 
+<<<<<<< HEAD
+=======
+require_once 'Date.php';
+
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 class Functions
 {
 
@@ -57,6 +62,47 @@ class Functions
             return $array;
         }
     }
+<<<<<<< HEAD
+=======
+
+    /**La funzione StringToDate converte una stringa nel formato dd/mm/yyyy in
+     * una variabile di tipo \classi\utilities\Date assegnando gli attributi come segue:
+     * 
+     * day = dd
+     * month = mm
+     * year = yyyy
+     *
+     * @param string $stringDate    stringa in formato dd/mm/yyyy da convertire
+     * @return \classi\utilities\Date   variabile di tipo Date restituita
+     */
+    public function StringToDate($stringDate)
+    {
+        if (is_string($stringDate)) {
+
+            $pieces = explode('/', $stringDate);
+
+            $date = new Date(intval($pieces[0]), intval($pieces[1]), intval($pieces[2]));
+
+            return $date;
+        } else {
+            trigger_error('errore di tipo');
+        }
+    }
+    /**
+     * 
+     * @param Date $date
+     * @return string
+     */
+    public function writeDateDb(Date $date){
+        $pieces = array();
+        array_push($pieces,$date->getYear());
+        array_push($pieces,$date->getMonth());
+        array_push($pieces,$date->getDay());
+        
+        return implode('-', $pieces);
+        
+    }
+>>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 }
 ?>
  
