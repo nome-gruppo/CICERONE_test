@@ -13,15 +13,17 @@ class Cicerone extends User
     const MAX_ACTIVITY = 3;    // numero massimo di inserzioni inseribili da cicerone non premium
 
     private $premiumDate = null;
-
+    private $valutazione;
     private $myActivity = array();
-
     private $myReview = array();
 
     public function __construct()
     {}
-        
 
+    public function setValutazione(){
+        
+    }
+    
     public function addActivity(\classi\activities\Activity $activity)
     {
         //se cicerone non premium
