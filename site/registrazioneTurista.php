@@ -29,7 +29,6 @@ if ((isset($_POST["invia_dati_turista"]))) {
     $turista->setBirthDate($functions->StringToDate($_POST['data_nascita']));
     $turista->setAddress($_POST['paese'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
 
-
     // campi password temporanei per il controllo
     $password1 = $_POST['password'];
     $password2 = $_POST['password2'];
@@ -56,9 +55,9 @@ if ((isset($_POST["invia_dati_turista"]))) {
         var_dump($turista);
         var_dump($functions->writeDateDb($turista->getBirthDate()));
 
-        $query = "INSERT into {$database->getTurista_table()} values ('{$turista->getName()}', '{$turista->getSurname()}','{$functions->writeDateDb($turista->getBirthDate())}','{$turista->getContact()->getPhone_num()}','{$turista->getContact()->getEmail()}',
+        $query = "INSERT into {$database->getTurista_table()} values ('{$turista->getName()}', '{$turista->getSurname()}','2019-6-17','{$turista->getContact()->getPhone_num()}','{$turista->getContact()->getEmail()}',
                             '{$turista->getPassword()}', '{$turista->getAddress()->getNation()}', '{$turista->getAddress()->getCounty()}', '{$turista->getAddress()->getCity()}',
-                            '{$turista->getAddress()->getStreet()}', '{$turista->getAddress()->getCAP()}')";
+                            '{$turista->getAddress()->getStreet()}', '{$turista->getAddress()->getCAP()}',)";
 
         $result = mysqli_query($link, $query) or die("Errore di registrazione!");
 

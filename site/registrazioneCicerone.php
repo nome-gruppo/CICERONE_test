@@ -49,7 +49,7 @@ if (isset($_POST["invia_dati"])) {
 
         $query = "INSERT into {$database->getCicerone_table()} values ('{$cicerone->getName()}', '{$cicerone->getSurname()}','2019-2-27','{$cicerone->getContact()->getPhone_num()}','{$cicerone->getContact()->getEmail()}',
                             '{$cicerone->getPassword()}', '{$cicerone->getAddress()->getNation()}', '{$cicerone->getAddress()->getCounty()}', '{$cicerone->getAddress()->getCity()}',
-                            '{$cicerone->getAddress()->getStreet()}', '{$cicerone->getAddress()->getCAP()}')";
+                            '{$cicerone->getAddress()->getStreet()}', '{$cicerone->getAddress()->getCAP()}', 'null', 'null')";
 
         $result = mysqli_query($link, $query) or die("Errore di registrazione!");
 

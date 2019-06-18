@@ -1,6 +1,5 @@
 <?php
 namespace classi\utilities;
-use classi\utilities\Date;
 require_once 'Date.php';
 
 class Functions
