@@ -1,4 +1,6 @@
 <?php
+namespace classi\activities;
+
 class Activity{
   private  $idAttivita;
   private  $idCicerone;

@@ -3,10 +3,13 @@ namespace classi\users;
 
 require_once 'User.php';
 require_once '..\classi\utilities\Date.php';
+require_once '..\classi\utilities\Database.php';
 
 use classi\activities\Activity;
 use classi\utilities\Functions;
 use classi\utilities\Date;
+use classi\utilities\Database;
+
 class Cicerone extends User
 {
 

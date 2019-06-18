@@ -21,7 +21,7 @@ class Database
         $this->connection = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASE) or die("Errore di connessione!");
     }
 
-    public function getConnetion(){
+    public function getConnection(){
         return $this->connection;
     }
     /**

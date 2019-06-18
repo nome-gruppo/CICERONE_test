@@ -15,7 +15,7 @@ require_once '../classi/utilities/Functions.php';
 
 // connessione database
 $database = new Database();
-$link = $database->getConnetion();
+$link = $database->getConnection();
 
 $turista = new Turista(); //classi\users\Turista()
 

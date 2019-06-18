@@ -13,7 +13,7 @@ require_once '../classi/utilities/Database.php';
 
 // connessione database
 $database = new Database();
-$link = $database->getConnetion();
+$link = $database->getConnection();
 
 $cicerone = new Cicerone();
 
