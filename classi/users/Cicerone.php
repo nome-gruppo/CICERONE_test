@@ -1,18 +1,6 @@
 <?php
 namespace classi\users;
 
-<<<<<<< HEAD
-use classi\activities\Activity;
-use classi\utilities\Functions;
-
-class Cicerone extends User
-{
-
-    const MAX_ACTIVITY = 3;
-
-    // numero massimo di inserzioni inseribili da cicerone non premium
-    private $idCicerone;
-=======
 require_once 'User.php';
 require_once '..\classi\utilities\Date.php';
 
@@ -23,7 +11,6 @@ class Cicerone extends User
 {
 
     const MAX_ACTIVITY = 3;    // numero massimo di inserzioni inseribili da cicerone non premium
->>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 
     private $premiumDate = null;
 
@@ -33,17 +20,13 @@ class Cicerone extends User
 
     public function __construct()
     {}
-<<<<<<< HEAD
-=======
-    
-    
->>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
+        
 
-    public function addActivity(Activity $activity)
+    public function addActivity(\classi\activities\Activity $activity)
     {
         //se cicerone non premium
         if (premiumDate == null) {
-            
+
             if(sizeof($myActivity) < MAX_ACTIVITY){
                 $this->myActivity[] = $activity;
             }
@@ -52,10 +35,10 @@ class Cicerone extends User
             //tasto diventa premium e richiama la fuzione diventa premium
         }
     }
-    
-    public function removeActivity(Activity $activity){
+
+    public function removeActivity(\classi\activities\Activity $activity){
         $functions = new Functions();
-        
+
         $functions->delete_from_array($yhis->myActivity, $activity);
     }
     /**
@@ -135,23 +118,17 @@ class Cicerone extends User
     public function setAddress($nation, $county, $city, $street, $CAP)
     {
         // TODO Auto-generated method stub
-        
+
     }
 
     /**
      * {@inheritDoc}
      * @see \classi\users\User::setBirthDate()
      */
-<<<<<<< HEAD
-    public function setBirthDate($day, $month, $year)
-    {
-        // TODO Auto-generated method stub
-=======
     public function setBirthDate(Date $birthDate)
     {
         parent::setBirthDate($birthDate);
->>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
-        
+
     }
 
     /**
@@ -161,7 +138,7 @@ class Cicerone extends User
     public function setContact($email, $phone_num)
     {
         // TODO Auto-generated method stub
-        
+
     }
 
     /**
@@ -171,7 +148,7 @@ class Cicerone extends User
     public function setName($name)
     {
         // TODO Auto-generated method stub
-        
+
     }
 
     /**
@@ -181,7 +158,7 @@ class Cicerone extends User
     public function setPassword($password)
     {
         // TODO Auto-generated method stub
-        
+
     }
 
     /**
@@ -191,7 +168,7 @@ class Cicerone extends User
     public function setPayment($payment)
     {
         // TODO Auto-generated method stub
-        
+
     }
 
     /**
@@ -201,10 +178,8 @@ class Cicerone extends User
     public function setSurname($surname)
     {
         // TODO Auto-generated method stub
-        
+
     }
-<<<<<<< HEAD
-=======
     /**
      * {@inheritDoc}
      * @see \classi\users\User::getId()
@@ -225,9 +200,7 @@ class Cicerone extends User
     }
 
 
->>>>>>> 0750736768bf10df9c3b7003b49ee5df14877fff
 
-    
-    
+
+
 }
-
