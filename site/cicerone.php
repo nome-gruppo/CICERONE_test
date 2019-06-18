@@ -1,12 +1,7 @@
 <?php
-namespace classi\users;
-require_once '../classi/users/Cicerone.php';
-
-$cicerone = new Cicerone();
-
 session_start();
-
-$cicerone = unserialize($_SESSION['cicerone']);
+require_once '../classi/user/Cicerone.php';
+$cicerone=$_SESSION["cicerone"];
 ?>
 
 
@@ -24,18 +19,17 @@ $cicerone = unserialize($_SESSION['cicerone']);
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <a class="navbar-brand" href="cicerone.php" button type="button" class="btn btn-default btn-lg"> Benvenuto  <?php echo $nome; ?> </a>
+        <a class="navbar-brand" href="cicerone.php" button type="button" class="btn btn-default btn-lg"> Area riservata</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $cicerone->getName(); ?></a>
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $nome; ?></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Il mio profilo</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="">Il mio profilo</a></li>
+            <li><a href="gestioneAttivita.php">Le mie attività</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>   Logout</a></li>
           </ul>
@@ -45,13 +39,10 @@ $cicerone = unserialize($_SESSION['cicerone']);
   </div><!-- /.container-fluid -->
   </nav>
 
-
-  <div class="list-group">
-    <button type="button" class="list-group-item">Crea attività</button>
-    <button type="button" class="list-group-item">Gestisci attività</button>
-    <button type="button" class="list-group-item">Morbi leo risus</button>
-    <button type="button" class="list-group-item">Porta ac consectetur ac</button>
-    <button type="button" class="list-group-item">Vestibulum at eros</button>
+  <h1>Benvenuto nell'area riservata!</h1></br></br>
+  <div class="text-center">
+    <a href="formAttivita.php" class="btn btn-primary" .btn{font-size: 30px;}>
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>    CREA ATIVITÁ</a>
   </div>
 
 
