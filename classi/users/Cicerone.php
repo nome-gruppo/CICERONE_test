@@ -20,10 +20,20 @@ class Cicerone extends User
     public function __construct()
     {}
 
-    public function setValutazione(){
-        
+    public function printActivity()
+    {
+        $database=new Database();
+        $link=$database->getConnetion();
+        $query = "SELECT * from {$database->getActivity_table} WHERE idCicerone='{$cicerone->getId()}'";
+        $result = mysqli_query($link, $query) or die("Errore connessione");
+        mysqli_close($link);
+        return $result;
     }
-    
+
+    public function setValutazione(){
+
+    }
+
     public function addActivity(\classi\activities\Activity $activity)
     {
         //se cicerone non premium

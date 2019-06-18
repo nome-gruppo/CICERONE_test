@@ -31,6 +31,15 @@ class Turista extends User
         parent::__construct();
     }
 
+    public function searchActivity($citta, $lingua, $data){
+      $database=new Database();
+      $link=$database->getConnetion();
+      $query="SELECT attivita.id, attivita.citta, attivita.data, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua FROM(attivita inner join ciceroni on attivita.idCicerone=ciceroni.id)where attivita.citta='$citta'and attivita.lingua='$lingua'and attivita.data='$data'";
+      $result = mysqli_query($link, $query) or die("Errore connessione");
+      mysqli_close($link);
+      return $result;
+    }
+    
     public function addActivityDone(Activity $activity)
     {
         $this->activitiesDone($activity);
