@@ -20,7 +20,7 @@ $link = $database->getConnection();
 
 $turista = new Turista(); // classi\users\Turista()
 
-if ((isset($_POST["invia_dati_turista"]))) {
+if (isset($_POST["invia_dati_turista"])) {
 
     $functions = new Functions();
 
@@ -35,9 +35,10 @@ if ((isset($_POST["invia_dati_turista"]))) {
     $password2 = $_POST['password2'];
 
     // controllo campi vuoti
-    if ($turista->getName() == "" || $turista->getSurname() == "" || $password1 == "" || $password2 == "" || $turista->getContact()->getEmail() == "" ||
-		    $turista->getContact()->getPhone_num() == "" || $turista->getBirthDate() == NULL || $turista->getAddress()->getNation() == "" || $turista->getAddress()->getCounty() == ""
-				|| $turista->getAddress()->getCity() == "" || $turista->getAddress()->getStreet() == "" || $turista->getAddress()->getCAP() == "") {
+    if ($turista->getName() == "" || $turista->getSurname() == "" || $password1 == "" ||
+				$password2 == "" || $turista->getContact()->getEmail() == "" || $turista->getContact()->getPhone_num() == "" || $turista->getBirthDate() == NULL ||
+				$turista->getAddress()->getNation() == "" || $turista->getAddress()->getCounty() == "" || $turista->getAddress()->getCity() == "" ||
+				$turista->getAddress()->getStreet() == "" || $turista->getAddress()->getCAP() == "") {
 
         echo "<div class='alert alert-danger' role='alert'>
           <a href='formRegistrazioneTurista.html' class='alert-link'>Non tutti i campi sono stati compilati! Click per riprovare</a>

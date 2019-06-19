@@ -132,7 +132,8 @@ class Cicerone extends User
      */
     public function setAddress($nation, $county, $city, $street, $CAP)
     {
-        // TODO Auto-generated method stub
+      parent::setAddress($nation, $county, $city, $street, $CAP);
+
 
     }
 
@@ -152,7 +153,7 @@ class Cicerone extends User
      */
     public function setContact($email, $phone_num)
     {
-        // TODO Auto-generated method stub
+        parent::setContact($email, $phone_num);
 
     }
 
@@ -162,7 +163,7 @@ class Cicerone extends User
      */
     public function setName($name)
     {
-        // TODO Auto-generated method stub
+        parent::setName($name);
 
     }
 
@@ -172,7 +173,7 @@ class Cicerone extends User
      */
     public function setPassword($password)
     {
-        // TODO Auto-generated method stub
+        parent::setPassword($password);
 
     }
 
@@ -192,7 +193,7 @@ class Cicerone extends User
      */
     public function setSurname($surname)
     {
-        // TODO Auto-generated method stub
+        parent::setSurname($surname);
 
     }
     /**
