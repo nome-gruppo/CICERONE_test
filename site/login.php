@@ -9,7 +9,7 @@ require_once '../classi/utilities/Database.php';
 // connessione database
 session_start();
 $database = new Database();
-$link = $database->getConnetion();
+$link = $database->getConnection();
 
 if (isset($_POST["login"])) {
 
@@ -41,10 +41,7 @@ if (isset($_POST["login"])) {
             $cicerone->setAddress($row['nazione'], $row['provincia'], $row['citta'],$row['indirizzo'], $row['cap']);
             $cicerone->setPassword($row['password']);
 
-
-
-
-            $_SESSION['cicerone'] = serialize($cicerone);
+            $_SESSION['cicerone'] = $cicerone;
 
             $_SESSION['logged'] = true; // Nella variabile SESSION associo TRUE al valore logged
             mysqli_free_result($result);
@@ -52,6 +49,7 @@ if (isset($_POST["login"])) {
 
         } elseif ($num == 0) {
 
+            //ricerca nella tabella turista
             $query = "SELECT * from turista WHERE mail='$mail' and password='$password'";
             $result = mysqli_query($link, $query) or die("Errore connessione");
             $num = mysqli_num_rows($result);
@@ -69,9 +67,7 @@ if (isset($_POST["login"])) {
                 $turista->setAddress($row['nazione'], $row['provincia'], $row['citta'],$row['indirizzo'], $row['cap']);
                 $turista->setPassword($row['password']);
 
-                var_dump($row['data_nascita']);
-
-                $_SESSION['turista'] = serialize($turista);
+                $_SESSION['turista'] = $turista;
 
                 $_SESSION['logged'] = true; // Nella variabile SESSION associo TRUE al valore logged
                 mysqli_free_result($result);

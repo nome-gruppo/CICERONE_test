@@ -1,6 +1,8 @@
 <?php
 namespace classi\users;
+
 use classi\utilities\Database;
+use classi\utilities\Functions;
 ?>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script
@@ -10,6 +12,7 @@ use classi\utilities\Database;
 <?php
 require_once '../classi/users/Cicerone.php';
 require_once '../classi/utilities/Database.php';
+require_once '../classi/utilities/Functions.php';
 
 // connessione database
 $database = new Database();
@@ -19,9 +22,12 @@ $cicerone = new Cicerone();
 
 if (isset($_POST["invia_dati"])) {
 
+    $functions = new Functions();
+    
     $cicerone->setName($_POST['nome']);
     $cicerone->setSurname($_POST['cognome']);
     $cicerone->setContact($_POST['mail'], $_POST['telefono']);
+    $cicerone->setBirthDate($functions->StringToDate($_POST['data_nascita']));
     $cicerone->setAddress($_POST['paese'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
 
     // campi password temporanei per il controllo
@@ -30,7 +36,7 @@ if (isset($_POST["invia_dati"])) {
 
     // controllo campi vuoti
     if ($cicerone->getName() == "" || $cicerone->getSurname() == ""|| $password1 == "" ||
-        $password2 == "" || $cicerone->getContact()->getEmail() == ""|| $cicerone->getContact()->getPhone_num() == "" ||
+    $password2 == "" || $cicerone->getContact()->getEmail() == ""|| $cicerone->getContact()->getPhone_num() == "" || $cicerone->getBirthDate() == NULL ||
         $cicerone->getAddress()->getNation() == "" || $cicerone->getAddress()->getCounty() == "" || $cicerone->getAddress()->getCity() == "" ||
         $cicerone->getAddress()->getStreet() == ""|| $cicerone->getAddress()->getCAP() == ""){
 
