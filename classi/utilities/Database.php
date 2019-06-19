@@ -9,9 +9,9 @@ define('DATABASE', 'cicerone');
 
 class Database
 {
-    private $turista_table = "turista(id_turista, nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap)";
-    private $cicerone_table = "ciceroni(id_cicerone, nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap, data_premium, valutazione)";
-    private $activity_table = "attivita(id_attivita, id_cicerone,citta,data,costo,descrizione,lingua)";
+    private $turista_table = "turista(nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap)";
+    private $cicerone_table = "ciceroni(nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap, data_premium, valutazione)";
+    private $activity_table = "attivita(id_cicerone,citta,data,costo,descrizione,lingua)";
     private $connection;
 
 
