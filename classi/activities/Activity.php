@@ -8,7 +8,7 @@ class Activity{
   private  $costo;
   private  $descrizione;
   private  $lingua;
-  private $data;
+  private  $data;
 
   public function __construct($idCicerone, $citta, $costo, $descrizione, $lingua, $data){ //costruttore della classe attivita
     $this->idCicerone = $idCicerone;
@@ -21,9 +21,9 @@ class Activity{
   public function setIdAttivita($idAttivita){
     $this->idAttivita = $idAttivita;
   }
-  public function insertDatabse(){//funzione di inserimento dati attivita nel database
-      $link=mysqli_connect("localhost", "root", "root","cicero")or die("Errore connessione!");
-      $query="INSERT INTO attivita(idCicerone, citta, costo, descrizione, lingua, data)VALUES('$this->idCicerone','$this->citta', '$this->costo','$this->descrizione','$this->lingua','$this->data')";
+  public function insertDatabase(){//funzione di inserimento dati attivita nel database
+      $link=mysqli_connect("localhost", "root", "root","cicerone")or die("Errore connessione!");
+      $query="INSERT INTO attivita(id_cicerone, citta, costo, descrizione, lingua, data)VALUES('$this->idCicerone','$this->citta', '$this->costo','$this->descrizione','$this->lingua','$this->data')";
       $result=mysqli_query($link, $query)or die("Errore di registrazione! Controlla di aver compilato tutti i campi.");
       $this->idAttivita=mysql_insert_id(attivita);//assegna l'ultimo valore Id all'interno della tabella attivita
       //$query2="SELECT id from attivita ORDER BY id DESC LIMIT 1";//per prelevare dal databse l'id dell'ultima attività immessa ovvero quella appena inserita

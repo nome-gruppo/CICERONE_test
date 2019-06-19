@@ -40,6 +40,13 @@ class Database
         return $this->cicerone_table;
     }
 
+    public function getAttivita_table()
+    {
+        return $this->attivita_table;
+    }
+    /**
+    * @return string
+    */
 
 
 }

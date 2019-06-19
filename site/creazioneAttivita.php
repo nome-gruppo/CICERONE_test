@@ -20,7 +20,7 @@ $cicerone=$_SESSION["cicerone"];
           </div>";
         }else {
           $attivita=new Activity($idCicerone, $citta, $costo, $descrizione, $lingua, $data);
-        	$result=$attivita->insertDatabse();
+        	$result=$attivita->insertDatabase();
         }
           if($result){
             echo "<div class='alert alert-success' role='alert'>
