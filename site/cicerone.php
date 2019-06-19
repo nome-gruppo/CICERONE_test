@@ -1,6 +1,11 @@
 <?php
-session_start();
+namespace classi\users;
 require_once '../classi/user/Cicerone.php';
+
+$cicerone = new Cicerone();
+
+session_start();
+
 $cicerone=$_SESSION["cicerone"];
 ?>
 
@@ -26,7 +31,7 @@ $cicerone=$_SESSION["cicerone"];
       <ul class="nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $nome; ?></a>
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $cicerone->getName(); ?></a>
           <ul class="dropdown-menu">
             <li><a href="">Il mio profilo</a></li>
             <li><a href="gestioneAttivita.php">Le mie attività</a></li>

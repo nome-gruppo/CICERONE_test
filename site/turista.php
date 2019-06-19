@@ -6,9 +6,7 @@ $turista = new Turista();
 
 session_start();
 
-$turista = unserialize($_SESSION['turista']);
-
-var_dump($turista);
+$turista = $_SESSION['turista'];
 ?>
 
 <html lang="it">

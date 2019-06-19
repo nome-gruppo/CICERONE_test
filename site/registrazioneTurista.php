@@ -49,9 +49,6 @@ if ((isset($_POST["invia_dati_turista"]))) {
 
         $turista->setPassword(sha1(md5(sha1($password1))));
 
-        var_dump($turista);
-        var_dump($functions->writeDateDb($turista->getBirthDate()));
-
         $query = "INSERT into {$database->getTurista_table()} values ('{$turista->getName()}', '{$turista->getSurname()}','{$functions->writeDateDb($turista->getBirthDate())}','{$turista->getContact()->getPhone_num()}','{$turista->getContact()->getEmail()}',
                             '{$turista->getPassword()}', '{$turista->getAddress()->getNation()}', '{$turista->getAddress()->getCounty()}', '{$turista->getAddress()->getCity()}',
                             '{$turista->getAddress()->getStreet()}', '{$turista->getAddress()->getCAP()}')";
