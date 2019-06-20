@@ -60,7 +60,7 @@ class Functions
 
     /**
      *
-     * @param Date $date
+     * @param string $date
      * @return string
      */
     public function writeDateDb($date){
