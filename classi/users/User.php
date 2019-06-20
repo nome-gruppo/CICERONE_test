@@ -115,9 +115,9 @@ class User {
         }
     }
 
-    public function setContact($email,  $phone_num)
+    public function setContact($mail,  $phone_num)
     {
-        $this->contact = new Contact($email, $phone_num);
+        $this->contact = new Contact($mail, $phone_num);
     }
 
 

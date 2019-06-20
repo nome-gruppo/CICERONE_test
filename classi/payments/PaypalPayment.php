@@ -4,12 +4,12 @@ namespace classi\payments;
 class PaypalPayment extends AbPayment
 {
 
-    private $email;
+    private $mail;
 
-    public function __construct($email)
+    public function __construct($mail)
     {
-        if (is_string($email)) {
-            $this->email = $email;
+        if (is_string($mail)) {
+            $this->mail = $mail;
         } else {
             trigger_error('errore di tipo');
         }

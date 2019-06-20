@@ -33,10 +33,10 @@ if (isset($_POST["invia_dati"])) {
   $password2 = $_POST['password2'];
 
   // controllo presenza mail in tabelle ciceroni e turista
-  $query_mail_ciceroni = "SELECT * from ciceroni WHERE mail = '{$cicerone->getContact()->getEmail()}'";
+  $query_mail_ciceroni = "SELECT * from ciceroni WHERE mail = '{$cicerone->getContact()->getMail()}'";
   $result_mail_ciceroni = mysqli_query($link, $query_mail_ciceroni) or die("Errore di registrazione!");
  
-  $query_mail_turisti = "SELECT * from turista WHERE mail = '{$cicerone->getContact()->getEmail()}'";
+  $query_mail_turisti = "SELECT * from turista WHERE mail = '{$cicerone->getContact()->getMail()}'";
   $result_mail_turisti = mysqli_query($link, $query_mail_turisti) or die("Errore di registrazione!");
 
   if (mysqli_num_rows($result_mail_ciceroni) == 1 || mysqli_num_rows($result_mail_turisti) == 1) {
@@ -61,7 +61,7 @@ if (isset($_POST["invia_dati"])) {
       // controllo campi vuoti
       if (
         $cicerone->getName() == "" || $cicerone->getSurname() == "" || $password1 == "" ||
-        $password2 == "" || $cicerone->getContact()->getEmail() == "" || $cicerone->getContact()->getPhone_num() == "" || $cicerone->getBirthDate() == "" ||
+        $password2 == "" || $cicerone->getContact()->getMail() == "" || $cicerone->getContact()->getPhone_num() == "" || $cicerone->getBirthDate() == "" ||
         $cicerone->getAddress()->getNation() == "" || $cicerone->getAddress()->getCounty() == "" || $cicerone->getAddress()->getCity() == "" ||
         $cicerone->getAddress()->getStreet() == "" || $cicerone->getAddress()->getCAP() == ""
       ) {
@@ -78,7 +78,7 @@ if (isset($_POST["invia_dati"])) {
 
         $cicerone->setPassword(sha1(md5(sha1($password1))));
 
-        $query = "INSERT into {$database->getCicerone_table()} values ('{$cicerone->getName()}', '{$cicerone->getSurname()}','{$cicerone->getBirthDate()}','{$cicerone->getContact()->getPhone_num()}','{$cicerone->getContact()->getEmail()}',
+        $query = "INSERT into {$database->getCicerone_table()} values ('{$cicerone->getName()}', '{$cicerone->getSurname()}','{$cicerone->getBirthDate()}','{$cicerone->getContact()->getPhone_num()}','{$cicerone->getContact()->getMail()}',
                             '{$cicerone->getPassword()}', '{$cicerone->getAddress()->getNation()}', '{$cicerone->getAddress()->getCounty()}', '{$cicerone->getAddress()->getCity()}',
                             '{$cicerone->getAddress()->getStreet()}', '{$cicerone->getAddress()->getCAP()}', 'null', 'null')";
 

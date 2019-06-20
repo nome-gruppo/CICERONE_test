@@ -33,10 +33,10 @@ if (isset($_POST["invia_dati_turista"])) {
   $password2 = $_POST['password2'];
 
   // controllo presenza mail in tabelle ciceroni e turista
-  $query_mail_ciceroni = "SELECT * from ciceroni WHERE mail = '{$turista->getContact()->getEmail()}'";
+  $query_mail_ciceroni = "SELECT * from ciceroni WHERE mail = '{$turista->getContact()->getMail()}'";
   $result_mail_ciceroni = mysqli_query($link, $query_mail_ciceroni) or die("Errore di registrazione!");
 
-  $query_mail_turisti = "SELECT * from turista WHERE mail = '{$turista->getContact()->getEmail()}'";
+  $query_mail_turisti = "SELECT * from turista WHERE mail = '{$turista->getContact()->getMail()}'";
   $result_mail_turisti = mysqli_query($link, $query_mail_turisti) or die("Errore di registrazione!");
 
   if (mysqli_num_rows($result_mail_ciceroni) == 1 || mysqli_num_rows($result_mail_turisti) == 1) {
@@ -61,7 +61,7 @@ if (isset($_POST["invia_dati_turista"])) {
       // controllo campi vuoti
       if (
         $turista->getName() == "" || $turista->getSurname() == "" || $password1 == "" ||
-        $password2 == "" || $turista->getContact()->getEmail() == "" || $turista->getContact()->getPhone_num() == "" || $turista->getBirthDate() == "" ||
+        $password2 == "" || $turista->getContact()->getMail() == "" || $turista->getContact()->getPhone_num() == "" || $turista->getBirthDate() == "" ||
         $turista->getAddress()->getNation() == "" || $turista->getAddress()->getCounty() == "" || $turista->getAddress()->getCity() == "" ||
         $turista->getAddress()->getStreet() == "" || $turista->getAddress()->getCAP() == ""
       ) {
@@ -78,7 +78,7 @@ if (isset($_POST["invia_dati_turista"])) {
 
         $turista->setPassword(sha1(md5(sha1($password1))));
 
-        $query = "INSERT into {$database->getTurista_table()} values ('{$turista->getName()}', '{$turista->getSurname()}','{$turista->getBirthDate()}','{$turista->getContact()->getPhone_num()}','{$turista->getContact()->getEmail()}',
+        $query = "INSERT into {$database->getTurista_table()} values ('{$turista->getName()}', '{$turista->getSurname()}','{$turista->getBirthDate()}','{$turista->getContact()->getPhone_num()}','{$turista->getContact()->getMail()}',
                             '{$turista->getPassword()}', '{$turista->getAddress()->getNation()}', '{$turista->getAddress()->getCounty()}', '{$turista->getAddress()->getCity()}',
                             '{$turista->getAddress()->getStreet()}', '{$turista->getAddress()->getCAP()}')";
 

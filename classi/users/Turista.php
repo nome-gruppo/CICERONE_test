@@ -181,9 +181,9 @@ class Turista extends User
      * {@inheritdoc}
      * @see \classi\users\User::setContact()
      */
-    public function setContact($email, $phone_num)
+    public function setContact($mail, $phone_num)
     {
-        parent::setContact($email, $phone_num);
+        parent::setContact($mail, $phone_num);
     }
 
     /**
