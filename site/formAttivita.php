@@ -17,24 +17,7 @@
     <h1>Crea la tua attività</h1>
     <form action="creazioneAttivita.php" method="post">
 
-    <div class="form-group col-md-6">
-                  <div class='input-group date' id='datetimepicker1'>
-                      <input type='text' class="form-control" name="data">
-                      <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
-                  </div>
-          <script type="text/javascript">
-                  $('#datetimepicker1').datetimepicker({
-                    ‘locale’:’it’, //Usa la lingua italiana
-                    ‘stepping’: 30, //Step per gli orari (30 minuti)
-                    ‘useStrict’: true, //Imposta il parametro “strict” di moment.js
-                    ‘useCurrent’: true, //Data attuale di default
-                    ‘showClose’: true, // Mostra il pulsante di chiusura
-                    ‘inline’:false // Forza il calendario in modalità popup
-                  });
-          </script>
-      </div>
+
 
 
 
