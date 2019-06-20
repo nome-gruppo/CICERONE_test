@@ -2,11 +2,10 @@
 namespace classi\users;
 require_once '..\classi\users\Cicerone.php';
 
-$cicerone = new Cicerone();
 
 session_start();
 
-$cicerone=$_SESSION["cicerone"];
+$cicerone=$_SESSION['cicerone'];
 ?>
 
 

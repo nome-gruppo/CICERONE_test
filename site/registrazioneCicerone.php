@@ -61,7 +61,7 @@ if (isset($_POST["invia_dati"])) {
 
         if ($result) {
             echo "<div class='alert alert-success' role='alert'>
-            <a href='cicerone.php' class='alert-link'>Registrazione effettuata con successo! Click per entrare</a>
+            <a href='homepage.html' class='alert-link'>Registrazione effettuata con successo! Click per effettuare il login</a>
           </div>";
         }
     }
