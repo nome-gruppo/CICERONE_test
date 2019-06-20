@@ -1,6 +1,6 @@
 <?php
 namespace classi\users;
-require_once '../classi/user/Cicerone.php';
+require_once '..\classi\users\Cicerone.php';
 
 $cicerone = new Cicerone();
 
