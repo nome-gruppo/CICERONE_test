@@ -33,6 +33,24 @@ if (isset($_POST["invia_dati"])) {
     // campi password temporanei per il controllo
     $password1 = $_POST['password'];
     $password2 = $_POST['password2'];
+		// controllo presenza mail
+		$query1 = "SELECT *from ciceroni WHERE mail = '$getContact()->$getmail()'";
+		$result1 = mysqli_query($link, $query1) or die("Errore di registrazione!");
+		$num=mysqli_num_rows($result1);
+			if($num==1){
+				echo "<div class='alert alert-danger' role='alert'>
+					<a href='formRegistrazione.html' class='alert-link'>Esiste un account con la mail appena inserita! Click per riprovare</a>
+				</div>";
+			}
+
+		$query2 = "SELECT *from ciceroni WHERE telefono = '$telefono'";
+		$result2 = mysqli_query($link, $query2) or die("Errore di registrazione!");
+		$num=mysqli_num_rows($result2);
+			if($num==1){
+				echo "<div class='alert alert-danger' role='alert'>
+					<a href='formRegistrazione.html' class='alert-link'>Esiste un account con il numero di telefono appena inserito! Click per riprovare</a>
+				</div>";
+			}
 
     // controllo campi vuoti
     if ($cicerone->getName() == "" || $cicerone->getSurname() == ""|| $password1 == "" ||
