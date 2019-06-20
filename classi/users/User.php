@@ -1,10 +1,8 @@
 <?php
 namespace classi\users;
 require_once 'Contact.php';
-require_once '..\classi\utilities\Date.php';
 require_once '..\classi\utilities\Place.php';
 use classi\payments\PaymentInterface;
-use classi\utilities\Date;
 use classi\utilities\Place;
 
 class User {
@@ -108,12 +106,16 @@ class User {
         $this->address = new Place($nation, $county, $city, $street, $CAP);
     }
 
-    public function setBirthDate(Date $birthDate)
+    public function setBirthDate($birthDate)
     {
+        if(is_string($birthDate)){
         $this->birthDate = $birthDate;
+        }else{
+            trigger_error('errore di tipo');
+        }
     }
 
-    public function setContact( $email,  $phone_num)
+    public function setContact($email,  $phone_num)
     {
         $this->contact = new Contact($email, $phone_num);
     }

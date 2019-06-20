@@ -2,12 +2,10 @@
 namespace classi\users;
 
 require_once 'User.php';
-require_once '..\classi\utilities\Date.php';
 require_once '..\classi\utilities\Database.php';
 
 use classi\activities\Activity;
 use classi\utilities\Functions;
-use classi\utilities\Date;
 use classi\utilities\Database;
 
 class Cicerone extends User
@@ -26,8 +24,8 @@ class Cicerone extends User
     public function printActivity()
     {
         $database=new Database();
-        $link=$database->getConnetion();
-        $query = "SELECT * from {$database->getActivity_table} WHERE idCicerone='{$cicerone->getId()}'";
+        $link=$database->getConnection();
+        $query = "SELECT * from attivita WHERE id_cicerone={$this->getId()}";
         $result = mysqli_query($link, $query) or die("Errore connessione");
         mysqli_close($link);
         return $result;
@@ -42,7 +40,7 @@ class Cicerone extends User
         //se cicerone non premium
         if (premiumDate == null) {
 
-            if(sizeof($myActivity) < MAX_ACTIVITY){
+            if(sizeof($this->myActivity) < MAX_ACTIVITY){
                 $this->myActivity[] = $activity;
             }
         }else{
@@ -54,7 +52,7 @@ class Cicerone extends User
     public function removeActivity(\classi\activities\Activity $activity){
         $functions = new Functions();
 
-        $functions->delete_from_array($yhis->myActivity, $activity);
+        $functions->delete_from_array($this->myActivity, $activity);
     }
     /**
      * {@inheritDoc}
@@ -141,7 +139,7 @@ class Cicerone extends User
      * {@inheritDoc}
      * @see \classi\users\User::setBirthDate()
      */
-    public function setBirthDate(Date $birthDate)
+    public function setBirthDate($birthDate)
     {
         parent::setBirthDate($birthDate);
 

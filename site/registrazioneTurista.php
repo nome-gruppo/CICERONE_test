@@ -27,7 +27,7 @@ if (isset($_POST["invia_dati_turista"])) {
     $turista->setName($_POST['nome']);
     $turista->setSurname($_POST['cognome']);
     $turista->setContact($_POST['mail'], $_POST['telefono']);
-    $turista->setBirthDate($functions->StringToDate($_POST['data_nascita']));
+    $turista->setBirthDate($functions->writeDateDb( $_POST['data_nascita']));
     $turista->setAddress($_POST['paese'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
 
     // campi password temporanei per il controllo
@@ -36,7 +36,7 @@ if (isset($_POST["invia_dati_turista"])) {
 
     // controllo campi vuoti
     if ($turista->getName() == "" || $turista->getSurname() == "" || $password1 == "" ||
-				$password2 == "" || $turista->getContact()->getEmail() == "" || $turista->getContact()->getPhone_num() == "" || $turista->getBirthDate() == NULL ||
+				$password2 == "" || $turista->getContact()->getEmail() == "" || $turista->getContact()->getPhone_num() == "" || $turista->getBirthDate() == "" ||
 				$turista->getAddress()->getNation() == "" || $turista->getAddress()->getCounty() == "" || $turista->getAddress()->getCity() == "" ||
 				$turista->getAddress()->getStreet() == "" || $turista->getAddress()->getCAP() == "") {
 
@@ -52,7 +52,7 @@ if (isset($_POST["invia_dati_turista"])) {
 
         $turista->setPassword(sha1(md5(sha1($password1))));
 
-        $query = "INSERT into {$database->getTurista_table()} values ('{$turista->getName()}', '{$turista->getSurname()}','{$functions->writeDateDb($turista->getBirthDate())}','{$turista->getContact()->getPhone_num()}','{$turista->getContact()->getEmail()}',
+        $query = "INSERT into {$database->getTurista_table()} values ('{$turista->getName()}', '{$turista->getSurname()}','{$turista->getBirthDate()}','{$turista->getContact()->getPhone_num()}','{$turista->getContact()->getEmail()}',
                             '{$turista->getPassword()}', '{$turista->getAddress()->getNation()}', '{$turista->getAddress()->getCounty()}', '{$turista->getAddress()->getCity()}',
                             '{$turista->getAddress()->getStreet()}', '{$turista->getAddress()->getCAP()}')";
 

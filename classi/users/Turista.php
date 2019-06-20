@@ -2,12 +2,10 @@
 namespace classi\users;
 
 require_once 'User.php';
-require_once '..\classi\utilities\Date.php';
 require_once '..\classi\utilities\Database.php';
 
 use classi\activities\Activity;
 use classi\activities\Review;
-use classi\utilities\Date;
 use classi\utilities\Database;
 
 class Turista extends User
@@ -173,7 +171,7 @@ class Turista extends User
      * {@inheritdoc}
      * @see \classi\users\User::setBirthDate()
      */
-    public function setBirthDate(Date $birthDate)
+    public function setBirthDate($birthDate)
     {
        parent::setBirthDate($birthDate);
     }

@@ -37,10 +37,12 @@ if (isset($_POST["login"])) {
             $cicerone->setId($row['id_cicerone']);
             $cicerone->setName($row['nome']);
             $cicerone->setSurname($row['cognome']);
+            $cicerone->setBirthDate($row['data_nascita']);
             $cicerone->setContact($row['mail'], $row['telefono']);
             $cicerone->setAddress($row['nazione'], $row['provincia'], $row['citta'],$row['indirizzo'], $row['cap']);
             $cicerone->setPassword($row['password']);
 
+            var_dump($cicerone);
             $_SESSION['cicerone'] = $cicerone;
 
             $_SESSION['logged'] = true; // Nella variabile SESSION associo TRUE al valore logged
@@ -63,6 +65,7 @@ if (isset($_POST["login"])) {
                 $turista->setId($row['id_turista']);
                 $turista->setName($row['nome']);
                 $turista->setSurname($row['cognome']);
+                $turista->setBirthDate($row['data_nascita']);
                 $turista->setContact($row['mail'], $row['telefono']);
                 $turista->setAddress($row['nazione'], $row['provincia'], $row['citta'],$row['indirizzo'], $row['cap']);
                 $turista->setPassword($row['password']);

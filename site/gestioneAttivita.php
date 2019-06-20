@@ -36,9 +36,9 @@ if ($num > 0) {
         $i ++;
         ?>
                   <tr>
-				<th scope="row"><?php echo $riga['id'];//stampo il campo citta dell'array $riga ?></th>
+				<th scope="row"><?php echo $riga['id_attivita'];//stampo il campo citta dell'array $riga ?></th>
 				<td><?php echo $riga['citta'];?></td>
-				<td><?php echo $riga['data'];?></td>
+				<td><?php echo $riga['data_attivita'];?></td>
 				<td><?php echo $riga['costo'];?></td>
 				<td><?php echo $riga['lingua'];?></td>
 				<td><?php echo $riga['descrizione'];?></td>
