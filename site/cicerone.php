@@ -9,7 +9,6 @@ session_start();
 $cicerone=$_SESSION['cicerone'];
 ?>
 
-
 <html lang="it">
   <head>
     <meta charset="UTF-8">
