@@ -14,7 +14,7 @@
 
 
 
-    <h1>Crea la tua attivitá</h1>
+    <h1>Crea la tua attività</h1>
     <form action="creazioneAttivita.php" method="post">
 
     <div class="form-group col-md-6">
