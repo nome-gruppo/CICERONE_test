@@ -35,7 +35,7 @@ if (isset($_POST["invia_dati"])) {
   // controllo presenza mail in tabelle ciceroni e turista
   $query_mail_ciceroni = "SELECT * from ciceroni WHERE mail = '{$cicerone->getContact()->getMail()}'";
   $result_mail_ciceroni = mysqli_query($link, $query_mail_ciceroni) or die("Errore di registrazione!");
- 
+
   $query_mail_turisti = "SELECT * from turista WHERE mail = '{$cicerone->getContact()->getMail()}'";
   $result_mail_turisti = mysqli_query($link, $query_mail_turisti) or die("Errore di registrazione!");
 
@@ -51,7 +51,7 @@ if (isset($_POST["invia_dati"])) {
 
     $query_phone_turisti = "SELECT *from turista WHERE telefono = '{$cicerone->getContact()->getPhone_num()}'";
     $result_phone_turisti = mysqli_query($link, $query_phone_turisti) or die("Errore di registrazione!");
-    
+
     if (mysqli_num_rows($result_phone_ciceroni) == 1 || mysqli_num_rows($result_phone_turisti) == 1) {
       echo "<div class='alert alert-danger' role='alert'>
 					<a href='formRegistrazione.html' class='alert-link'>Esiste già un account con questo numero di telefono! Click per riprovare</a>
@@ -61,7 +61,7 @@ if (isset($_POST["invia_dati"])) {
       // controllo campi vuoti
       if (
         $cicerone->getName() == "" || $cicerone->getSurname() == "" || $password1 == "" ||
-        $password2 == "" || $cicerone->getContact()->getMail() == "" || $cicerone->getContact()->getPhone_num() == "" || $cicerone->getBirthDate() == "" ||
+        $password2 == "" || $cicerone->getContact()->getMail() == "" || $cicerone->getContact()->getPhone_num() == "" || $cicerone->getBirthDate() == "0000-00-00" ||
         $cicerone->getAddress()->getNation() == "" || $cicerone->getAddress()->getCounty() == "" || $cicerone->getAddress()->getCity() == "" ||
         $cicerone->getAddress()->getStreet() == "" || $cicerone->getAddress()->getCAP() == ""
       ) {
