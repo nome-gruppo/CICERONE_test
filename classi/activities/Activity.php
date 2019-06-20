@@ -31,7 +31,7 @@ class Activity
   public function insertDatabase()
   { //funzione di inserimento dati attivita nel database
     $database = new Database();
-    $link = database->getConnection();
+    $link = $database->getConnection();
 
     $query = "INSERT INTO {$database->getCicerone_table()} VALUES('$this->idCicerone','$this->citta','$this->data', '$this->costo','$this->descrizione','$this->lingua')";
     $result = mysqli_query($link, $query) or die("Errore di registrazione! Controlla di aver compilato tutti i campi.");
