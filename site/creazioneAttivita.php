@@ -2,7 +2,10 @@
 
 <?php
 session_start();
-require_once '../classi/Attivita.php';
+require_once '..\classi\activities\Activity.php';
+
+use classi\activities\Activity;
+
 $cicerone=$_SESSION["cicerone"];
 
       if(isset($_POST["inviaDatiAttivita"])){
@@ -16,8 +19,8 @@ $cicerone=$_SESSION["cicerone"];
             <a href='formAttivita.php' class='alert-link'>Non tutti i campi sono stati compilati! Click per riprovare</a>
           </div>";
         }else {
-          $attivita=new Attivita($idCicerone, $citta, $costo, $descrizione, $lingua, $data);
-        	$result=$attivita->insertDatabse();
+          $attivita=new Activity($idCicerone, $citta, $costo, $descrizione, $lingua, $data);
+        	$result=$attivita->insertDatabase();
         }
           if($result){
             echo "<div class='alert alert-success' role='alert'>

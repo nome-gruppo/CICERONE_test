@@ -3,19 +3,21 @@ namespace classi\users;
 
 require_once 'User.php';
 require_once '..\classi\utilities\Date.php';
+require_once '..\classi\utilities\Database.php';
 
 use classi\activities\Activity;
 use classi\utilities\Functions;
 use classi\utilities\Date;
+use classi\utilities\Database;
+
 class Cicerone extends User
 {
 
     const MAX_ACTIVITY = 3;    // numero massimo di inserzioni inseribili da cicerone non premium
 
     private $premiumDate = null;
-
+    private $valutazione;
     private $myActivity = array();
-
     private $myReview = array();
 
     public function __construct()
@@ -29,6 +31,10 @@ class Cicerone extends User
         $result = mysqli_query($link, $query) or die("Errore connessione");
         mysqli_close($link);
         return $result;
+    }
+
+    public function setValutazione(){
+
     }
 
     public function addActivity(\classi\activities\Activity $activity)
@@ -126,7 +132,8 @@ class Cicerone extends User
      */
     public function setAddress($nation, $county, $city, $street, $CAP)
     {
-        // TODO Auto-generated method stub
+      parent::setAddress($nation, $county, $city, $street, $CAP);
+
 
     }
 
@@ -146,7 +153,7 @@ class Cicerone extends User
      */
     public function setContact($email, $phone_num)
     {
-        // TODO Auto-generated method stub
+        parent::setContact($email, $phone_num);
 
     }
 
@@ -156,7 +163,7 @@ class Cicerone extends User
      */
     public function setName($name)
     {
-        // TODO Auto-generated method stub
+        parent::setName($name);
 
     }
 
@@ -166,7 +173,7 @@ class Cicerone extends User
      */
     public function setPassword($password)
     {
-        // TODO Auto-generated method stub
+        parent::setPassword($password);
 
     }
 
@@ -186,7 +193,7 @@ class Cicerone extends User
      */
     public function setSurname($surname)
     {
-        // TODO Auto-generated method stub
+        parent::setSurname($surname);
 
     }
     /**

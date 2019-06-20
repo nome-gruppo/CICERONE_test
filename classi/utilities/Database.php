@@ -9,9 +9,9 @@ define('DATABASE', 'cicerone');
 
 class Database
 {
-    private $turista_table = "turista(id, nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap)";
-    private $cicerone_table = "ciceroni(id, nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap, data_premium, valutazione)";
-    private $activity_table = "attivita(id, idCicerone,citta,data,costo,descrizione,lingua)";
+    private $turista_table = "turista(nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap)";
+    private $cicerone_table = "ciceroni(nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap, data_premium, valutazione)";
+    private $activity_table = "attivita(id_cicerone,citta,data,costo,descrizione,lingua)";
     private $connection;
 
 
@@ -21,7 +21,7 @@ class Database
         $this->connection = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASE) or die("Errore di connessione!");
     }
 
-    public function getConnetion(){
+    public function getConnection(){
         return $this->connection;
     }
     /**
@@ -40,6 +40,13 @@ class Database
         return $this->cicerone_table;
     }
 
+    public function getAttivita_table()
+    {
+        return $this->attivita_table;
+    }
+    /**
+    * @return string
+    */
 
 
 }

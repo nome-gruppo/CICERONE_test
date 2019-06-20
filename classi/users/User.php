@@ -8,6 +8,7 @@ use classi\utilities\Date;
 use classi\utilities\Place;
 
 class User {
+    
     private $id;
     private $name;
     private $surname;

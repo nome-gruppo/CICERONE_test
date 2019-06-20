@@ -1,6 +1,5 @@
 <?php
 namespace classi\utilities;
-
 require_once 'Date.php';
 
 class Functions
@@ -68,7 +67,7 @@ class Functions
      * year = yyyy
      *
      * @param string $stringDate    stringa in formato dd/mm/yyyy da convertire
-     * @return \classi\utilities\Date   variabile di tipo Date restituita
+     * @return Date   variabile di tipo Date restituita
      */
     public function StringToDate($stringDate)
     {
