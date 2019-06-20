@@ -5,9 +5,7 @@ use classi\utilities\Database;
 use classi\utilities\Functions;
 ?>
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
-	type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
 
 <?php
 require_once '../classi/users/Cicerone.php';
@@ -22,52 +20,61 @@ $cicerone = new Cicerone();
 
 if (isset($_POST["invia_dati"])) {
 
-    $functions = new Functions();
+  $functions = new Functions();
 
-    $cicerone->setName($_POST['nome']);
-    $cicerone->setSurname($_POST['cognome']);
-    $cicerone->setContact($_POST['mail'], $_POST['telefono']);
-    $cicerone->setBirthDate($functions->writeDateDb( $_POST['data_nascita']));
-    $cicerone->setAddress($_POST['paese'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
+  $cicerone->setName($_POST['nome']);
+  $cicerone->setSurname($_POST['cognome']);
+  $cicerone->setContact($_POST['mail'], $_POST['telefono']);
+  $cicerone->setBirthDate($functions->writeDateDb($_POST['data_nascita']));
+  $cicerone->setAddress($_POST['paese'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
 
-    // campi password temporanei per il controllo
-    $password1 = $_POST['password'];
-    $password2 = $_POST['password2'];
-		// controllo presenza mail
-		$query1 = "SELECT *from ciceroni WHERE mail = '$getContact()->$getmail()'";
-		$result1 = mysqli_query($link, $query1) or die("Errore di registrazione!");
-		$num=mysqli_num_rows($result1);
-			if($num==1){
-				echo "<div class='alert alert-danger' role='alert'>
-					<a href='formRegistrazione.html' class='alert-link'>Esiste un account con la mail appena inserita! Click per riprovare</a>
+  // campi password temporanei per il controllo
+  $password1 = $_POST['password'];
+  $password2 = $_POST['password2'];
+
+  // controllo presenza mail in tabelle ciceroni e turista
+  $query_mail_ciceroni = "SELECT * from ciceroni WHERE mail = '{$cicerone->getContact()->getEmail()}'";
+  $result_mail_ciceroni = mysqli_query($link, $query_mail_ciceroni) or die("Errore di registrazione!");
+ 
+  $query_mail_turisti = "SELECT * from turista WHERE mail = '{$cicerone->getContact()->getEmail()}'";
+  $result_mail_turisti = mysqli_query($link, $query_mail_turisti) or die("Errore di registrazione!");
+
+  if (mysqli_num_rows($result_mail_ciceroni) == 1 || mysqli_num_rows($result_mail_turisti) == 1) {
+    echo "<div class='alert alert-danger' role='alert'>
+					<a href='formRegistrazione.html' class='alert-link'>Esiste già un account con questa mail! Click per riprovare</a>
 				</div>";
-			}
+  } else {
 
-		$query2 = "SELECT *from ciceroni WHERE telefono = '$telefono'";
-		$result2 = mysqli_query($link, $query2) or die("Errore di registrazione!");
-		$num=mysqli_num_rows($result2);
-			if($num==1){
-				echo "<div class='alert alert-danger' role='alert'>
-					<a href='formRegistrazione.html' class='alert-link'>Esiste un account con il numero di telefono appena inserito! Click per riprovare</a>
+    //controllo presenza numero telefono in tabelle ciceroni e turista
+    $query_phone_ciceroni = "SELECT *from ciceroni WHERE telefono = '{$cicerone->getContact()->getPhone_num()}'";
+    $result_phone_ciceroni = mysqli_query($link, $query_phone_ciceroni) or die("Errore di registrazione!");
+
+    $query_phone_turisti = "SELECT *from turista WHERE telefono = '{$cicerone->getContact()->getPhone_num()}'";
+    $result_phone_turisti = mysqli_query($link, $query_phone_turisti) or die("Errore di registrazione!");
+    
+    if (mysqli_num_rows($result_phone_ciceroni) == 1 || mysqli_num_rows($result_phone_turisti) == 1) {
+      echo "<div class='alert alert-danger' role='alert'>
+					<a href='formRegistrazione.html' class='alert-link'>Esiste già un account con questo numero di telefono! Click per riprovare</a>
 				</div>";
-			}
+    } else {
 
-    // controllo campi vuoti
-    if ($cicerone->getName() == "" || $cicerone->getSurname() == ""|| $password1 == "" ||
-    		$password2 == "" || $cicerone->getContact()->getEmail() == ""|| $cicerone->getContact()->getPhone_num() == "" || $cicerone->getBirthDate() == "" ||
+      // controllo campi vuoti
+      if (
+        $cicerone->getName() == "" || $cicerone->getSurname() == "" || $password1 == "" ||
+        $password2 == "" || $cicerone->getContact()->getEmail() == "" || $cicerone->getContact()->getPhone_num() == "" || $cicerone->getBirthDate() == "" ||
         $cicerone->getAddress()->getNation() == "" || $cicerone->getAddress()->getCounty() == "" || $cicerone->getAddress()->getCity() == "" ||
-        $cicerone->getAddress()->getStreet() == ""|| $cicerone->getAddress()->getCAP() == ""){
+        $cicerone->getAddress()->getStreet() == "" || $cicerone->getAddress()->getCAP() == ""
+      ) {
 
         echo "<div class='alert alert-danger' role='alert'>
           <a href='formRegistrazione.html' class='alert-link'>Non tutti i campi sono stati compilati! Click per riprovare</a>
         </div>";
-
-    } elseif (strcmp($password1, $password2) != 0) {
+      } elseif (strcmp($password1, $password2) != 0) {
 
         echo "<div class='alert alert-danger' role='alert'>
           <a href='formRegistrazione.html' class='alert-link'>Le password non corrispondono! Click per riprovare</a>
         </div>";
-    } else {
+      } else {
 
         $cicerone->setPassword(sha1(md5(sha1($password1))));
 
@@ -78,15 +85,16 @@ if (isset($_POST["invia_dati"])) {
         $result = mysqli_query($link, $query) or die("Errore di registrazione!");
 
         if ($result) {
-            echo "<div class='alert alert-success' role='alert'>
+          echo "<div class='alert alert-success' role='alert'>
             <a href='homepage.html' class='alert-link'>Registrazione effettuata con successo! Click per effettuare il login</a>
           </div>";
         }
-    }
-    mysqli_close($link);
+      }
+    }// end else controllo presenza numero di telefono
+  } //end else controllo presenza mail
+  mysqli_close($link);
 }
 ?>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
