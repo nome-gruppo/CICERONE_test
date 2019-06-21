@@ -1,3 +1,8 @@
+<?php
+namespace classi\users;
+require_once '..\classi\users\Turista.php'; //includo la classe turista
+require_once '..\classi\utilities\Functions.php';
+?>
 <html lang="it">
   <head>
     <meta charset="UTF-8">
@@ -9,13 +14,18 @@
   </head>
   <body>
 
+
 <?php
-require_once '../classi/users/Turista.php'; //includo la classe turista
 session_start();
-$turista=$_SESSION["turista"];//prendo l'oggetto turista precedentemente messo in sessione
-  if(isset($_POST["ricerca"])){//se l'utente clicca su ricerca
+use classi\utilities\Functions;
+use classi\users\Turista;
+$turista=new Turista();
+$turista=$_SESSION['utente'];//prendo l'oggetto turista precedentemente messo in sessione
+$functions=new Functions();
+  if(isset($_POST["ricercaAttivita"])){//se l'utente clicca su ricerca
     $citta=$_POST['citta'];
     $lingua=$_POST['lingua'];
+    $data=($functions->writeDateDb( $_POST['data']));
     $result=$turista->searchActivity($citta, $lingua, $data);//chiamo la funzione cercaAttivita
     $num=mysqli_num_rows($result);//conto il numero di righe restituite dalla funzione
   if($num>0){
@@ -30,7 +40,7 @@ $turista=$_SESSION["turista"];//prendo l'oggetto turista precedentemente messo i
             <th scope="col">Costo €</th>
             <th scope="col">Lingua</th>
             <th scope="col">Descrizione</th>
-            <th scope="col">Partecipanti</th>
+            <th scope="col">Prenota</th>
           </tr>
         </thead>
         <tbody>
@@ -41,28 +51,41 @@ $turista=$_SESSION["turista"];//prendo l'oggetto turista precedentemente messo i
           ?>
                     <tr>
                     <th scope="row"><?php echo $riga['citta'];//stampo il campo citta dell'array $riga ?></th>
-                    <td><?php echo $riga['data'];?></td>
+                    <td><?php echo $riga['data_attivita'];?></td>
                     <td><?php echo $riga['nomeCicerone'];?></td>
                     <td><?php echo $riga['cognomeCicerone'];?></td>
                     <td><?php echo $riga['costo'];?></td>
                     <td><?php echo $riga['lingua'];?></td>
                     <td><?php echo $riga['descrizione'];?></td>
-                    <td><a href="prenotazione.php"><button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">PRENOTA</button></td>
+                    <td><div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" aria-label="..." data-toggle="modal" data-target=".bs-example-modal-lg" name="<?php $riga['id_attivita'];?>">
+                      </span>
+                    </div></td>
                   </tr>
               <?php
                 }
               ?>
-
         </tbody>
       </table>
 
-      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-
-          </div>
-        </div>
-      </div>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <h1>Sicuro di voler prenotare l'attivita selezionata?</h1>
+    </br></br>
+    <div class="row">
+    <div class="col-lg-6">
+    <button type="submit" class="btn btn-primary">SI   <span class="glyphicon glyphicon-ok-circle"></span></button>
+  </div>
+  <div class="col-lg-6">
+    <button type="submit" class="btn btn-primary">NO   <span class="glyphicon glyphicon-remove-circle"></span></button>
+  </div>
+</br></br></br></br>
+  </div>
+    </div>
+  </div>
+</div>
 
     <?php
   }

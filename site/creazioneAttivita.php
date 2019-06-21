@@ -20,8 +20,6 @@ $cicerone = new Cicerone();
 
 $cicerone=$_SESSION['cicerone'];
 
-var_dump($cicerone);
-
       $functions = new Functions();
       if(isset($_POST["inviaDatiAttivita"])){
         $citta=$_POST['citta'];

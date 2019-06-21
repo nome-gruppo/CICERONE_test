@@ -33,13 +33,13 @@ class Turista extends User
 
     public function searchActivity($citta, $lingua, $data){
       $database=new Database();
-      $link=$database->getConnetion();
-      $query="SELECT attivita.id, attivita.citta, attivita.data, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua FROM(attivita inner join ciceroni on attivita.idCicerone=ciceroni.id)where attivita.citta='$citta'and attivita.lingua='$lingua'and attivita.data='$data'";
+      $link=$database->getConnection();
+      $query="SELECT attivita.id_attivita, attivita.citta, attivita.data_attivita, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua, attivita.costo FROM(attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)where attivita.citta='$citta'and attivita.lingua='$lingua'and attivita.data_attivita='$data'";
       $result = mysqli_query($link, $query) or die("Errore connessione");
       mysqli_close($link);
       return $result;
     }
-    
+
     public function addActivityDone(Activity $activity)
     {
         $this->activitiesDone($activity);
