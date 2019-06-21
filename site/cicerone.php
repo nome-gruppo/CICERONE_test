@@ -34,6 +34,7 @@ $cicerone=$_SESSION['utente'];
           <ul class="dropdown-menu">
             <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
             <li><a href="gestioneAttivita.php">Le mie attività</a></li>
+            <li><a href="homepage.html">Logout <?php session_destroy()?></a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>   Logout</a></li>
           </ul>
