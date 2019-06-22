@@ -18,23 +18,20 @@ use classi\users\Cicerone;
 
 $cicerone = new Cicerone();
 
-$cicerone=$_SESSION['cicerone'];
-
+$cicerone=$_SESSION['utente'];
       $functions = new Functions();
       if(isset($_POST["inviaDatiAttivita"])){
-        $citta=$_POST['citta'];
-        $costo=$_POST['costo'];
-        $descrizione=$_POST['descrizione'];
-        $lingua=$_POST['lingua'];
-        $data=($functions->writeDateDb( $_POST['data']));
-        if($citta==""||$costo==""||$descrizione==""||$lingua==""||$data==""){
+
+        $attivita=new Activity($cicerone->getId(), $_POST['citta'], intval($_POST['costo']), $_POST['descrizione'], $_POST['lingua'], $functions->writeDateDb( $_POST['data']));
+        
+
+        if($attivita->getCitta()==""||$attivita->getCosto()==NULL||$attivita->getDescrizione()==""||$attivita->getLingua()==""||$attivita->getData()==""){
           echo "<div class='alert alert-danger' role='alert'>
             <a href='formAttivita.php' class='alert-link'>Non tutti i campi sono stati compilati! Click per riprovare</a>
           </div>";
         }else {
-          $id = $cicerone->getId();
-          $attivita=new Activity($id, $citta, $costo, $descrizione, $lingua, $data);
-        	$result=$attivita->insertDatabase();
+          
+          	$result=$attivita->insertDatabase();
         }
           if($result){
             echo "<div class='alert alert-success' role='alert'>

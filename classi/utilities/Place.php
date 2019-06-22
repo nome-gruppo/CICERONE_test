@@ -72,9 +72,9 @@ class Place
     public function __construct($nation, $county, $city, $street, $CAP)
     {
         if(is_string($nation) && is_string($county) && is_string($city) && is_string($street) && is_string($CAP)){
-            $this->nation = trim($nation);
-            $this->county = trim($county);
-            $this->city = trim($city);
+            $this->nation = ucfirst(trim($nation));
+            $this->county = ucfirst(trim($county));
+            $this->city = ucfirst(trim($city));
             $this->street = trim($street);
             $this->CAP = trim($CAP);
         }

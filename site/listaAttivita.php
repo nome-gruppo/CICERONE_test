@@ -59,7 +59,8 @@ $functions=new Functions();
                     <td><?php echo $riga['descrizione'];?></td>
                     <td><div class="input-group">
                       <span class="input-group-addon">
-                        <input type="checkbox" aria-label="..." data-toggle="modal" data-target=".bs-example-modal-lg" name="<?php $riga['id_attivita'];?>">
+                        <input type="checkbox" aria-label="..." data-toggle="modal" data-target=".bs-example-modal-lg" onclick="<?php $_SESSION['id']=$riga['id_attivita'];?>">
+
                       </span>
                     </div></td>
                   </tr>
@@ -76,7 +77,7 @@ $functions=new Functions();
     </br></br>
     <div class="row">
     <div class="col-lg-6">
-    <button type="submit" class="btn btn-primary">SI   <span class="glyphicon glyphicon-ok-circle"></span></button>
+    <a href="prenotazione.php"><button type="submit" class="btn btn-primary">SI   <span class="glyphicon glyphicon-ok-circle"></span></button></a>
   </div>
   <div class="col-lg-6">
     <button type="submit" class="btn btn-primary">NO   <span class="glyphicon glyphicon-remove-circle"></span></button>

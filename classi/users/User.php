@@ -55,7 +55,7 @@ class User {
     public function setName($name)
     {
         if(is_string($name)){
-        $this->name = $name;
+        $this->name = ucfirst(trim($name));
         } else{
             trigger_error('errore di tipo');
         }
@@ -64,7 +64,7 @@ class User {
     public function setSurname($surname)
     {
         if(is_string($surname)){
-            $this->surname = $surname;
+            $this->surname = ucfirst(trim($surname));
         } else{
             trigger_error('errore di tipo');
         }
@@ -132,14 +132,5 @@ class User {
     {
         return $this->id;
     }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
 
 }

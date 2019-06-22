@@ -204,17 +204,4 @@ class Cicerone extends User
         return parent::getId();
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::setId()
-     */
-    public function setId($id)
-    {
-        parent::setId($id);
-    }
-
-
-
-
-
 }

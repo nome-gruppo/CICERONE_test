@@ -17,12 +17,16 @@ class Activity
 
   public function __construct($idCicerone, $citta, $costo, $descrizione, $lingua, $data)
   { //costruttore della classe attivita
-    $this->idCicerone = $idCicerone;
-    $this->citta = $citta;
-    $this->costo = $costo;
-    $this->lingua = $lingua;
-    $this->descrizione = $descrizione;
-    $this->data = $data;
+    if (is_string($citta) && is_int($costo) && is_string($descrizione) && is_string($lingua) && is_string($data)) {
+      $this->idCicerone = $idCicerone;
+      $this->citta = ucfirst(trim($citta));
+      $this->costo = $costo;
+      $this->lingua = trim($lingua);
+      $this->descrizione = trim($descrizione);
+      $this->data = $data;
+    } else {
+      trigger_error('Errore di tipo');
+    }
   }
   public function setIdAttivita($idAttivita)
   {
@@ -37,5 +41,46 @@ class Activity
 
     mysqli_close($link);
     return $result;
+  }
+  
+  public function getIdAttivita()
+  {
+    return $this->idAttivita;
+  }
+
+  
+  public function getIdCicerone()
+  {
+    return $this->idCicerone;
+  }
+
+  
+  public function getCitta()
+  {
+    return $this->citta;
+  }
+
+  
+  public function getCosto()
+  {
+    return $this->costo;
+  }
+
+  
+  public function getDescrizione()
+  {
+    return $this->descrizione;
+  }
+
+  
+  public function getLingua()
+  {
+    return $this->lingua;
+  }
+
+  
+  public function getData()
+  {
+    return $this->data;
   }
 }
