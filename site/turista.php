@@ -40,7 +40,7 @@ $turista = $_SESSION['utente'];
 
 
 
-    
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-right">
       <li class="dropdown">
@@ -48,13 +48,9 @@ $turista = $_SESSION['utente'];
         <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $turista->getName(); ?></a>
         <ul class="dropdown-menu">
           <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
-<<<<<<< HEAD
           <li><a href="#">Attività in programma</a></li>
           <li><a href="#">Attività svolte</a></li>
-=======
-          <li><a href="#">Another action</a></li>
           <li><a href="homepage.html">Logout <?php session_destroy()?></a></li>
->>>>>>> 4ffdd00e38e8249710133ddc43f32283ea44a96d
           <li role="separator" class="divider"></li>
           <li><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>   Logout</a></li>
         </ul>

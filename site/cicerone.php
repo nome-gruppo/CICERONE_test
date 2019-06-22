@@ -6,7 +6,7 @@ $cicerone = new Cicerone();
 
 session_start();
 
-$cicerone=$_SESSION['cicerone'];
+$cicerone=$_SESSION['utente'];
 ?>
 
 <html lang="it">
