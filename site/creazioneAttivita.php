@@ -18,8 +18,7 @@ use classi\users\Cicerone;
 
 $cicerone = new Cicerone();
 
-$cicerone=$_SESSION['cicerone'];
-
+$cicerone=$_SESSION['utente'];
       $functions = new Functions();
       if(isset($_POST["inviaDatiAttivita"])){
         $citta=$_POST['citta'];
