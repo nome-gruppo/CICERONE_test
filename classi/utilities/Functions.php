@@ -69,15 +69,24 @@ class Functions
         $pieces = array();
         $pieces = explode('/', $date);
         
-        $pieces2 = array();
-        array_push($pieces2, $pieces[2]);
-        array_push($pieces2, $pieces[1]);
-        array_push($pieces2, $pieces[0]);
-        return implode('-', $pieces2);
+        return implode('-', array_reverse($pieces));
         }else{
             trigger_error('errore di tipo');
         }
     }
+
+    public function DateDb_to_Date($date){
+        if(is_string($date)){
+            $pieces = array();
+            $pieces = explode('-', $date);
+            
+            return implode('/', array_reverse($pieces));
+            }else{
+                trigger_error('errore di tipo');
+            }
+    }
 }
+
+
 ?>
  
