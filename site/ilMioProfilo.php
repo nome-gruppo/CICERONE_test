@@ -18,7 +18,6 @@ $utente = $_SESSION['utente'];
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!--ottimizza la visione su mobile dello slider-->
-
 </head>
 
 <body>
@@ -29,6 +28,7 @@ $utente = $_SESSION['utente'];
         <h2>
           Il mio profilo </h2>
       </div>
+
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-right">
           <li class="dropdown">
@@ -37,7 +37,7 @@ $utente = $_SESSION['utente'];
             <ul class="dropdown-menu">
               <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
               <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
+              <li><a href="homepage.html">Logout </a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
             </ul>
@@ -47,11 +47,16 @@ $utente = $_SESSION['utente'];
     </div><!-- /.container-fluid -->
   </nav>
 
+  </br></br></br>
 
+
+
+
+
+  </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-
 
 </body>
 
