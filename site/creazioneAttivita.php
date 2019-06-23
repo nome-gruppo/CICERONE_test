@@ -22,7 +22,7 @@ $cicerone=$_SESSION['utente'];
       $functions = new Functions();
       if(isset($_POST["inviaDatiAttivita"])){
 
-        $attivita=new Activity($cicerone->getId(), $_POST['citta'], intval($_POST['costo']), $_POST['descrizione'], $_POST['lingua'], $functions->writeDateDb( $_POST['data']));
+        $attivita=new Activity($cicerone->getId(), $_POST['citta'], $_POST['costo'], $_POST['descrizione'], $_POST['lingua'], $functions->writeDateDb( $_POST['data']));
         
 
         if($attivita->getCitta()==""||$attivita->getCosto()==NULL||$attivita->getDescrizione()==""||$attivita->getLingua()==""||$attivita->getData()==""){

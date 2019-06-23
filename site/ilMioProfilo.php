@@ -176,6 +176,7 @@ $functions = new Functions();
       <div class="form-group">
         <div class="text-center">
           <button type="submit" class="btn btn-primary" name="invia_dati">Modifica dati</button>
+          <button type="submit" class="btn btn-primary" name="invia_dati">Modifica dati</button>
         </div>
       </div>
 

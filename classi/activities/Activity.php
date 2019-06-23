@@ -17,10 +17,10 @@ class Activity
 
   public function __construct($idCicerone, $citta, $costo, $descrizione, $lingua, $data)
   { //costruttore della classe attivita
-    if (is_string($citta) && is_int($costo) && is_string($descrizione) && is_string($lingua) && is_string($data)) {
+    if (is_string($citta) && is_int($costo) && is_string($descrizione) &&is_numeric($costo) && is_string($lingua) && is_string($data)) {
       $this->idCicerone = $idCicerone;
       $this->citta = ucfirst(trim($citta));
-      $this->costo = $costo;
+      $this->costo = intVal($costo);
       $this->lingua = trim($lingua);
       $this->descrizione = trim($descrizione);
       $this->data = $data;
