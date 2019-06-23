@@ -61,12 +61,14 @@ $functions = new Functions();
     </div><!-- /.container-fluid -->
   </nav>
 
-  </br>
+  <br />
 
   <div class="container-fluid">
     <form action="modificaDati.php" method="post">
+
       <div class=" col-sm-2 col-xs-1">
       </div>
+
       <div class="col-sm-8 col-xs-10">
         <table class="table table-striped">
 
@@ -100,7 +102,7 @@ $functions = new Functions();
             </tr>
             <tr>
               <th>Email</th>
-              <td><?=$utente->getContact()->getMail() ?></td>
+              <td><?= $utente->getContact()->getMail() ?></td>
             </tr>
             <tr>
               <th>Password</th>
@@ -109,7 +111,7 @@ $functions = new Functions();
                   <input type='password' class="form-control" placeholder="Nuova password" name="password">
                   <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span> </span>
                 </div>
-                </br>
+                <br />
                 <div class='input-group col-sm-9 col-xs-10' id='ripeti_password'>
                   <input type='password' class="form-control" placeholder="Ripeti password" name="ripeti_password">
                   <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span> </span>
@@ -170,27 +172,77 @@ $functions = new Functions();
                 </div>
               </td>
             </tr>
-          </tbody>
+            </tbody>                    
         </table>
-      </div>
-      <div class="form-group">
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary" name="invia_dati">Modifica dati</button>
-          <button type="submit" class="btn btn-primary" name="invia_dati">Modifica dati</button>
+
+        <!-- Tasti -->
+        <div class="row">
+          <div class="col-sm-2 col-xs-2">
+          </div>
+          <div class="col-sm-3 col-xs-3">
+            <button type="submit" class="btn btn-primary" name="modifica_dati">Modifica dati</button>
+          </div>
+
+          <div class="col-sm-3 col-xs-3">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#eliminaAccount">Elimina account</button>
+          </div>
+
+          <div class="col-sm-2 col-xs-2">
+          </div>
         </div>
+        <!-- Fine tasti -->
+
+      </div>
+      <div class="col-sm-2 col-xs-1">
       </div>
 
-      <div class=" col-sm-2 col-xs-1">
+
+        <!-- Modal -->
+  <div class="modal fade" id="eliminaAccount" tabindex="-1" role="dialog" aria-labelledby="eliminaAccountLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="eliminaAccountLabel">Sicuro di voler eliminare l'account?</h3>
+        </div>
+        <div class="modal-body">
+          Una volta eliminato l'account sarà impossibile recuperarei tuoi dati
+        </div>
+        <br />
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-sm-2 col-xs-2">
+            </div>
+
+            <div class="col-sm-3 col-xs-3">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+            </div>
+            <div class="col-sm-3 col-xs-3">
+              <button type="submit" class="btn btn-danger" name="elimina_account">Elimina account</button>
+            </div>
+
+            <div class="col-sm-2 col-xs-2">
+            </div>
+          </div>
+
+        </div>
+        <div class="col-sm-2 col-xs-1">
+        </div>
       </div>
+    </div>
+  </div>
+   <!--Fine Modal -->
     </form>
   </div>
+
+
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 
   <!--Script Datepicker-->
   <script src="js/bootstrap-datepicker.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script>
     jQuery(function() {
       jQuery('#data_nascita').datepicker({
@@ -203,5 +255,7 @@ $functions = new Functions();
     });
   </script>
   <!--Fine script Datepicker-->
+
+</body>
 
 </html>

@@ -1,18 +1,21 @@
 <?php
 namespace classi\users;
 
+require_once '../classi/users/Cicerone.php';
+require_once '../classi/users/Turista.php';
+require_once '../classi/utilities/Database.php';
+require_once '../classi/utilities/Functions.php';
+
+
 use classi\utilities\Database;
 use classi\utilities\Functions;
+
+session_start();
 ?>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
 
 <?php
-require_once '../classi/users/User.php';
-require_once '../classi/utilities/Database.php';
-require_once '../classi/utilities/Functions.php';
-
-session_start();
 
 $utente = $_SESSION['utente'];
 
@@ -20,9 +23,7 @@ $utente = $_SESSION['utente'];
 $database = new Database();
 $link = $database->getConnection();
 
-
-
-if (isset($_POST["invia_dati"])) {
+if (isset($_POST["modifica_dati"])) {
 
     $functions = new Functions();
 
@@ -55,7 +56,7 @@ if (isset($_POST["invia_dati"])) {
             $utente->setSurname(trim($_POST['cognome']));
         }
 
-        if (trim($_POST['data_nascita']) != "") {           
+        if (trim($_POST['data_nascita']) != "") {
             $utente->setBirthDate($functions->writeDateDb(trim($_POST['data_nascita'])));
         }
 
@@ -79,30 +80,53 @@ if (isset($_POST["invia_dati"])) {
             $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(),  $utente->getAddress->getStreet(), trim($_POST['CAP']));
         }
 
-        if ((($_POST['password'] != "") || ($_POST['ripeti_password'] != "")) || ($_POST['password'] != $_POST['ripeti_password'])) {
-            echo "<div class='alert alert-danger' role='alert'>
-            <a href='ilMioProfilo' class='alert-link'>Le password non corrispondono! Click per riprovare</a>
-          </div>";
-        } else {
+        if ((($_POST['password'] != "") && ($_POST['ripeti_password'] != "")) && ($_POST['password'] == $_POST['ripeti_password'])) {
             $utente->setPassword(sha1(md5(sha1($_POST['password']))));
+
+        } elseif($_POST['password'] != $_POST['ripeti_password']) {
+            echo "<div class='alert alert-danger' role='alert'>
+            <a href='ilMioProfilo.php' class='alert-link'>Le password non corrispondono! Click per riprovare</a>
+          </div>";
+            
         }
 
-        if($utente instanceof Cicerone){
-        
-        $query = "UPDATE 'ciceroni' SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}',
-                provincia = '{$utente->getAddress()->getCounty()}', citta = '{$utente->getAddress()->getCity()}', indirizzo = '{$utente->getAddress()->getStreet()}', cap ='{$utente->getAddress()->getCAP()}' where mail = '{$utente->getContact()->getMail()}')";
-        }else{
-            $query = "UPDATE 'turista' SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}',
-                provincia = '{$utente->getAddress()->getCounty()}', citta = '{$utente->getAddress()->getCity()}', indirizzo = '{$utente->getAddress()->getStreet()}', cap ='{$utente->getAddress()->getCAP()}' where mail = '{$utente->getContact()->getMail()}')";
+        if ($utente instanceof Cicerone) {
+
+            $query = "UPDATE ciceroni SET 'nome' = '{$utente->getName()}', 'cognome' = '{$utente->getSurname()}', 'data_nascita' ='{$utente->getBirthDate()}','telefono' = '{$utente->getContact()->getPhone_num()}',  'password' ='{$utente->getPassword()}', 'nazione' = '{$utente->getAddress()->getNation()}',
+               'provincia' = '{$utente->getAddress()->getCounty()}', 'citta' = '{$utente->getAddress()->getCity()}', 'indirizzo' = '{$utente->getAddress()->getStreet()}', 'cap' ='{$utente->getAddress()->getCAP()}' WHERE 'id_cicerone' = '{$utente->getId()}')";
+    
+        } else {
+            $query = "UPDATE turista SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}',
+                provincia = '{$utente->getAddress()->getCounty()}', citta = '{$utente->getAddress()->getCity()}', indirizzo = '{$utente->getAddress()->getStreet()}', cap ='{$utente->getAddress()->getCAP()}' where id_turista = {$utente->getId()})";
         }
 
-        $result = mysqli_query($link, $query) or die("Errore di registrazione!");
+        $result = mysqli_query($link, $query) or die("Errore nella modifica dei dati!");
 
         if ($result) {
             echo "<div class='alert alert-success' role='alert'>
-                <a href='ilMioProfilo.php' class='alert-link'>Modifica dati effettuata con successo! Click per effettuare il login</a>
+                <a href='ilMioProfilo.php' class='alert-link'>Modifica dati effettuata con successo!</a>
                 </div>";
         }
+    }
+
+    mysqli_close($link);
+}
+
+if (isset($_POST["elimina_account"])) {
+
+    if ($utente instanceof Cicerone) {
+
+        $query = "DELETE from 'ciceroni' where id_cicerone = '{$utente->getId()}'";
+    } else {
+        $query = "DELETE from 'turista' where id_turista = '{$utente->getId()}'";
+    }
+
+    $result = mysqli_query($link, $query) or die("Errore eliminazione account!");
+
+    if ($result) {
+        echo "<div class='alert alert-success' role='alert'>
+                <a href='homepage.html' class='alert-link'>Il tuo account è stato eliminato correttamente</a>
+                </div>";
     }
 
     mysqli_close($link);

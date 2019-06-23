@@ -41,6 +41,8 @@ if (isset($_POST["login"])) {
             $utente->setContact($row['mail'], $row['telefono']);
             $utente->setAddress($row['nazione'], $row['provincia'], $row['citta'],$row['indirizzo'], $row['cap']);
             $utente->setPassword($row['password']);
+            $utente->setValutazione($row['valutazione']);
+            $utente->setPremiumDate($row['data_premium']);
 
             $_SESSION['utente'] = $utente;
 
