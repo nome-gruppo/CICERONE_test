@@ -37,48 +37,47 @@ class Activity
     $database = new Database();
     $link = $database->getConnection();
     $query = "INSERT INTO {$database->getActivity_table()} VALUES('$this->idCicerone','$this->citta','$this->data', '$this->costo','$this->descrizione','$this->lingua')";
-    $result = mysqli_query($link, $query) or die("Errore di registrazione! Controlla di aver compilato tutti i campi.");
-
+    $result = mysqli_query($link, $query) or die("Errore di connessione!");
     mysqli_close($link);
     return $result;
   }
-  
+
   public function getIdAttivita()
   {
     return $this->idAttivita;
   }
 
-  
+
   public function getIdCicerone()
   {
     return $this->idCicerone;
   }
 
-  
+
   public function getCitta()
   {
     return $this->citta;
   }
 
-  
+
   public function getCosto()
   {
     return $this->costo;
   }
 
-  
+
   public function getDescrizione()
   {
     return $this->descrizione;
   }
 
-  
+
   public function getLingua()
   {
     return $this->lingua;
   }
 
-  
+
   public function getData()
   {
     return $this->data;

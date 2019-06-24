@@ -12,6 +12,7 @@ class Database
     private $turista_table = "turista(nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap)";
     private $cicerone_table = "ciceroni(nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap, data_premium, valutazione)";
     private $activity_table = "attivita(id_cicerone,citta,data_attivita,costo,descrizione,lingua)";
+    private $partecipazione_table="partecipazione(id_attivita, id_turista)";
     private $connection;
 
 
@@ -44,6 +45,10 @@ class Database
     {
         return $this->activity_table;
     }
+    public function getPartecipazione_table(){
+        return $this->partecipazione_table;
+    }
+
     /**
     * @return string
     */
