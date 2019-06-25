@@ -39,6 +39,14 @@ class Turista extends User
       mysqli_close($link);
       return $result;
     }
+    public function confermaAttivita($id_attivita){
+      $database=new Database();
+      $link=$database->getConnection();
+      $query="INSERT INTO {$database->getPartecipazione_table()} VALUES('$id_attivita','{$this->getId()}')";
+      $result = mysqli_query($link, $query) or die("Errore connessione");
+      mysqli_close($link);
+      return $result;
+    }
 
     public function addActivityDone(Activity $activity)
     {

@@ -25,9 +25,9 @@ $functions = new Functions();
 
   <!--Fine fogli di stile datepicker-->
 
-  <!--Script datepicker-->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+   <!--Script datepicker-->
+   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.js"></script>
   <!--Fine script datepicker-->
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,26 +39,31 @@ $functions = new Functions();
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <h2>
-          Il mio profilo </h2>
+        <h2> Il mio profilo </h2>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $utente->getName(); ?></a>
-            <ul class="dropdown-menu">
-              <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="homepage.html">Logout </a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+      <ul class="nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $utente->getName(); ?></a>
+          <ul class="dropdown-menu">
+            <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
+            <?php
+            if($utente instanceof Cicerone){
+            <li><a href="gestioneAttivita.php">Le mie attività</a></li>
+          }else{
+            echo '  <li><a href="#">Attività in programma</a></li>
+                    <li><a href="#">Attività svolte</a></li>';
+          }
+            ?>
+            <li role="separator" class="divider"></li>
+            <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>   Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
   </nav>
 
   <br />
@@ -107,8 +112,13 @@ $functions = new Functions();
             <tr>
               <th>Password</th>
               <td>
-                <div class='input-group col-sm-9 col-xs-10' id='password'>
-                  <input type='password' class="form-control" placeholder="Nuova password" name="password">
+                <div class='input-group col-sm-9 col-xs-10' id='vecchia_password'>
+                  <input type='password' class="form-control" placeholder="Vecchia password" name="vecchia_password">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span> </span>
+                </div>
+                <br />
+                <div class='input-group col-sm-9 col-xs-10' id='nuova_password'>
+                  <input type='password' class="form-control" placeholder="Nuova password" name="nuova_password">
                   <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span> </span>
                 </div>
                 <br />
@@ -172,7 +182,36 @@ $functions = new Functions();
                 </div>
               </td>
             </tr>
-            </tbody>                    
+            <?php
+            if ($utente instanceof Cicerone) {
+              echo '<tr>';
+              echo    '<th>Valutazione utenti</th>';
+              echo    '<td>' . $utente->getValutazione() . '</td>';
+              echo '</tr>';
+              echo '<tr>';
+              echo    '<th>Info premium</th>';
+              echo    '<td>';
+              echo '<div class="row">';
+              echo '<div class="col-sm-7 col-xs-7">';
+
+              if ($utente->getPremiumDate() == '0000-00-00') {
+
+                echo 'Non sei ancora premium';
+                echo '</div>';
+                echo '<div class="col-sm-3 col-xs-3">';
+                echo '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#premium">Diventa premium</button></div></td>';
+
+              } else {
+
+                echo $utente->getPremiumDate();
+                echo '</div>';
+                echo '<div class="col-sm-3 col-xs-3">';
+                echo '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#premium">Disdici premium</button></div></td>';
+
+              }
+            }
+            ?>
+          </tbody>
         </table>
 
         <!-- Tasti -->
@@ -196,41 +235,99 @@ $functions = new Functions();
       <div class="col-sm-2 col-xs-1">
       </div>
 
+       <!-- Modal premium -->
+       <div class="modal fade" id="premium" tabindex="-1" role="dialog" aria-labelledby="premiumLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <?php
+              if ($utente->getPremiumDate() == '0000-00-00'){
+                echo '<h3 class="modal-title" id="premiumLabel">Vuoi diventare premium?</h3>';
+                echo '</div>';
+                echo '<div class="modal-body">';
+                echo "Il costo dell'abbonamento premium è di €9.99 al mese.<br>";
+                echo "L'abbonamento ti consentirà di inserire un numero illimitato di attività.";
+                echo '</div>';
 
-        <!-- Modal -->
-  <div class="modal fade" id="eliminaAccount" tabindex="-1" role="dialog" aria-labelledby="eliminaAccountLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="eliminaAccountLabel">Sicuro di voler eliminare l'account?</h3>
-        </div>
-        <div class="modal-body">
-          Una volta eliminato l'account sarà impossibile recuperarei tuoi dati
-        </div>
-        <br />
-        <div class="modal-footer">
-          <div class="row">
-            <div class="col-sm-2 col-xs-2">
-            </div>
+              }else{
+                echo '<h3 class="modal-title" id="premiumLabel">Sicuro di voler disdire il tuo abbonamento premium?</h3>';
+                echo '</div>';
+                echo '<div class="modal-body">';
+                echo 'Ci dispiace che tu voglia disdire il tuo abbonamento premium.<br>';
+                echo 'Ti ricordiamo che verranno conservate solo le 3 attività future create per prime.';
+                echo '</div>';
+              }
+              ?>
 
-            <div class="col-sm-3 col-xs-3">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-            </div>
-            <div class="col-sm-3 col-xs-3">
-              <button type="submit" class="btn btn-danger" name="elimina_account">Elimina account</button>
-            </div>
+            <br />
+            <div class="modal-footer">
+              <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                </div>
 
-            <div class="col-sm-2 col-xs-2">
+                <div class="col-sm-3 col-xs-3">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                <?php
+                if ($utente->getPremiumDate() == '0000-00-00'){
+                  echo '<button type="submit" class="btn btn-primary" name="diventa_premium">Diventa premium</button>';
+
+                }else{
+                  echo '<button type="submit" class="btn btn-primary" name="disdici_premium">Disdici premium</button>';
+                }
+                ?>
+                </div>
+
+                <div class="col-sm-2 col-xs-2">
+                </div>
+              </div>
+
+            </div>
+            <div class="col-sm-2 col-xs-1">
             </div>
           </div>
-
-        </div>
-        <div class="col-sm-2 col-xs-1">
         </div>
       </div>
-    </div>
-  </div>
-   <!--Fine Modal -->
+      <!--Fine Modal premium-->
+
+
+      <!-- Modal elimina account -->
+      <div class="modal fade" id="eliminaAccount" tabindex="-1" role="dialog" aria-labelledby="eliminaAccountLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="eliminaAccountLabel">Sicuro di voler eliminare l'account?</h3>
+            </div>
+            <div class="modal-body">
+              Una volta eliminato l'account sarà impossibile recuperare i tuoi dati
+            </div>
+            <br />
+            <div class="modal-footer">
+              <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                </div>
+
+                <div class="col-sm-3 col-xs-3">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <button type="submit" class="btn btn-danger" name="elimina_account">Elimina account</button>
+                </div>
+
+                <div class="col-sm-2 col-xs-2">
+                </div>
+              </div>
+
+            </div>
+            <div class="col-sm-2 col-xs-1">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Fine Modal elimina account-->
+
+
     </form>
   </div>
 

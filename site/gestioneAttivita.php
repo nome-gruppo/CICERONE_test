@@ -12,7 +12,7 @@
 <?php
 require_once '../classi/users/Cicerone.php'; // includo la classe cicerone
 session_start();
-$cicerone = $_SESSION["cicerone"]; // prendo l'oggetto cicerone precedentemente messo in sessione
+$cicerone = $_SESSION["utente"]; // prendo l'oggetto utente precedentemente messo in sessione (di tipo cicerone)
 $result = $cicerone->printActivity();
 $num = mysqli_num_rows($result);
 if ($num > 0) {
@@ -54,7 +54,7 @@ if ($num > 0) {
     <?php
 } else {
     echo "<div class='alert alert-danger' role='alert'>
-      <a href='cicerone.php' class='alert-link'>Nessuna attività presente al momento. CLick per tornare indietro!</a>
+      <a href='cicerone.php' class='alert-link'>Nessuna attività presente al momento. Click per tornare indietro!</a>
     </div>";
 }
 ?>

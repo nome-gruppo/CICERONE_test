@@ -47,12 +47,11 @@ $turista = $_SESSION['utente'];
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $turista->getName(); ?></a>
         <ul class="dropdown-menu">
-          <li><a href="ilMioProfilo.php">Il mio profilo<?php $_SESSION['utente'] = $turista?></a></li>
+          <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
           <li><a href="#">Attività in programma</a></li>
           <li><a href="#">Attività svolte</a></li>
-          <li><a href="homepage.html">Logout </a></li>
           <li role="separator" class="divider"></li>
-          <li><a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>   Logout</a></li>
+          <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>   Logout</a></li>
         </ul>
       </li>
     </ul>
@@ -87,8 +86,8 @@ $turista = $_SESSION['utente'];
             class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> </span>
         </div>
       </div>
-      </br>
-    </br>
+      <br />
+    <br 7>
         <div class="form-group">
           <div class="text-center">
             <button type="submit" class="btn btn-primary" name="ricercaAttivita">CERCA   <span class="  glyphicon glyphicon-zoom-in"></span></button>

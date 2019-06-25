@@ -10,7 +10,8 @@ require_once '..\classi\utilities\Functions.php';
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1"/> <!--ottimizza la visione su mobile dello slider-->
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="jquery-1.6.1.js"></script>
   </head>
   <body>
 
@@ -45,9 +46,7 @@ $functions=new Functions();
         </thead>
         <tbody>
           <?php
-              $i=0;
               while($riga= mysqli_fetch_assoc($result)){//assoccio il risultato della funzione(record per record)a un array riga fin quando il record non sarà zero e quindi $riga diventerà false
-              $i++;
           ?>
                     <tr>
                     <th scope="row"><?php echo $riga['citta'];//stampo il campo citta dell'array $riga ?></th>
@@ -57,37 +56,13 @@ $functions=new Functions();
                     <td><?php echo $riga['costo'];?></td>
                     <td><?php echo $riga['lingua'];?></td>
                     <td><?php echo $riga['descrizione'];?></td>
-                    <td><div class="input-group">
-                      <span class="input-group-addon">
-                        <input type="checkbox" aria-label="..." data-toggle="modal" data-target=".bs-example-modal-lg" onclick="<?php $_SESSION['id']=$riga['id_attivita'];?>">
-
-                      </span>
-                    </div></td>
+                    <td><a href="prenotazione.php?<?php echo $riga['id_attivita'];?>">PRENOTA</a></td>
                   </tr>
               <?php
                 }
               ?>
         </tbody>
       </table>
-
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <h1>Sicuro di voler prenotare l'attivita selezionata?</h1>
-    </br></br>
-    <div class="row">
-    <div class="col-lg-6">
-    <a href="prenotazione.php"><button type="submit" class="btn btn-primary">SI   <span class="glyphicon glyphicon-ok-circle"></span></button></a>
-  </div>
-  <div class="col-lg-6">
-    <button type="submit" class="btn btn-primary">NO   <span class="glyphicon glyphicon-remove-circle"></span></button>
-  </div>
-</br></br></br></br>
-  </div>
-    </div>
-  </div>
-</div>
-
     <?php
   }
   else{
@@ -97,6 +72,7 @@ $functions=new Functions();
   }
 }
 ?>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 

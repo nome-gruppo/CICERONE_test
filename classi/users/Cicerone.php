@@ -36,6 +36,13 @@ class Cicerone extends User
         $this->valutazione = $valutazione;
     }
 
+    public function getValutazione(){
+        return $this->valutazione;
+    }
+
+    public function getPremiumDate(){
+        return $this->premiumDate;
+    }
     public function setPremiumDate($premiumDate){
         $this->premiumDate = $premiumDate;
     }
