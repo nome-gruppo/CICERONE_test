@@ -14,12 +14,16 @@ use classi\activities\Activity;
 
 session_start();
 ?>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="style.css"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js"></script>
 
 <?php
 
 $utente = $_SESSION['utente'];
+$costo_premium = $_SESSION['costo_premium'];
 
 // connessione database
 $database = new Database();
@@ -32,11 +36,12 @@ if (isset($_POST["modifica_dati"])) {
     $telefono_ok = true;
 
     if (trim($_POST['telefono']) != "") {
+        $telefono = trim($_POST['telefono']);
         //controllo presenza numero telefono in tabelle ciceroni e turista
-        $query_phone_ciceroni = "SELECT *from ciceroni WHERE telefono = '{$utente->getContact()->getPhone_num()}'";
+        $query_phone_ciceroni = "SELECT *from ciceroni WHERE telefono = '$telefono'";
         $result_phone_ciceroni = mysqli_query($link, $query_phone_ciceroni) or die("Errore di registrazione!");
 
-        $query_phone_turisti = "SELECT *from turista WHERE telefono = '{$utente->getContact()->getPhone_num()}'";
+        $query_phone_turisti = "SELECT *from turista WHERE telefono = '$telefono'";
         $result_phone_turisti = mysqli_query($link, $query_phone_turisti) or die("Errore di registrazione!");
 
         if (mysqli_num_rows($result_phone_ciceroni) == 1 || mysqli_num_rows($result_phone_turisti) == 1) {
@@ -139,7 +144,7 @@ if (isset($_POST["modifica_dati"])) {
                 </div>";
         }
     }
-}
+}//end if modifica dati
 
 if (isset($_POST["elimina_account"])) {
 
@@ -157,7 +162,7 @@ if (isset($_POST["elimina_account"])) {
                 <a href='homepage.html' class='alert-link'>Il tuo account è stato eliminato correttamente</a>
                 </div>";
     }
-}
+}//end if elimina account
 
 if (isset($_POST["disdici_premium"])) {
 
@@ -216,17 +221,100 @@ if (isset($_POST["disdici_premium"])) {
                     <a href='homepage.html' class='alert-link'>Le attività sono state eliminate</a>
                     </div>";
         } else {
-            echo "<div class='alert alert-success' role='alert'>
+            echo "<div class='alert alert-danger' role='alert'>
                     <a href='homepage.html' class='alert-link'>Non tutte le tue attività sono state eliminate correttamente</a>
                     </div>";
         }
     }
-}
+}//end if disdici premium
 
-if (isset($_POST["diventa_premium"])) { }
+if (isset($_POST["diventa_premium"])) { 
+    echo '<form action="pagamenti.php" method="post">
+                <div class="container-fluid">
+                    <br /><br /><br /><br />
+                    <div class="col-sm-3 col-xs-2">
+                    </div>
+
+                <div class="col-sm-6 col-xs-8">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#carta" data-toggle="tab"><strong>Carta di credito</strong></a>
+                        </li>
+                        <li><a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
+                        </li>                
+                    </ul>
+  
+                    <div class="tab-content clearfix">  
+                        <div class="tab-pane active" id="carta">
+                            <!-- Carta -->
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-body">
+                                    Carte di credito accettate<br>
+                                    <img src="images\cardLogo.png">
+                                    <br /><br />
+                                    <div class="row">
+                                        <strong>&nbsp&nbsp&nbsp&nbspImporto €'. $costo_premium .'</strong>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-8">
+                                            <input type="text" class="form-control" placeholder="Numero carta" name="num_carta">
+                                        </div>
+                                        <br /><br />
+                                    
+                                        <div class="col-sm-3 col-xs-3">
+                                            <input type="text" class="form-control" placeholder="CVV" name="cvv_code">
+                                        </div>
+                                        <br /><br />
+                                        <div class="col-sm-8 col-xs-8">
+                                        </div>
+                                        <div class="col-sm-4 col-xs-4">
+                                            <button type="submit" class="btn btn-primary" name="pagamento_carta">Procedi</button>
+                                        </div>                                    
+                                    </div>
+                                </div>
+                            < /div>
+                            <!-- Fine carta -->
+    
+                        
+                        </div>
+        
+                        <div class="tab-pane" id="paypal">
+                            <!-- paypal -->
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-body">  
+                                    <img src="images\paypalLogo.png">
+                                    <br /><br />
+                                    <div class="row">
+                                        <strong>&nbsp&nbsp&nbsp&nbspImporto €'. $costo_premium .'</strong>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-8">
+                                            <input type="email" class="form-control" placeholder="Email PayPal" name="mail_paypal">
+                                        </div>                              
+                                        <br /><br />
+                                        <div class="col-sm-8 col-xs-8">
+                                        </div>
+                                        <div class="col-sm-4 col-xs-4">
+                                            <button type="submit" class="btn btn-primary" name="pagamento_paypal">Procedi</button>
+                                        </div>                                    
+                                    </div>                            
+                                </div>
+                            </div>   
+                            <!-- Fine paypal -->
+                        </div>
+                    </div>  
+                </div>
+                <div class="col-sm-3 col-xs-2">
+                </div>  
+            </div>
+        </form>';
+}//end if diventa premium
 
 mysqli_close($link);
 ?>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+

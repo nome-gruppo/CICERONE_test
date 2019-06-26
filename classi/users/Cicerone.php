@@ -4,7 +4,6 @@ namespace classi\users;
 require_once 'User.php';
 require_once '..\classi\utilities\Database.php';
 
-use classi\activities\Activity;
 use classi\utilities\Functions;
 use classi\utilities\Database;
 

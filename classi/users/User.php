@@ -2,7 +2,6 @@
 namespace classi\users;
 require_once 'Contact.php';
 require_once '..\classi\utilities\Place.php';
-use classi\payments\PaymentInterface;
 use classi\utilities\Place;
 
 class User {

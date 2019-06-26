@@ -17,10 +17,8 @@ h1 {
 }
 
 img {
-	margin-left: 40%;
-	margin-right: 40%;
-	width: 200px;
-	height: 200px;
+	max-width: 40%;
+	height: auto;
 }
 
 k {

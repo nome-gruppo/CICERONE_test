@@ -38,7 +38,7 @@ else eval("var "+param[i]+";");
 <?php
 session_start();
 use classi\utilities\Functions;
-use classi\users\Turista;
+
 $turista=new Turista();
 $turista=$_SESSION['utente'];//prendo l'oggetto turista precedentemente messo in sessione
 $functions=new Functions();

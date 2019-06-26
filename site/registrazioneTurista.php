@@ -26,7 +26,7 @@ if (isset($_POST["invia_dati_turista"])) {
   $turista->setSurname($_POST['cognome']);
   $turista->setContact($_POST['mail'], $_POST['telefono']);
   $turista->setBirthDate($_POST['data_nascita']);
-  $turista->setAddress($_POST['paese'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
+  $turista->setAddress($_POST['nazione'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
 
   // campi password temporanei per il controllo
   $password1 = $_POST['password'];

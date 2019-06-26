@@ -14,7 +14,6 @@ session_start();
 
 use classi\activities\Activity;
 use classi\utilities\Functions;
-use classi\users\Cicerone;
 
 $cicerone = new Cicerone();
 

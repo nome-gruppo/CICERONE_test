@@ -26,7 +26,7 @@ if (isset($_POST["invia_dati"])) {
   $cicerone->setSurname($_POST['cognome']);
   $cicerone->setContact($_POST['mail'], $_POST['telefono']);
   $cicerone->setBirthDate($_POST['data_nascita']);
-  $cicerone->setAddress($_POST['paese'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
+  $cicerone->setAddress($_POST['nazione'], $_POST['provincia'], $_POST['citta'], $_POST['indirizzo'], $_POST['CAP']);
 
   // campi password temporanei per il controllo
   $password1 = $_POST['password'];
