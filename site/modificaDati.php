@@ -103,7 +103,11 @@ if (isset($_POST["modifica_dati"])) {
                     </div>";
 
                     //altrimenti i nuovi campi non coincidono   
-                } else {
+                } elseif(sha1(md5(sha1($_POST['vecchia_password']))) != $utente->getPassword()) {
+                    echo "<div class='alert alert-danger' role='alert'>
+                    <a href='ilMioProfilo.php' class='alert-link'>Campo vecchia password errato! Click per riprovare</a>
+                    </div>";
+                }else{
                     echo "<div class='alert alert-danger' role='alert'>
                     <a href='ilMioProfilo.php' class='alert-link'>Le password non corrispondono! Click per riprovare</a>
                     </div>";
