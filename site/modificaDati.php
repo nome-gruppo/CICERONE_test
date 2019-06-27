@@ -343,7 +343,7 @@ if (isset($_POST["diventa_premium"])) {
             </div>
         </form>
           </div>
-          //end container fluid
+          <!--end col-->
 
       </form>';
 

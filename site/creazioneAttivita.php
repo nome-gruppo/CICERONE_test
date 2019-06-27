@@ -15,7 +15,7 @@ $cicerone=$_SESSION['utente'];
   <?php
       $numeroAttivita=$cicerone->contaAttivita();
       if(isset($_POST["inviaDatiAttivita"])&&($numeroAttivita['0']<$cicerone::MAX_ACTIVITY)){
-        $attivita=new Activity($cicerone->getId(), $_POST['citta'], $_POST['costo'], $_POST['descrizione'], $_POST['lingua'], $functions->writeDateDb( $_POST['data']));
+        $attivita=new Activity($cicerone->getId(), $_POST['titolo'], $_POST['citta'], $_POST['costo'], $_POST['descrizione'], $_POST['lingua'], $functions->writeDateDb( $_POST['data']));
         if($attivita->getCitta()==""||$attivita->getCosto()==NULL||$attivita->getDescrizione()==""||$attivita->getLingua()==""||$attivita->getData()==""){
           echo "<div class='alert alert-danger' role='alert'>
             <a href='formAttivita.html' class='alert-link'>Non tutti i campi sono stati compilati! Click per riprovare</a>
@@ -38,27 +38,6 @@ $cicerone=$_SESSION['utente'];
 
 
 
-$cicerone = $_SESSION['utente'];
-$functions = new Functions();
-if (isset($_POST["inviaDatiAttivita"])) {
-
-  $attivita = new Activity($cicerone->getId(), $_POST['titolo'], $_POST['citta'], $_POST['costo'], $_POST['descrizione'], $_POST['lingua'], $functions->writeDateDb($_POST['data']));
-
-
-  if ($attivita->getCitta() == "" || $attivita->getTitolo() == "" || $attivita->getCosto() == NULL || $attivita->getDescrizione() == "" || $attivita->getLingua() == "" || $attivita->getData() == "") {
-    echo "<div class='alert alert-danger' role='alert'>
-            <a href='formAttivita.php' class='alert-link'>Non tutti i campi sono stati compilati! Click per riprovare</a>
-          </div>";
-  } else {
-
-    $result = $attivita->insertDatabase();
-  }
-  if ($result) {
-    echo "<div class='alert alert-success' role='alert'>
-              <a href='cicerone.php' class='alert-link'>Attivita creata con successo! Click per tornare all'area riservata</a>
-            </div>";
-  }
-}
 ?>
 
 
