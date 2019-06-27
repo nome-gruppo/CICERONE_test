@@ -1,5 +1,6 @@
 <?php
 namespace classi\payments;
+require_once 'AbPayment.php';
 
 class PaypalPayment extends AbPayment
 {

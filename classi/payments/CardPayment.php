@@ -1,5 +1,6 @@
 <?php
 namespace classi\payments;
+require_once 'AbPayment.php';
 
 class CardPayment extends AbPayment
 {
@@ -27,14 +28,6 @@ class CardPayment extends AbPayment
         } else {
             trigger_error('errore di tipo');
         }
-    }
-
-    public function getCodeSize(){
-        return CODE_SIZE;
-    }
-
-    public function getCvvSize(){
-        return CVV_SIZE;
     }
 
     public function setCvv($cvv){

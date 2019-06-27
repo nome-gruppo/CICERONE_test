@@ -1,3 +1,9 @@
+<?php
+namespace classi\users;
+require_once '../classi/users/Cicerone.php'; // includo la classe cicerone
+session_start();
+?>
+
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -9,9 +15,31 @@
 </head>
 <body>
 
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="cicerone.php" button type="button" class="btn btn-default btn-lg"> Area riservata</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $cicerone->getName(); ?></a>
+            <ul class="dropdown-menu">
+              <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
+              <li><a href="gestioneAttivita.php">Le mie attività</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  
 <?php
-require_once '../classi/users/Cicerone.php'; // includo la classe cicerone
-session_start();
 $cicerone = $_SESSION["utente"]; // prendo l'oggetto utente precedentemente messo in sessione (di tipo cicerone)
 $result = $cicerone->printActivity();
 $num = mysqli_num_rows($result);
