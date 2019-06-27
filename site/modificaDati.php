@@ -30,7 +30,7 @@ $database = new Database();
 $link = $database->getConnection();
 
 $functions = new Functions();
-
+$functions->stampaNavbarCicerone($utente->getName());
 if (isset($_POST["modifica_dati"])) {
 
     $telefono_ok = true;
@@ -107,7 +107,7 @@ if (isset($_POST["modifica_dati"])) {
                     <a href='ilMioProfilo.php' class='alert-link'>Compila tutti i campi password! Click per riprovare</a>
                     </div>";
 
-                    //altrimenti i nuovi campi non coincidono   
+                    //altrimenti i nuovi campi non coincidono
                 } elseif(sha1(md5(sha1($_POST['vecchia_password']))) != $utente->getPassword()) {
                     echo "<div class='alert alert-danger' role='alert'>
                     <a href='ilMioProfilo.php' class='alert-link'>Campo vecchia password errato! Click per riprovare</a>
@@ -228,7 +228,7 @@ if (isset($_POST["disdici_premium"])) {
     }
 }//end if disdici premium
 
-if (isset($_POST["diventa_premium"])) { 
+if (isset($_POST["diventa_premium"])) {
     echo '<form action="pagamenti.php" method="post">
                 <div class="container-fluid">
                     <br /><br /><br /><br />
@@ -241,10 +241,10 @@ if (isset($_POST["diventa_premium"])) {
                             <a href="#carta" data-toggle="tab"><strong>Carta di credito</strong></a>
                         </li>
                         <li><a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
-                        </li>                
+                        </li>
                     </ul>
-  
-                    <div class="tab-content clearfix">  
+
+                    <div class="tab-content clearfix">
                         <div class="tab-pane active" id="carta">
                             <!-- Carta -->
                             <div class="panel panel-default">
@@ -262,7 +262,7 @@ if (isset($_POST["diventa_premium"])) {
                                             <input type="text" class="form-control" placeholder="Numero carta" name="num_carta">
                                         </div>
                                         <br /><br />
-                                    
+
                                         <div class="col-sm-3 col-xs-3">
                                             <input type="text" class="form-control" placeholder="CVV" name="cvv_code">
                                         </div>
@@ -271,20 +271,20 @@ if (isset($_POST["diventa_premium"])) {
                                         </div>
                                         <div class="col-sm-4 col-xs-4">
                                             <button type="submit" class="btn btn-primary" name="pagamento_carta">Procedi</button>
-                                        </div>                                    
+                                        </div>
                                     </div>
                                 </div>
                             < /div>
                             <!-- Fine carta -->
-    
-                        
+
+
                         </div>
-        
+
                         <div class="tab-pane" id="paypal">
                             <!-- paypal -->
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
-                                <div class="panel-body">  
+                                <div class="panel-body">
                                     <img src="images\paypalLogo.png">
                                     <br /><br />
                                     <div class="row">
@@ -294,27 +294,25 @@ if (isset($_POST["diventa_premium"])) {
                                     <div class="row">
                                         <div class="col-sm-6 col-xs-8">
                                             <input type="email" class="form-control" placeholder="Email PayPal" name="mail_paypal">
-                                        </div>                              
+                                        </div>
                                         <br /><br />
                                         <div class="col-sm-8 col-xs-8">
                                         </div>
                                         <div class="col-sm-4 col-xs-4">
                                             <button type="submit" class="btn btn-primary" name="pagamento_paypal">Procedi</button>
-                                        </div>                                    
-                                    </div>                            
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>   
+                            </div>
                             <!-- Fine paypal -->
                         </div>
-                    </div>  
+                    </div>
                 </div>
                 <div class="col-sm-3 col-xs-2">
-                </div>  
+                </div>
             </div>
         </form>';
 }//end if diventa premium
 
 mysqli_close($link);
 ?>
-
-

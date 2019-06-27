@@ -21,11 +21,9 @@ $costo_premium = $_SESSION['costo_premium'];
 // connessione database
 $database = new Database();
 $link = $database->getConnection();
-
 $functions = new Functions();
 
 ?>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -38,7 +36,7 @@ if (isset($_POST["pagamento_carta"])) {
     $codice_ok = false;
 
     while ($tentativo <= MAX_TENTATIVI && !$codice_ok) {
-        if (($functions->code_control($_POST["num_carta"], $pagamento->getCodeSize()) == true) && 
+        if (($functions->code_control($_POST["num_carta"], $pagamento->getCodeSize()) == true) &&
         ($functions->code_control($_POST["cvv_code"], $pagamento->getCvvSize()) == true)) {
 
             $pagamento->setCode($_POST["num_carta"]);
@@ -46,10 +44,10 @@ if (isset($_POST["pagamento_carta"])) {
             $codice_ok = true;
 
         } else {
-            
+
             if($tentativo < MAX_TENTATIVI){
             echo "<div class='alert alert-danger' role='alert'>
-                <a href='site\pagamenti.php' class='alert-link'>Codici carta non validi!<br> 
+                <a href='site\pagamenti.php' class='alert-link'>Codici carta non validi!<br>
                 Ti restano ". MAX_TENTATIVI - $tentativo ."tentativi, altrimenti sarà effettuato il logout. Click per riprovare</a>
                 </div>";
                 $tentativo++;

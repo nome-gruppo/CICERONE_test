@@ -1,19 +1,14 @@
 <?php
 namespace classi\users;
-
 use classi\utilities\Functions;
-
 require_once '../classi/users/Turista.php';
 require_once '../classi/users/Cicerone.php';
 require_once '../classi/utilities/Functions.php';
 define('COSTO_PREMIUM', 9.99);
-
 session_start();
-
 $utente = $_SESSION['utente'];
 $_SESSION['costo_premium'] = COSTO_PREMIUM;
 $functions = new Functions();
-
 ?>
 
 <html lang="it">
@@ -38,38 +33,11 @@ $functions = new Functions();
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <h2> Il mio profilo </h2>
-      </div>
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $utente->getName(); ?></a>
-            <ul class="dropdown-menu">
-              <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
-              <?php
-              if ($utente instanceof Cicerone) {
-                echo '<li><a href="gestioneAttivita.php">Le mie attività</a></li>';
-              } else {
-                echo '  <li><a href="#">Attività in programma</a></li>
-                    <li><a href="#">Attività svolte</a></li>';
-              }
-              ?>
-              <li role="separator" class="divider"></li>
-              <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <br />
+<?php if($utente instanceof Turista){
+  $functions->stampaNavbarTurista($utente->getName());
+}else{
+  $functions->stampaNavbarCicerone($utente->getName());
+} ?>
 
   <div class="container-fluid">
     <form action="modificaDati.php" method="post">
@@ -403,7 +371,7 @@ $functions = new Functions();
                     <option value="Zambia">Zambia</option>
                     <option value="Zimbabwe">Zimbabwe</option>
                   </select> <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span> </span>
-                </div>                
+                </div>
               </td>
             </tr>
             <tr>
@@ -505,7 +473,7 @@ $functions = new Functions();
                 echo '<h3 class="modal-title" id="premiumLabel">Vuoi diventare premium?</h3>';
                 echo '</div>';  //fine header modal
                 echo '<div class="modal-body">';
-                echo "Il costo dell'abbonamento premium è di €" . COSTO_PREMIUM . "al mese.<br>";
+                echo "Il costo dell'abbonamento premium è di €" . COSTO_PREMIUM . " al mese.<br>";
                 echo "L'abbonamento ti consentirà di inserire un numero illimitato di attività.";
                 echo '</div>';
               } else {

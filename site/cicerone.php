@@ -1,12 +1,11 @@
 <?php
 namespace classi\users;
-
-require_once '..\classi\users\Cicerone.php';
-
+require_once '../classi/users/Cicerone.php';
+require_once '../classi/utilities/Functions.php';
+use classi\utilities\Functions;
 $cicerone = new Cicerone();
-
+$functions=new Functions();
 session_start();
-
 $cicerone = $_SESSION['utente'];
 ?>
 
@@ -23,29 +22,7 @@ $cicerone = $_SESSION['utente'];
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="cicerone.php" button type="button" class="btn btn-default btn-lg"> Area riservata</a>
-      </div>
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $cicerone->getName(); ?></a>
-            <ul class="dropdown-menu">
-              <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
-              <li><a href="gestioneAttivita.php">Le mie attività</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+  <?php $functions->stampaNavbarCicerone($cicerone->getName()); ?>
 
   <h1>Benvenuto nell'area riservata!</h1><br /><br />
   <div class="text-center">

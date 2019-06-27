@@ -2,6 +2,7 @@
 namespace classi\users;
 require_once '..\classi\users\Turista.php'; //includo la classe turista
 require_once '..\classi\utilities\Functions.php';
+require_once '..\classi\utilities\Mail.php';
 ?>
 <html lang="it">
   <head>
@@ -38,16 +39,28 @@ else eval("var "+param[i]+";");
 <?php
 session_start();
 use classi\utilities\Functions;
+use classi\utilities\Mail;
 
 $turista=new Turista();
+$mail=new Mail();
 $turista=$_SESSION['utente'];//prendo l'oggetto turista precedentemente messo in sessione
 $functions=new Functions();
 $url= $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 $id_attivita=(parse_url($url, PHP_URL_QUERY));
 $result=$turista->confermaAttivita($id_attivita);
-if($result){
+$mailCicerone=$functions->recuperoMailCicerone($id_attivita);
+$mail->setNomeMittente($turista->getName());
+$mail->setMailMittente($turista->getContact()->getMail());
+$mail->setMailDestinatario($mailCicerone[0]);
+$result2=$mail->mailPrenotazione();
+if($result&&$result2){
   echo "<div class='alert alert-success' role='alert'>
-    <a href='turista.php' class='alert-link'>Attivita prenotata con successo!</a>
+    <a href='turista.php' class='alert-link'>Attivita prenotata con successo!E' stata inviata una mail di notifica al cicerone.</a>
+  </div>";
+}
+else{
+  echo "<div class='alert alert-danger' role='alert'>
+    <a href='turista.php' class='alert-link'>Prenotazione non effettuata!</a>
   </div>";
 }
 ?>

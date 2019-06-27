@@ -1,7 +1,12 @@
 <?php
 namespace classi\users;
-require_once '..\classi\users\Turista.php'; //includo la classe turista
-require_once '..\classi\utilities\Functions.php';
+require_once '../classi/users/Turista.php';
+require_once '../classi/utilities/Functions.php';
+use classi\utilities\Functions;
+$turista = new Turista();
+$functions=new Functions();
+session_start();
+$turista = $_SESSION['utente'];
 ?>
 <html lang="it">
   <head>
@@ -15,14 +20,8 @@ require_once '..\classi\utilities\Functions.php';
   </head>
   <body>
 
-
 <?php
-session_start();
-use classi\utilities\Functions;
-
-$turista=new Turista();
-$turista=$_SESSION['utente'];//prendo l'oggetto turista precedentemente messo in sessione
-$functions=new Functions();
+  $functions->stampaNavbarTurista($turista->getName());
   if(isset($_POST["ricercaAttivita"])){//se l'utente clicca su ricerca
     $citta=$_POST['citta'];
     $lingua=$_POST['lingua'];

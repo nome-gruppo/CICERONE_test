@@ -9,9 +9,7 @@ use classi\utilities\Database;
 
 class Cicerone extends User
 {
-
-    const MAX_ACTIVITY = 3;    // numero massimo di inserzioni inseribili da cicerone non premium
-
+    const MAX_ACTIVITY = 5;    // numero massimo di inserzioni inseribili da cicerone non premium
     private $premiumDate = null;
     private $valutazione;
     private $myActivity = array();
@@ -28,6 +26,23 @@ class Cicerone extends User
         $result = mysqli_query($link, $query) or die("Errore connessione");
         mysqli_close($link);
         return $result;
+    }
+    public function contaAttivita(){
+      $database=new Database();
+      $link=$database->getConnection();
+      $query="SELECT count(id_attivita)as numero from(attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)group by attivita.id_cicerone";
+      $result = mysqli_query($link, $query) or die("Errore connessione");
+      $result2 = $result->fetch_row();
+      mysqli_close($link);
+      return $result2;
+    }
+    public function visualizzaPartecipanti($id_attivita){
+      $database=new Database();
+      $link=$database->getConnection();
+      $query="SELECT *from(turista inner join partecipazione on turista.id_turista=partecipazione.id_turista)where partecipazione.id_attivita=$id_attivita";
+      $result = mysqli_query($link, $query) or die("Errore connessione");
+      mysqli_close($link);
+      return $result;
     }
 
     public function setValutazione($valutazione){
