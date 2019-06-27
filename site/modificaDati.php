@@ -56,35 +56,35 @@ if (isset($_POST["modifica_dati"])) {
 
     if ($telefono_ok == true) {
         if (trim($_POST['nome']) != "") {
-            $utente->setName(trim($_POST['nome']));
+            $utente->setName($_POST['nome']);
         }
 
         if (trim($_POST['cognome']) != "") {
-            $utente->setSurname(trim($_POST['cognome']));
+            $utente->setSurname($_POST['cognome']);
         }
 
-        if (trim($_POST['data_nascita']) != "") {
-            $utente->setBirthDate($functions->writeDateDb(trim($_POST['data_nascita'])));
+        if ($_POST['data_nascita'] != "") {
+            $utente->setBirthDate($functions->writeDateDb($_POST['data_nascita']));
         }
 
-        if (trim($_POST['nazione']) != "") {
-            $utente->setAddress(trim($_POST['nazione']), $utente->getAddress->getCounty(), $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
+        if ($_POST['nazione'] != "") {
+            $utente->setAddress($_POST['nazione'], $utente->getAddress->getCounty(), $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
         }
 
         if (trim($_POST['provincia']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), trim($_POST['provincia']), $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
+            $utente->setAddress($utente->getAddress->getNation(), $_POST['provincia'], $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
         }
 
         if (trim($_POST['citta']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), trim($_POST['citta']), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
+            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $_POST['citta'], $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
         }
 
         if (trim($_POST['indirizzo']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(), trim($_POST['indirizzo']), $utente->getAddress->getCAP());
+            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(), $_POST['indirizzo'], $utente->getAddress->getCAP());
         }
 
         if (trim($_POST['CAP']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(),  $utente->getAddress->getStreet(), trim($_POST['CAP']));
+            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(),  $utente->getAddress->getStreet(), $_POST['CAP']);
         }
 
 
@@ -175,7 +175,7 @@ if (isset($_POST["disdici_premium"])) {
     while ($row = mysqli_fetch_array($result)) {
 
         if ($row['id_cicerone'] == $utente->getId()) {
-            $attivita = new Activity($row['id_cicerone'], $row['citta'], $row['costo'], $row['descrizione'], $row['lingua'], $row['data_attivita']);
+            $attivita = new Activity($row['id_cicerone'],$row['titolo'], $row['citta'], $row['costo'], $row['descrizione'], $row['lingua'], $row['data_attivita']);
             $attivita->setIdAttivita($row['id_attivita']);
             $array_attivita[] = $attivita;
         }
@@ -320,13 +320,7 @@ if (isset($_POST["diventa_premium"])) {
           </div>
           <!--end container fluid-->
         
-      </form>';
-
-    //cambio data premium
-    $utente->setPremiumDate(date("Y-m-d"));
-
-    $query = "UPDATE ciceroni SET data_premium='{$utente->getPremiumDate()}' where id_cicerone = '{$utente->getId()}'";
-    $result = mysqli_query($link, $query) or die("Errore nella modifica data premium!");
+      </form>';   
 
 }//end if diventa premium
 

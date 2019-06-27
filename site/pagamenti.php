@@ -45,6 +45,12 @@ if (isset($_POST["pagamento_carta"])) {
             $pagamento->setCvv($_POST["cvv_code"]);
             $codice_ok = true;
 
+            //cambio data premium
+    $utente->setPremiumDate(date("Y-m-d"));
+
+    $query = "UPDATE ciceroni SET data_premium='{$utente->getPremiumDate()}' where id_cicerone = '{$utente->getId()}'";
+    $result = mysqli_query($link, $query) or die("Errore nella modifica data premium!");
+
         } else {
             
             if($tentativo < MAX_TENTATIVI){

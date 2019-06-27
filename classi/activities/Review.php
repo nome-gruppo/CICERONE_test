@@ -34,7 +34,7 @@ class Review
     public function setTitle($title)
     {
         if (is_string($title)) {
-            $this->title = trim($title);
+            $this->title =  ucfirst(strtolower(trim($title)));
         } else {
             trigger_error('errore di tipo');
         }

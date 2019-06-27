@@ -63,6 +63,10 @@ $cicerone = $_SESSION['utente'];
   <h1>Crea la tua attività</h1>
   <form action="creazioneAttivita.php" method="post">
 
+  <div class="form-group col-md-12">
+  <label for="inputTitle">Titolo</label>
+      <input type="text" class="form-control" id="titolo" placeholder="Inserisci titolo attività" name="titolo">
+</div>
     <div class="form-group col-md-6">
       <label for="inputAddress">Città</label>
       <input type="text" class="form-control" id="citta" placeholder="Inserisci citta" name="citta">

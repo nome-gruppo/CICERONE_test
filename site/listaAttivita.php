@@ -52,7 +52,7 @@ session_start();
   $turista = $_SESSION['utente']; //prendo l'oggetto turista precedentemente messo in sessione
   $functions = new Functions();
   if (isset($_POST["ricercaAttivita"])) { //se l'utente clicca su ricerca
-    $citta = $_POST['citta'];
+    $citta =  ucfirst(strtolower(trim($_POST['citta'])));
     $lingua = $_POST['lingua'];
     $data = ($functions->writeDateDb($_POST['data']));
     $result = $turista->searchActivity($citta, $lingua, $data); //chiamo la funzione cercaAttivita
