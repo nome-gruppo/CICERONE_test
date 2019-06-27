@@ -200,7 +200,7 @@ if (isset($_POST["disdici_premium"])) {
         unset($array_attivita_future[1]);
         unset($array_attivita_future[2]);
         $array_attivita_future = array_values($array_attivita_future);
-        $array_dim = count($array_attivita_future);        
+        $array_dim = count($array_attivita_future);
 
         //eliminazione attività future dal database
         for ($i = 0; $i < $array_dim; $i++) {
@@ -210,7 +210,7 @@ if (isset($_POST["disdici_premium"])) {
             if (!$result) {
                 $errore_eliminazione = true;
             }
-        }     
+        }
     }
 
     //modifica data_premium del cicerone
@@ -240,7 +240,7 @@ if (isset($_POST["diventa_premium"])) {
                         <li class="active">
                             <a href="#carta" data-toggle="tab"><strong>Carta di credito</strong></a>
                         </li>
-<<<<<<< HEAD
+
                         <li><a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
                         </li>
                     </ul>
@@ -248,18 +248,18 @@ if (isset($_POST["diventa_premium"])) {
                     <div class="tab-content clearfix">
                         <div class="tab-pane active" id="carta">
                             <!-- Carta -->
-=======
+
                         <li>
                             <a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
-                        </li>      
+                        </li>
                     </ul>
-    
+
                     <div class="tab-content clearfix">
-                        <!-- Carta -->    
-                        <div class="tab-pane active" id="carta">                            
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
+                        <!-- Carta -->
+                        <div class="tab-pane active" id="carta">
+
                             <div class="panel panel-default">
-                                <!-- Default panel contents -->           
+                                <!-- Default panel contents -->
                                 <div class="panel-body">
                                     Carte di credito accettate<br>
                                     <img src="images\cardLogo.png">
@@ -275,10 +275,6 @@ if (isset($_POST["diventa_premium"])) {
                                             <input type="text" class="form-control" placeholder="Numero carta" name="num_carta">
                                         </div>
                                         <br /><br />
-<<<<<<< HEAD
-
-=======
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
                                         <div class="col-sm-3 col-xs-3">
                                             <input type="text" class="form-control" placeholder="CVV" name="cvv_code">
                                         </div>
@@ -291,7 +287,6 @@ if (isset($_POST["diventa_premium"])) {
                                     </div>
 
                                 </div>
-<<<<<<< HEAD
                             < /div>
                             <!-- Fine carta -->
 
@@ -300,15 +295,13 @@ if (isset($_POST["diventa_premium"])) {
 
                         <div class="tab-pane" id="paypal">
                             <!-- paypal -->
-=======
                                 <!-- fine Default panel contents -->
-                            </div>          
+                            </div>
                         </div>
-                        <!-- Fine carta --> 
-        
+                        <!-- Fine carta -->
+
                         <!-- paypal -->
-                        <div class="tab-pane" id="paypal">                            
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
+                        <div class="tab-pane" id="paypal">
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
@@ -324,11 +317,8 @@ if (isset($_POST["diventa_premium"])) {
                                         <div class="col-sm-6 col-xs-8">
                                             <input type="email" class="form-control" placeholder="Email PayPal" name="mail_paypal">
                                         </div>
-<<<<<<< HEAD
                                         <br /><br />
-=======
                                         <br /><br /><br />
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
                                         <div class="col-sm-8 col-xs-8">
                                         </div>
                                         <div class="col-sm-4 col-xs-4">
@@ -336,33 +326,27 @@ if (isset($_POST["diventa_premium"])) {
                                         </div>
                                     </div>
                                 </div>
-<<<<<<< HEAD
                             </div>
                             <!-- Fine paypal -->
                         </div>
                     </div>
-=======
                                 <!-- Fine Default panel contents -->
-                            </div> 
-                        </div>   
+                            </div>
+                        </div>
                         <!-- Fine Paypal -->
 
-                    </div>     
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
+                    </div>
                 </div>
                 <!--end col-->
                 <div class="col-sm-3 col-xs-2">
                 </div>
-<<<<<<< HEAD
             </div>
-        </form>';
-=======
+        </form>
           </div>
-          <!--end container fluid-->
-        
-      </form>';   
+          //end container fluid
 
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
+      </form>';
+
 }//end if diventa premium
 
 mysqli_close($link);

@@ -1,6 +1,6 @@
 <?php
 namespace classi\users;
-<<<<<<< HEAD
+
 require_once '../classi/users/Cicerone.php';
 require_once '../classi/utilities/Functions.php';
 use classi\utilities\Functions;
@@ -11,7 +11,7 @@ $cicerone = $_SESSION['utente'];
 =======
 require_once '../classi/users/Cicerone.php'; // includo la classe cicerone
 session_start();
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
+
 ?>
 
 <html lang="it">
@@ -48,13 +48,11 @@ session_start();
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  
+
 <?php
-<<<<<<< HEAD
+
 $functions->stampaNavbarCicerone($cicerone->getName());
-=======
 $cicerone = $_SESSION["utente"]; // prendo l'oggetto utente precedentemente messo in sessione (di tipo cicerone)
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
 $result = $cicerone->printActivity();
 $num = mysqli_num_rows($result);
 if ($num > 0) {

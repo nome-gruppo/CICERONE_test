@@ -36,13 +36,13 @@ if (isset($_POST["pagamento_carta"])) {
     $codice_ok = false;
 
     while ($tentativo <= MAX_TENTATIVI && !$codice_ok) {
-<<<<<<< HEAD
+
         if (($functions->code_control($_POST["num_carta"], $pagamento->getCodeSize()) == true) &&
         ($functions->code_control($_POST["cvv_code"], $pagamento->getCvvSize()) == true)) {
-=======
-        if (($functions->code_control($_POST["num_carta"], $pagamento::CODE_SIZE)) && 
+
+        if (($functions->code_control($_POST["num_carta"], $pagamento::CODE_SIZE)) &&
         ($functions->code_control($_POST["cvv_code"], $pagamento::CVV_SIZE))) {
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
+
 
             $pagamento->setCode($_POST["num_carta"]);
             $pagamento->setCvv($_POST["cvv_code"]);

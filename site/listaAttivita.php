@@ -1,6 +1,5 @@
 <?php
 namespace classi\users;
-<<<<<<< HEAD
 require_once '../classi/users/Turista.php';
 require_once '../classi/utilities/Functions.php';
 use classi\utilities\Functions;
@@ -8,7 +7,6 @@ $turista = new Turista();
 $functions=new Functions();
 session_start();
 $turista = $_SESSION['utente'];
-=======
 
 require_once '..\classi\users\Turista.php'; //includo la classe turista
 require_once '..\classi\utilities\Functions.php';
@@ -16,11 +14,9 @@ require_once '..\classi\utilities\Functions.php';
 use classi\utilities\Functions;
 
 session_start();
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
 ?>
 <html lang="it">
 
-<<<<<<< HEAD
 <?php
   $functions->stampaNavbarTurista($turista->getName());
   if(isset($_POST["ricercaAttivita"])){//se l'utente clicca su ricerca
@@ -32,7 +28,7 @@ session_start();
   if($num>0){
     ?>
         <table class="table">
-=======
+
 <head>
   <meta charset="UTF-8">
   <title>Lista attività</title>
@@ -83,7 +79,7 @@ session_start();
     if ($num > 0) {
       ?>
       <table class="table">
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
+
         <thead>
           <tr>
             <th scope="col">Citta</th>
@@ -101,7 +97,7 @@ session_start();
           while ($riga = mysqli_fetch_assoc($result)) { //assoccio il risultato della funzione(record per record)a un array riga fin quando il record non sarà zero e quindi $riga diventerà false
             ?>
             <tr>
-              <th scope="row"><?php echo $riga['citta']; 
+              <th scope="row"><?php echo $riga['citta'];
                               ?></th>
               <td><?php echo $riga['data_attivita']; ?></td>
               <td><?php echo $riga['nomeCicerone']; ?></td>

@@ -8,7 +8,6 @@ session_start();
 use classi\activities\Activity;
 use classi\utilities\Functions;
 $cicerone = new Cicerone();
-<<<<<<< HEAD
 $functions = new Functions();
 $cicerone=$_SESSION['utente'];
 ?>
@@ -36,8 +35,8 @@ $cicerone=$_SESSION['utente'];
             <a href='ilMioProfilo.php' class='alert-link'>Esaurito il numero massimo di attivita gratuite da creare! Click per diventare premimum</a>
           </div>";
         }
- ?>
-=======
+
+
 
 $cicerone = $_SESSION['utente'];
 $functions = new Functions();
@@ -61,7 +60,7 @@ if (isset($_POST["inviaDatiAttivita"])) {
   }
 }
 ?>
->>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
