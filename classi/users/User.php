@@ -13,8 +13,6 @@ class User {
     private $birthDate;
     private $contact;
     private $password;
-    private $payment;
-
 
     /**
      * @return \classi\utilities\Place
@@ -28,7 +26,7 @@ class User {
     public function setPassword($password)
     {
         if(is_string($password)){
-            $this->password = $password;
+            $this->password =  ucfirst(strtolower(trim($password)));
         } else{
             trigger_error('errore di tipo');
         }
@@ -54,7 +52,7 @@ class User {
     public function setName($name)
     {
         if(is_string($name)){
-        $this->name = ucfirst(trim($name));
+        $this->name =  ucfirst(strtolower(trim($name)));
         } else{
             trigger_error('errore di tipo');
         }
@@ -63,7 +61,7 @@ class User {
     public function setSurname($surname)
     {
         if(is_string($surname)){
-            $this->surname = ucfirst(trim($surname));
+            $this->surname =  ucfirst(strtolower(trim($surname)));
         } else{
             trigger_error('errore di tipo');
         }
@@ -92,13 +90,6 @@ class User {
         return $this->password;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPayment()
-    {
-        return $this->payment;
-    }
 
     public function setAddress($nation, $county, $city, $street, $CAP)
     {
@@ -119,11 +110,6 @@ class User {
         $this->contact = new Contact($mail, $phone_num);
     }
 
-
-    public function setPayment($payment)
-    {
-        $this->payment = $payment;      //TODO
-    }
     /**
      * @return int
      */

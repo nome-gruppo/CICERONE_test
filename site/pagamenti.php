@@ -36,12 +36,23 @@ if (isset($_POST["pagamento_carta"])) {
     $codice_ok = false;
 
     while ($tentativo <= MAX_TENTATIVI && !$codice_ok) {
+<<<<<<< HEAD
         if (($functions->code_control($_POST["num_carta"], $pagamento->getCodeSize()) == true) &&
         ($functions->code_control($_POST["cvv_code"], $pagamento->getCvvSize()) == true)) {
+=======
+        if (($functions->code_control($_POST["num_carta"], $pagamento::CODE_SIZE)) && 
+        ($functions->code_control($_POST["cvv_code"], $pagamento::CVV_SIZE))) {
+>>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
 
             $pagamento->setCode($_POST["num_carta"]);
             $pagamento->setCvv($_POST["cvv_code"]);
             $codice_ok = true;
+
+            //cambio data premium
+    $utente->setPremiumDate(date("Y-m-d"));
+
+    $query = "UPDATE ciceroni SET data_premium='{$utente->getPremiumDate()}' where id_cicerone = '{$utente->getId()}'";
+    $result = mysqli_query($link, $query) or die("Errore nella modifica data premium!");
 
         } else {
 

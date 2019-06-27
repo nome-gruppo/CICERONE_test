@@ -87,7 +87,7 @@ class Functions
         if (is_int($size)) {
             $correct = true;
 
-            if (! is_numeric($code) || sizeof($code) != $size) {
+            if (! is_numeric($code) || strlen($code) != $size) {
                 $correct = false;
             }
 

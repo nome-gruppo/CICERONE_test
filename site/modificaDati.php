@@ -56,35 +56,35 @@ if (isset($_POST["modifica_dati"])) {
 
     if ($telefono_ok == true) {
         if (trim($_POST['nome']) != "") {
-            $utente->setName(trim($_POST['nome']));
+            $utente->setName($_POST['nome']);
         }
 
         if (trim($_POST['cognome']) != "") {
-            $utente->setSurname(trim($_POST['cognome']));
+            $utente->setSurname($_POST['cognome']);
         }
 
-        if (trim($_POST['data_nascita']) != "") {
-            $utente->setBirthDate($functions->writeDateDb(trim($_POST['data_nascita'])));
+        if ($_POST['data_nascita'] != "") {
+            $utente->setBirthDate($functions->writeDateDb($_POST['data_nascita']));
         }
 
-        if (trim($_POST['nazione']) != "") {
-            $utente->setAddress(trim($_POST['nazione']), $utente->getAddress->getCounty(), $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
+        if ($_POST['nazione'] != "") {
+            $utente->setAddress($_POST['nazione'], $utente->getAddress->getCounty(), $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
         }
 
         if (trim($_POST['provincia']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), trim($_POST['provincia']), $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
+            $utente->setAddress($utente->getAddress->getNation(), $_POST['provincia'], $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
         }
 
         if (trim($_POST['citta']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), trim($_POST['citta']), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
+            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $_POST['citta'], $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
         }
 
         if (trim($_POST['indirizzo']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(), trim($_POST['indirizzo']), $utente->getAddress->getCAP());
+            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(), $_POST['indirizzo'], $utente->getAddress->getCAP());
         }
 
         if (trim($_POST['CAP']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(),  $utente->getAddress->getStreet(), trim($_POST['CAP']));
+            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(),  $utente->getAddress->getStreet(), $_POST['CAP']);
         }
 
 
@@ -175,7 +175,7 @@ if (isset($_POST["disdici_premium"])) {
     while ($row = mysqli_fetch_array($result)) {
 
         if ($row['id_cicerone'] == $utente->getId()) {
-            $attivita = new Activity($row['id_cicerone'], $row['citta'], $row['costo'], $row['descrizione'], $row['lingua'], $row['data_attivita']);
+            $attivita = new Activity($row['id_cicerone'],$row['titolo'], $row['citta'], $row['costo'], $row['descrizione'], $row['lingua'], $row['data_attivita']);
             $attivita->setIdAttivita($row['id_attivita']);
             $array_attivita[] = $attivita;
         }
@@ -192,6 +192,7 @@ if (isset($_POST["disdici_premium"])) {
         }
     }
 
+    $errore_eliminazione = false;
 
     //elimino le prime 3 attività dall'array e cancello dal database le attività presenti nell'array
     if (count($array_attivita_future) > 3) {
@@ -199,10 +200,9 @@ if (isset($_POST["disdici_premium"])) {
         unset($array_attivita_future[1]);
         unset($array_attivita_future[2]);
         $array_attivita_future = array_values($array_attivita_future);
-        $array_dim = count($array_attivita_future);
+        $array_dim = count($array_attivita_future);        
 
-        $errore_eliminazione = false;
-
+        //eliminazione attività future dal database
         for ($i = 0; $i < $array_dim; $i++) {
             $query = "DELETE from attivita WHERE id_attivita ='{$array_attivita_future[$i]->getIdAttivita()}'";
             $result = mysqli_query($link, $query) or die("Errore eliminazione attività");
@@ -210,36 +210,37 @@ if (isset($_POST["disdici_premium"])) {
             if (!$result) {
                 $errore_eliminazione = true;
             }
-        }
+        }     
+    }
 
-        //modifica data_premium del cicerone
-        $query = "UPDATE ciceroni SET data_premium = '0000-00-00' WHERE id_cicerone = '{$utente->getId()}'";
-        $result = mysqli_query($link, $query) or die("Errore modifica data!");
+    //modifica data_premium del cicerone
+    $query = "UPDATE ciceroni SET data_premium = '0000-00-00' WHERE id_cicerone = '{$utente->getId()}'";
+    $result = mysqli_query($link, $query) or die("Errore modifica data!");
 
-        if (($errore_eliminazione == false) && $result) {
-            echo "<div class='alert alert-success' role='alert'>
-                    <a href='homepage.html' class='alert-link'>Le attività sono state eliminate</a>
-                    </div>";
-        } else {
-            echo "<div class='alert alert-danger' role='alert'>
-                    <a href='homepage.html' class='alert-link'>Non tutte le tue attività sono state eliminate correttamente</a>
-                    </div>";
-        }
+    if (($errore_eliminazione == false) && $result) {
+        echo "<div class='alert alert-success' role='alert'>
+                <a href='cicerone.php' class='alert-link'>Le attività sono state eliminate. Non sei più un Cicerone premium</a>
+                </div>";
+    } else {
+        echo "<div class='alert alert-danger' role='alert'>
+                <a href='cicerone.php' class='alert-link'>La tua disdetta non è andata a buon fine</a>
+                </div>";
     }
 }//end if disdici premium
 
 if (isset($_POST["diventa_premium"])) {
     echo '<form action="pagamenti.php" method="post">
-                <div class="container-fluid">
-                    <br /><br /><br /><br />
-                    <div class="col-sm-3 col-xs-2">
-                    </div>
+            <div class="container-fluid">
+                <br /><br /><br /><br />
+                <div class="col-sm-3 col-xs-2">
+                </div>
 
                 <div class="col-sm-6 col-xs-8">
                     <ul class="nav nav-tabs">
                         <li class="active">
                             <a href="#carta" data-toggle="tab"><strong>Carta di credito</strong></a>
                         </li>
+<<<<<<< HEAD
                         <li><a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
                         </li>
                     </ul>
@@ -247,22 +248,37 @@ if (isset($_POST["diventa_premium"])) {
                     <div class="tab-content clearfix">
                         <div class="tab-pane active" id="carta">
                             <!-- Carta -->
+=======
+                        <li>
+                            <a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
+                        </li>      
+                    </ul>
+    
+                    <div class="tab-content clearfix">
+                        <!-- Carta -->    
+                        <div class="tab-pane active" id="carta">                            
+>>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
                             <div class="panel panel-default">
-                                <!-- Default panel contents -->
+                                <!-- Default panel contents -->           
                                 <div class="panel-body">
                                     Carte di credito accettate<br>
                                     <img src="images\cardLogo.png">
                                     <br /><br />
+
                                     <div class="row">
                                         <strong>&nbsp&nbsp&nbsp&nbspImporto €'. $costo_premium .'</strong>
                                     </div>
                                     <br />
+
                                     <div class="row">
                                         <div class="col-sm-6 col-xs-8">
                                             <input type="text" class="form-control" placeholder="Numero carta" name="num_carta">
                                         </div>
                                         <br /><br />
+<<<<<<< HEAD
 
+=======
+>>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
                                         <div class="col-sm-3 col-xs-3">
                                             <input type="text" class="form-control" placeholder="CVV" name="cvv_code">
                                         </div>
@@ -273,7 +289,9 @@ if (isset($_POST["diventa_premium"])) {
                                             <button type="submit" class="btn btn-primary" name="pagamento_carta">Procedi</button>
                                         </div>
                                     </div>
+
                                 </div>
+<<<<<<< HEAD
                             < /div>
                             <!-- Fine carta -->
 
@@ -282,20 +300,35 @@ if (isset($_POST["diventa_premium"])) {
 
                         <div class="tab-pane" id="paypal">
                             <!-- paypal -->
+=======
+                                <!-- fine Default panel contents -->
+                            </div>          
+                        </div>
+                        <!-- Fine carta --> 
+        
+                        <!-- paypal -->
+                        <div class="tab-pane" id="paypal">                            
+>>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
                                     <img src="images\paypalLogo.png">
                                     <br /><br />
+
                                     <div class="row">
                                         <strong>&nbsp&nbsp&nbsp&nbspImporto €'. $costo_premium .'</strong>
                                     </div>
                                     <br />
+
                                     <div class="row">
                                         <div class="col-sm-6 col-xs-8">
                                             <input type="email" class="form-control" placeholder="Email PayPal" name="mail_paypal">
                                         </div>
+<<<<<<< HEAD
                                         <br /><br />
+=======
+                                        <br /><br /><br />
+>>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
                                         <div class="col-sm-8 col-xs-8">
                                         </div>
                                         <div class="col-sm-4 col-xs-4">
@@ -303,15 +336,33 @@ if (isset($_POST["diventa_premium"])) {
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
                             </div>
                             <!-- Fine paypal -->
                         </div>
                     </div>
+=======
+                                <!-- Fine Default panel contents -->
+                            </div> 
+                        </div>   
+                        <!-- Fine Paypal -->
+
+                    </div>     
+>>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
                 </div>
+                <!--end col-->
                 <div class="col-sm-3 col-xs-2">
                 </div>
+<<<<<<< HEAD
             </div>
         </form>';
+=======
+          </div>
+          <!--end container fluid-->
+        
+      </form>';   
+
+>>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
 }//end if diventa premium
 
 mysqli_close($link);

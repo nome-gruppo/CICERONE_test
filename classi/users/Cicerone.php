@@ -3,9 +3,11 @@ namespace classi\users;
 
 require_once 'User.php';
 require_once '..\classi\utilities\Database.php';
+require_once '..\classi\activities\Activity.php';
 
 use classi\utilities\Functions;
 use classi\utilities\Database;
+use classi\activities\Activity;
 
 class Cicerone extends User
 {
@@ -61,7 +63,7 @@ class Cicerone extends User
         $this->premiumDate = $premiumDate;
     }
 
-    public function addActivity(\classi\activities\Activity $activity)
+    public function addActivity(Activity $activity)
     {
         //se cicerone non premium
         if (premiumDate == null) {
@@ -75,7 +77,7 @@ class Cicerone extends User
         }
     }
 
-    public function removeActivity(\classi\activities\Activity $activity){
+    public function removeActivity(Activity $activity){
         $functions = new Functions();
 
         $functions->delete_from_array($this->myActivity, $activity);

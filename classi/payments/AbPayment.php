@@ -16,7 +16,7 @@ abstract class AbPayment{
         if(is_float($import)){
             $this->import = $import;
             echo "<div class='alert alert-success' role='alert'>
-            <a href='site\cicerone.php' class='alert-link'>Pagamento effettuato con successo! Click per tornare all'area riservata</a>
+            <a href='cicerone.php' class='alert-link'>Pagamento effettuato con successo! Click per tornare all'area riservata</a>
           </div>";
         } else{
             trigger_error('errore di tipo');

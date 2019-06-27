@@ -473,8 +473,13 @@ $functions = new Functions();
                 echo '<h3 class="modal-title" id="premiumLabel">Vuoi diventare premium?</h3>';
                 echo '</div>';  //fine header modal
                 echo '<div class="modal-body">';
+<<<<<<< HEAD
                 echo "Il costo dell'abbonamento premium è di €" . COSTO_PREMIUM . " al mese.<br>";
                 echo "L'abbonamento ti consentirà di inserire un numero illimitato di attività.";
+=======
+                echo "L'abbonamento premium ha un costo mensile di €" . COSTO_PREMIUM . ".<br>";
+                echo "Ti consentirà di inserire un numero illimitato di attività e potrai disdirlo in qualsiasi momento.";
+>>>>>>> e98371685b21ae9059d877d813769a25532bb2a6
                 echo '</div>';
               } else {
                 echo '<h3 class="modal-title" id="premiumLabel">Sicuro di voler disdire il tuo abbonamento premium?</h3>';
