@@ -90,7 +90,7 @@ $perc1 = getPercentage(0);
 ?>
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!-- Include the above in your HEAD tag -->
 
 <html lang="it">
 
