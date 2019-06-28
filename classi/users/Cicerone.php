@@ -20,7 +20,7 @@ class Cicerone extends User
 >>>>>>> d9f0816b664ec844abee174b4c6d89215218885d
     private $premiumDate = null;
     private $valutazione;
-  
+
 
     public function __construct()
     {}
@@ -29,7 +29,7 @@ class Cicerone extends User
     {
         $database=new Database();
         $link=$database->getConnection();
-        $query = "SELECT * from attivita WHERE id_cicerone={$this->getId()}";
+        $query = "SELECT * from attivita WHERE id_cicerone={$this->getId()} order by(data_attivita)";
         $result = mysqli_query($link, $query) or die("Errore connessione");
         mysqli_close($link);
         return $result;

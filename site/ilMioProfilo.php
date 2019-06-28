@@ -33,7 +33,7 @@ $functions = new Functions();
 </head>
 
 <body>
-<<<<<<< HEAD
+
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -74,6 +74,13 @@ $functions = new Functions();
   $functions->stampaNavbarCicerone($utente->getName());
 } ?>
 >>>>>>> d9f0816b664ec844abee174b4c6d89215218885d
+
+<?php if($utente instanceof Turista){
+  $functions->stampaNavbarTurista($utente->getName());
+}else{
+  $functions->stampaNavbarCicerone($utente->getName());
+} ?>
+
 
   <div class="container-fluid">
     <form action="modificaDati.php" method="post">

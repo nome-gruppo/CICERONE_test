@@ -22,7 +22,7 @@ $cicerone = $_SESSION['utente'];
 </head>
 
 <body>
-<<<<<<< HEAD
+
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -50,6 +50,9 @@ $cicerone = $_SESSION['utente'];
 =======
   <?php $functions->stampaNavbarCicerone($cicerone->getName()); ?>
 >>>>>>> d9f0816b664ec844abee174b4c6d89215218885d
+
+  <?php $functions->stampaNavbarCicerone($cicerone->getName()); ?>
+
 
   <h1>Benvenuto nell'area riservata!</h1><br /><br />
   <div class="text-center">

@@ -21,10 +21,10 @@ class Turista extends User
         parent::__construct();
     }
 
-    public function searchActivity($citta, $lingua, $data){
+    public function searchActivity($citta, $lingua, $data, $id_turista){
       $database=new Database();
       $link=$database->getConnection();
-      $query="SELECT attivita.id_attivita, attivita.citta, attivita.data_attivita, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua, attivita.costo FROM(attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)where attivita.citta='$citta'and attivita.lingua='$lingua'and attivita.data_attivita='$data'";
+      $query="SELECT attivita.id_attivita,attivita.titolo, attivita.citta, attivita.data_attivita, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua, attivita.costo FROM(attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)where attivita.citta='$citta'and attivita.lingua='$lingua' and attivita.data_attivita='$data' and ('$id_turista',attivita.id_attivita) not in(select id_turista, id_attivita from partecipazione)";
       $result = mysqli_query($link, $query) or die("Errore connessione");
       mysqli_close($link);
       return $result;
@@ -40,7 +40,7 @@ class Turista extends User
     public function inProgramma($idTurista){
       $database=new Database();
       $link=$database->getConnection();
-      $query="SELECT attivita.id_attivita, attivita.citta, attivita.data_attivita, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua, attivita.costo FROM(((attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)inner join partecipazione on attivita.id_attivita=partecipazione.id_attivita)inner join turista on partecipazione.id_turista=turista.id_turista)WHERE((data_attivita>=CURRENT_DATE()) AND (partecipazione.id_turista=$idTurista))";
+      $query="SELECT attivita.id_attivita, attivita.titolo, attivita.citta, attivita.data_attivita, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua, attivita.costo FROM(((attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)inner join partecipazione on attivita.id_attivita=partecipazione.id_attivita)inner join turista on partecipazione.id_turista=turista.id_turista)WHERE((data_attivita>=CURRENT_DATE()) AND (partecipazione.id_turista=$idTurista))";
       $result = mysqli_query($link, $query) or die("Errore connessione");
       mysqli_close($link);
       return $result;
@@ -48,7 +48,7 @@ class Turista extends User
     public function attivitaSvolte($idTurista){
       $database=new Database();
       $link=$database->getConnection($idTurista);
-      $query="SELECT attivita.id_attivita, attivita.citta, attivita.data_attivita, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua, attivita.costo FROM(((attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)inner join partecipazione on attivita.id_attivita=partecipazione.id_attivita)inner join turista on partecipazione.id_turista=turista.id_turista)WHERE((data_attivita<CURRENT_DATE()) AND (partecipazione.id_turista=$idTurista))";
+      $query="SELECT attivita.id_attivita, attivita.titolo, attivita.citta, attivita.data_attivita, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua, attivita.costo FROM(((attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)inner join partecipazione on attivita.id_attivita=partecipazione.id_attivita)inner join turista on partecipazione.id_turista=turista.id_turista)WHERE((data_attivita<CURRENT_DATE()) AND (partecipazione.id_turista=$idTurista))";
       $result = mysqli_query($link, $query) or die("Errore connessione");
       mysqli_close($link);
       return $result;
