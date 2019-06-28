@@ -230,6 +230,7 @@ if (isset($_POST["disdici_premium"])) {
 
 if (isset($_POST["diventa_premium"])) {
     echo '<form action="pagamenti.php" method="post">
+            <!-- container-->
             <div class="container-fluid">
                 <br /><br /><br /><br />
                 <div class="col-sm-3 col-xs-2">
@@ -240,29 +241,14 @@ if (isset($_POST["diventa_premium"])) {
                         <li class="active">
                             <a href="#carta" data-toggle="tab"><strong>Carta di credito</strong></a>
                         </li>
-
                         <li><a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
                         </li>
                     </ul>
 
+                    <!--tab-->
                     <div class="tab-content clearfix">
-                        <div class="tab-pane active" id="carta">
-                            <!-- Carta -->
-
-                        <li>
-                            <a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content clearfix">
-
                         <!-- Carta -->
-                        <div class="tab-panel active" id="carta">
-
-                        <!-- Carta -->
-                        <div class="tab-pane active" id="carta">
-
-
+                        <div class="tab-panel active" id="carta">                                                                     
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
@@ -290,27 +276,14 @@ if (isset($_POST["diventa_premium"])) {
                                             <button type="submit" class="btn btn-primary" name="pagamento_carta">Procedi</button>
                                         </div>
                                     </div>
-
                                 </div>
-                            < /div>
-                            <!-- Fine carta -->
-
-
-                        </div>
-
-                        <div class="tab-pane" id="paypal">
-                            <!-- paypal -->
-                                <!-- fine Default panel contents -->
-                            </div>
+                            < /div>                            
                         </div>
                         <!-- Fine carta -->
 
+
                         <!-- paypal -->
-
-                        <div class="tab-panel" id="paypal">
-
-                        <div class="tab-pane" id="paypal">
-
+                        <div class="tab-panel" id="paypal">                     
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
@@ -335,26 +308,20 @@ if (isset($_POST["diventa_premium"])) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Fine paypal -->
+                            </div>                            
                         </div>
+                        <!-- Fine paypal -->
                     </div>
-                                <!-- Fine Default panel contents -->
-                            </div>
-                        </div>
-                        <!-- Fine Paypal -->
-
-                    </div>
+                    <!-- Fine tab-->                             
+                    
                 </div>
                 <!--end col-->
+                
                 <div class="col-sm-3 col-xs-2">
                 </div>
             </div>
-        </form>
-          </div>
-          <!--end col-->
-
-      </form>';
+            <!--fine container-->
+        </form>';
 
 }//end if diventa premium
 
