@@ -21,8 +21,16 @@ class Cicerone extends User
     public function __construct()
     {}
 
-    public function printActivity()
-    {
+    public function segnalaPrenotazioni($idCicerone){
+      $database=new Database();
+      $link=$database->getConnection();
+      $query="SELECT attivita.id_attivita from(partecipazione left join attivita on partecipazione.id_attivita=attivita.id_attivita)where id_cicerone=$idCicerone";
+      $result=mysqli_query($link, $query) or die("Errore connessione");
+      mysqli_close($link);
+      return $result;
+    }
+
+    public function printActivity(){
         $database=new Database();
         $link=$database->getConnection();
         $query = "SELECT * from attivita WHERE id_cicerone={$this->getId()} order by(data_attivita)";

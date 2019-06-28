@@ -23,32 +23,20 @@ $cicerone = $_SESSION['utente'];
 
 <body>
 
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="cicerone.php" button type="button" class="btn btn-default btn-lg"> Area riservata</a>
-      </div>
+  <?php $functions->stampaNavbarCicerone($cicerone->getName());
+    $result=$cicerone->segnalaPrenotazioni($cicerone->getId());
+    $num=mysqli_num_rows($result);
+    if($num>0){
+  ?>
+  <div class='alert alert-warning' role='alert'>
+    <a href='gestioneAttivita.php' class='alert-link'>Sono presenti delle prenotazioni nelle attivita:<?php while($riga = mysqli_fetch_assoc($result)){
+      $result2=$functions->recuperaTitolo($riga['id_attivita']);
+      $riga2=mysqli_fetch_assoc($result2);
+    echo '  '.$riga2['titolo'] ;}?>
+      . Click per controllare</a>
+    </div>
+      <?php }  ?>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $cicerone->getName(); ?></a>
-            <ul class="dropdown-menu">
-              <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
-              <li><a href="gestioneAttivita.php">Le mie attività</a></li>
-              <li><a href="recensioniCicerone.php">Recensioni utenti</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <?php $functions->stampaNavbarCicerone($cicerone->getName()); ?>
 
 
   <h1>Benvenuto nell'area riservata!</h1><br /><br />

@@ -24,11 +24,10 @@ class Mail{
   public function mailPrenotazione(){
     $this->mail_oggetto="Richiesta di prenotazione";
     $this->mail_corpo="";
-    $mail_headers = "From: " .  $this->nome_mittente . " <" .  $this->mail_mittente . ">\r\n";
+    $mail_headers = "From: " .  $this->nome_mittente . " < francycas@gmail.com >\r\n";
     $mail_headers .= "Reply-To: " .  $this->mail_mittente . "\r\n";
     $mail_headers .= "X-Mailer: PHP/" . phpversion();
-    $result=mail($this->mail_destinatario, $this->mail_oggetto, $this->mail_corpo, $mail_headers);
-    return $result;
+    mail($this->mail_destinatario, $this->mail_oggetto, $this->mail_corpo, $mail_headers);
   }
   public function mailConferma(){
     $this->mail_oggetto="Conferma prenotazione";
