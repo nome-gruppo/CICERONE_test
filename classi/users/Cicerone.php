@@ -12,12 +12,11 @@ use classi\activities\Activity;
 class Cicerone extends User
 {
 
-    const MAX_ACTIVITY = 3;    // numero massimo di inserzioni inseribili da cicerone non premium
+    const MAX_ACTIVITY = 5;    // numero massimo di inserzioni inseribili da cicerone non premium
 
     private $premiumDate = null;
     private $valutazione;
-    private $myActivity = array();
-    private $myReview = array();
+  
 
     public function __construct()
     {}
@@ -48,25 +47,6 @@ class Cicerone extends User
         $this->premiumDate = $premiumDate;
     }
 
-    public function addActivity(Activity $activity)
-    {
-        //se cicerone non premium
-        if (premiumDate == null) {
-
-            if(sizeof($this->myActivity) < MAX_ACTIVITY){
-                $this->myActivity[] = $activity;
-            }
-        }else{
-            echo 'Non puoi inserire altre inserzioni \r\nDiventa premium';
-            //tasto diventa premium e richiama la fuzione diventa premium
-        }
-    }
-
-    public function removeActivity(Activity $activity){
-        $functions = new Functions();
-
-        $functions->delete_from_array($this->myActivity, $activity);
-    }
     /**
      * {@inheritDoc}
      * @see \classi\users\User::getAddress()

@@ -38,6 +38,7 @@ $cicerone = $_SESSION['utente'];
             <ul class="dropdown-menu">
               <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
               <li><a href="gestioneAttivita.php">Le mie attività</a></li>
+              <li><a href="recensioniCicerone.php">Recensioni utenti</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
             </ul>
@@ -49,7 +50,7 @@ $cicerone = $_SESSION['utente'];
 
   <h1>Benvenuto nell'area riservata!</h1><br /><br />
   <div class="text-center">
-    <a href="formAttivita.html" class="btn btn-primary" .btn{font-size: 30px;}>
+    <a href="formAttivita.php" class="btn btn-primary" .btn{font-size: 30px;}>
       <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> CREA ATTIVITÀ</a>
   </div>
 

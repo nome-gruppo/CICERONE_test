@@ -4,11 +4,9 @@ namespace classi\activities;
 class Review
 {
 
-    private $idTurista;
+    private $id_turista;
 
-    private $idActivity;
-
-    private $idCicerone;
+    private $id_cicerone;
 
     private $title;
 
@@ -16,47 +14,40 @@ class Review
 
     private $text;
 
-    public function getIdActivity()
+    public function getId_cicerone()
     {
-        return (int) $this->idActivity;
+        return (int) $this->id_cicerone;
     }
 
-    public function __construct($idActivity)
-    {
-        $this->idActivity = $idActivity;
-    }
-
-    public function setidTurista($idTurista)
-    {
-        $this->idTurista = $idTurista;
-    }
-
-    public function setTitle($title)
-    {
-        if (is_string($title)) {
-            $this->title =  ucfirst(strtolower(trim($title)));
-        } else {
+    public function __construct($id_cicerone,$id_turista, $title, $valutation, $text){
+        if (is_string($title) && is_string($text)) {
+            $this->id_cicerone = $id_cicerone;
+            $this->id_turista = $id_turista;
+            $this->title = ucfirst(strtolower(trim($title)));
+            $this->valutation = $valutation;
+            $this->text = trim($text);
+        }else {
             trigger_error('errore di tipo');
         }
     }
+
 
     public function getValutation()
     {
         return $this->valutation;
     }
 
-    public function setValutation($valutation)
+    public function getId_turista()
     {
-        if (is_int($valutation)) {
-            $this->valutation = $valutation;
-        } else {
-            trigger_error('errore di tipo');
-        }
+        return $this->id_turista;
     }
-
-    public function set_text()
+    public function getTitle()
     {
-        $this->text = trim($_POST['text']); // TODO controlla
+        return $this->title;
+    }
+    public function getText()
+    {
+        return $this->text;
     }
 }
 

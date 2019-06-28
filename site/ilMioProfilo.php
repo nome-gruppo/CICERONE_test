@@ -55,6 +55,7 @@ $functions = new Functions();
               <?php
               if ($utente instanceof Cicerone) {
                 echo '<li><a href="gestioneAttivita.php">Le mie attività</a></li>';
+                echo '<li><a href="recensioniCicerone.php">Recensioni utenti</a></li>';
               } else {
                 echo '  <li><a href="#">Attività in programma</a></li>
                     <li><a href="#">Attività svolte</a></li>';

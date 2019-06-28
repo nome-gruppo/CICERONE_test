@@ -16,16 +16,6 @@ class Turista extends User
     private $myReview = array();
 
 
-    public function getIdTurista()
-    {
-        return $this->idTurista;
-    }
-
-    public function setIdTurista($idTurista)
-    {
-        $this->idTurista = $idTurista;
-    }
-
     public function __construct()
     {
         parent::__construct();

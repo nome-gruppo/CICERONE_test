@@ -247,7 +247,7 @@ if (isset($_POST["diventa_premium"])) {
     
                     <div class="tab-content clearfix">
                         <!-- Carta -->    
-                        <div class="tab-pane active" id="carta">                            
+                        <div class="tab-panel active" id="carta">                            
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->           
                                 <div class="panel-body">
@@ -283,7 +283,7 @@ if (isset($_POST["diventa_premium"])) {
                         <!-- Fine carta --> 
         
                         <!-- paypal -->
-                        <div class="tab-pane" id="paypal">                            
+                        <div class="tab-panel" id="paypal">                            
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
