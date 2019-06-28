@@ -21,7 +21,14 @@ class Functions
      *            variabile che indica la lunghezza di $code
      * @return boolean vero se i controlli hanno esito positivo, falso altrimenti
      */
-
+    public  function recuperaTitolo($id_attivita){
+      $database=new Database();
+      $link=$database->getConnection();
+      $query="SELECT titolo from attivita where id_attivita=$id_attivita";
+      $result = mysqli_query($link, $query) or die("Errore di connessione");
+      mysqli_close($link);
+      return $result;
+    }
     public function recuperoMailCicerone($id_attivita){
       $database=new Database();
       $link=$database->getConnection();

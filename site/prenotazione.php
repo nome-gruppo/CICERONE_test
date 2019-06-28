@@ -48,14 +48,9 @@ $functions=new Functions();
 $url= $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 $id_attivita=(parse_url($url, PHP_URL_QUERY));
 $result=$turista->confermaAttivita($id_attivita);
-$mailCicerone=$functions->recuperoMailCicerone($id_attivita);
-$mail->setNomeMittente($turista->getName());
-$mail->setMailMittente($turista->getContact()->getMail());
-$mail->setMailDestinatario($mailCicerone[0]);
-$result2=$mail->mailPrenotazione();
-if($result&&$result2){
+if($result){
   echo "<div class='alert alert-success' role='alert'>
-    <a href='turista.php' class='alert-link'>Attivita prenotata con successo!E' stata inviata una mail di notifica al cicerone.</a>
+    <a href='turista.php' class='alert-link'>Attivita prenotata con successo!E' stata inviata una notifica al cicerone.</a>
   </div>";
 }
 else{

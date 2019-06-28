@@ -23,13 +23,21 @@ $cicerone = $_SESSION['utente'];
 
 <body>
 
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="cicerone.php" button type="button" class="btn btn-default btn-lg"> Area riservata</a>
-      </div>
+  <?php $functions->stampaNavbarCicerone($cicerone->getName());
+    $result=$cicerone->segnalaPrenotazioni($cicerone->getId());
+    $num=mysqli_num_rows($result);
+    if($num>0){
+  ?>
+  <div class='alert alert-warning' role='alert'>
+    <a href='gestioneAttivita.php' class='alert-link'>Sono presenti delle prenotazioni nelle attivita:<?php while($riga = mysqli_fetch_assoc($result)){
+      $result2=$functions->recuperaTitolo($riga['id_attivita']);
+      $riga2=mysqli_fetch_assoc($result2);
+    echo '  '.$riga2['titolo'] ;}?>
+      . Click per controllare</a>
+    </div>
+      <?php }  ?>
 
+<<<<<<< HEAD
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-right">
           <li class="dropdown">
@@ -52,6 +60,8 @@ $cicerone = $_SESSION['utente'];
 >>>>>>> d9f0816b664ec844abee174b4c6d89215218885d
 
   <?php $functions->stampaNavbarCicerone($cicerone->getName()); ?>
+=======
+>>>>>>> 6a306d5d9dc397cd259588a340f34795800d283e
 
 
   <h1>Benvenuto nell'area riservata!</h1><br /><br />
