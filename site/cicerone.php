@@ -1,12 +1,11 @@
 <?php
 namespace classi\users;
-
-require_once '..\classi\users\Cicerone.php';
-
+require_once '../classi/users/Cicerone.php';
+require_once '../classi/utilities/Functions.php';
+use classi\utilities\Functions;
 $cicerone = new Cicerone();
-
+$functions=new Functions();
 session_start();
-
 $cicerone = $_SESSION['utente'];
 ?>
 
@@ -23,6 +22,7 @@ $cicerone = $_SESSION['utente'];
 </head>
 
 <body>
+<<<<<<< HEAD
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -47,6 +47,9 @@ $cicerone = $_SESSION['utente'];
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+=======
+  <?php $functions->stampaNavbarCicerone($cicerone->getName()); ?>
+>>>>>>> d9f0816b664ec844abee174b4c6d89215218885d
 
   <h1>Benvenuto nell'area riservata!</h1><br /><br />
   <div class="text-center">

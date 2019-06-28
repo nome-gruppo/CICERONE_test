@@ -1,7 +1,17 @@
 <?php
 namespace classi\users;
+
+require_once '../classi/users/Cicerone.php';
+require_once '../classi/utilities/Functions.php';
+use classi\utilities\Functions;
+$cicerone = new Cicerone();
+$functions=new Functions();
+session_start();
+$cicerone = $_SESSION['utente'];
+=======
 require_once '../classi/users/Cicerone.php'; // includo la classe cicerone
 session_start();
+
 ?>
 
 <html lang="it">
@@ -38,8 +48,10 @@ session_start();
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  
+
 <?php
+
+$functions->stampaNavbarCicerone($cicerone->getName());
 $cicerone = $_SESSION["utente"]; // prendo l'oggetto utente precedentemente messo in sessione (di tipo cicerone)
 $result = $cicerone->printActivity();
 $num = mysqli_num_rows($result);
@@ -70,6 +82,7 @@ if ($num > 0) {
 				<td><?php echo $riga['costo'];?></td>
 				<td><?php echo $riga['lingua'];?></td>
 				<td><?php echo $riga['descrizione'];?></td>
+        <td><a href="visualizzaPrenotazioni.php?<?php echo $riga['id_attivita'];?>">VISUALIZZA</a></td>
 			</tr>
             <?php
     }

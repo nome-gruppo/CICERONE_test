@@ -30,7 +30,7 @@ $database = new Database();
 $link = $database->getConnection();
 
 $functions = new Functions();
-
+$functions->stampaNavbarCicerone($utente->getName());
 if (isset($_POST["modifica_dati"])) {
 
     $telefono_ok = true;
@@ -107,7 +107,7 @@ if (isset($_POST["modifica_dati"])) {
                     <a href='ilMioProfilo.php' class='alert-link'>Compila tutti i campi password! Click per riprovare</a>
                     </div>";
 
-                    //altrimenti i nuovi campi non coincidono   
+                    //altrimenti i nuovi campi non coincidono
                 } elseif(sha1(md5(sha1($_POST['vecchia_password']))) != $utente->getPassword()) {
                     echo "<div class='alert alert-danger' role='alert'>
                     <a href='ilMioProfilo.php' class='alert-link'>Campo vecchia password errato! Click per riprovare</a>
@@ -200,7 +200,7 @@ if (isset($_POST["disdici_premium"])) {
         unset($array_attivita_future[1]);
         unset($array_attivita_future[2]);
         $array_attivita_future = array_values($array_attivita_future);
-        $array_dim = count($array_attivita_future);        
+        $array_dim = count($array_attivita_future);
 
         //eliminazione attività future dal database
         for ($i = 0; $i < $array_dim; $i++) {
@@ -210,7 +210,7 @@ if (isset($_POST["disdici_premium"])) {
             if (!$result) {
                 $errore_eliminazione = true;
             }
-        }     
+        }
     }
 
     //modifica data_premium del cicerone
@@ -228,7 +228,7 @@ if (isset($_POST["disdici_premium"])) {
     }
 }//end if disdici premium
 
-if (isset($_POST["diventa_premium"])) { 
+if (isset($_POST["diventa_premium"])) {
     echo '<form action="pagamenti.php" method="post">
             <div class="container-fluid">
                 <br /><br /><br /><br />
@@ -240,16 +240,31 @@ if (isset($_POST["diventa_premium"])) {
                         <li class="active">
                             <a href="#carta" data-toggle="tab"><strong>Carta di credito</strong></a>
                         </li>
+
+                        <li><a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="carta">
+                            <!-- Carta -->
+
                         <li>
                             <a href="#paypal" data-toggle="tab"><strong>PayPal</strong></a>
-                        </li>      
+                        </li>
                     </ul>
-    
+
                     <div class="tab-content clearfix">
+<<<<<<< HEAD
                         <!-- Carta -->    
                         <div class="tab-panel active" id="carta">                            
+=======
+                        <!-- Carta -->
+                        <div class="tab-pane active" id="carta">
+
+>>>>>>> d9f0816b664ec844abee174b4c6d89215218885d
                             <div class="panel panel-default">
-                                <!-- Default panel contents -->           
+                                <!-- Default panel contents -->
                                 <div class="panel-body">
                                     Carte di credito accettate<br>
                                     <img src="images\cardLogo.png">
@@ -277,13 +292,25 @@ if (isset($_POST["diventa_premium"])) {
                                     </div>
 
                                 </div>
-                                <!-- fine Default panel contents -->
-                            </div>          
+                            < /div>
+                            <!-- Fine carta -->
+
+
                         </div>
-                        <!-- Fine carta --> 
-        
+
+                        <div class="tab-pane" id="paypal">
+                            <!-- paypal -->
+                                <!-- fine Default panel contents -->
+                            </div>
+                        </div>
+                        <!-- Fine carta -->
+
                         <!-- paypal -->
+<<<<<<< HEAD
                         <div class="tab-panel" id="paypal">                            
+=======
+                        <div class="tab-pane" id="paypal">
+>>>>>>> d9f0816b664ec844abee174b4c6d89215218885d
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
@@ -299,6 +326,7 @@ if (isset($_POST["diventa_premium"])) {
                                         <div class="col-sm-6 col-xs-8">
                                             <input type="email" class="form-control" placeholder="Email PayPal" name="mail_paypal">
                                         </div>
+                                        <br /><br />
                                         <br /><br /><br />
                                         <div class="col-sm-8 col-xs-8">
                                         </div>
@@ -307,24 +335,28 @@ if (isset($_POST["diventa_premium"])) {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <!-- Fine paypal -->
+                        </div>
+                    </div>
                                 <!-- Fine Default panel contents -->
-                            </div> 
-                        </div>   
+                            </div>
+                        </div>
                         <!-- Fine Paypal -->
 
-                    </div>     
+                    </div>
                 </div>
                 <!--end col-->
                 <div class="col-sm-3 col-xs-2">
                 </div>
+            </div>
+        </form>
           </div>
-          <!--end container fluid-->
-        
-      </form>';   
+          <!--end col-->
+
+      </form>';
 
 }//end if diventa premium
 
 mysqli_close($link);
 ?>
-
-

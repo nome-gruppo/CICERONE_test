@@ -1,9 +1,10 @@
 <?php
 namespace classi\users;
 require_once '../classi/users/Turista.php';
-
+require_once '../classi/utilities/Functions.php';
+use classi\utilities\Functions;
 $turista = new Turista();
-
+$functions=new Functions();
 session_start();
 
 $turista = $_SESSION['utente'];
@@ -30,34 +31,7 @@ $turista = $_SESSION['utente'];
 
 </head>
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="turista.php" button type="button" class="btn btn-default btn-lg">
-      Benvenuto </a>
-    </div>
-
-
-
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $turista->getName(); ?></a>
-        <ul class="dropdown-menu">
-          <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
-          <li><a href="#">Attività in programma</a></li>
-          <li><a href="#">Attività svolte</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>   Logout</a></li>
-        </ul>
-      </li>
-    </ul>
-    </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-    </nav>
+  <?php $functions->stampaNavbarTurista($turista->getName()) ?>
 
 
     <h1>Ricerca attivita</h1>

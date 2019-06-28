@@ -1,19 +1,14 @@
 <?php
 namespace classi\users;
-
 use classi\utilities\Functions;
-
 require_once '../classi/users/Turista.php';
 require_once '../classi/users/Cicerone.php';
 require_once '../classi/utilities/Functions.php';
 define('COSTO_PREMIUM', 9.99);
-
 session_start();
-
 $utente = $_SESSION['utente'];
 $_SESSION['costo_premium'] = COSTO_PREMIUM;
 $functions = new Functions();
-
 ?>
 
 <html lang="it">
@@ -38,6 +33,7 @@ $functions = new Functions();
 </head>
 
 <body>
+<<<<<<< HEAD
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -71,6 +67,13 @@ $functions = new Functions();
   </nav>
 
   <br />
+=======
+<?php if($utente instanceof Turista){
+  $functions->stampaNavbarTurista($utente->getName());
+}else{
+  $functions->stampaNavbarCicerone($utente->getName());
+} ?>
+>>>>>>> d9f0816b664ec844abee174b4c6d89215218885d
 
   <div class="container-fluid">
     <form action="modificaDati.php" method="post">
@@ -404,7 +407,7 @@ $functions = new Functions();
                     <option value="Zambia">Zambia</option>
                     <option value="Zimbabwe">Zimbabwe</option>
                   </select> <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span> </span>
-                </div>                
+                </div>
               </td>
             </tr>
             <tr>
@@ -506,6 +509,8 @@ $functions = new Functions();
                 echo '<h3 class="modal-title" id="premiumLabel">Vuoi diventare premium?</h3>';
                 echo '</div>';  //fine header modal
                 echo '<div class="modal-body">';
+                echo "Il costo dell'abbonamento premium è di €" . COSTO_PREMIUM . " al mese.<br>";
+                echo "L'abbonamento ti consentirà di inserire un numero illimitato di attività.";
                 echo "L'abbonamento premium ha un costo mensile di €" . COSTO_PREMIUM . ".<br>";
                 echo "Ti consentirà di inserire un numero illimitato di attività e potrai disdirlo in qualsiasi momento.";
                 echo '</div>';
