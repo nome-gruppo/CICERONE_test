@@ -8,7 +8,7 @@ $cicerone = new Cicerone();
 $functions=new Functions();
 session_start();
 $cicerone = $_SESSION['utente'];
-=======
+
 require_once '../classi/users/Cicerone.php'; // includo la classe cicerone
 session_start();
 

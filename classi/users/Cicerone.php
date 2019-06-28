@@ -11,16 +11,12 @@ use classi\activities\Activity;
 
 class Cicerone extends User
 {
-<<<<<<< HEAD
 
     const MAX_ACTIVITY = 5;    // numero massimo di inserzioni inseribili da cicerone non premium
 
-=======
-    const MAX_ACTIVITY = 5;    // numero massimo di inserzioni inseribili da cicerone non premium
->>>>>>> d9f0816b664ec844abee174b4c6d89215218885d
     private $premiumDate = null;
     private $valutazione;
-  
+
 
     public function __construct()
     {}
