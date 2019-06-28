@@ -56,30 +56,37 @@ if (count($array_recensioni) > 0) {
     $media_valutazioni = $somma_valutazioni / count($array_recensioni);
 }
 
+
 //query per nome turisti che hanno scritto una recensione
-$query_turista = "SELECT id_turista,nome from turista where id_turista in (SELECT id_turista from recensioni) "; 
+$query_turista = "SELECT id_turista,nome from turista where id_turista in (SELECT id_turista from recensioni) ";
 $result_turista = mysqli_query($link, $query_turista) or die("Errore query turista!");
 
-$array_turisti= array();
+$array_turisti = array();
 
 //carico i turisti su un array
-while($row = mysqli_fetch_array($result_turista)){
+while ($row = mysqli_fetch_array($result_turista)) {
     $turista = new Turista();
     $turista->setName($row['nome']);
     $turista->setId($row['id_turista']);
     $array_turisti[] = $turista;
 }
 
-function getPercentage($num)
-{
+function getPercentage($num) {
     global $array_recensioni;
     global $array_valutazioni;
-    if (count($array_recensioni) > 0) {
-        return $array_valutazioni[$num] / count(array_recensioni) * 100;
+    $num_rec = count($array_recensioni); 
+    
+    if ($num_rec > 0) {
+        return $array_valutazioni[$num] * 100/ $num_rec ;
     } else {
         return 0;
     }
 }
+$perc5 = getPercentage(4);
+$perc4 = getPercentage(3);
+$perc3 = getPercentage(2);
+$perc2 = getPercentage(1);
+$perc1 = getPercentage(0);
 ?>
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -138,8 +145,7 @@ function getPercentage($num)
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getPercentage($array_recensioni, $array_valutazioni, 4)}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (getPercentage($array_recensioni, $array_valutazioni, 4) + '%')}">
-                                <span class="sr-only">{{getPercentage($array_recensioni, $array_valutazioni, 4)}}% Complete (danger)</span>
+                            <div class="progress-bar progress-bar-success" id="progress5" role="progressbar" aria_valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:50%">
                             </div>
                         </div>
                     </div>
@@ -152,8 +158,7 @@ function getPercentage($num)
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
-                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="{{getPercentage($array_recensioni, $array_valutazioni, 3)}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (getPercentage($array_recensioni, $array_valutazioni, 3) + '%')}">
-                                <span class="sr-only">{{getPercentage($array_recensioni, $array_valutazioni, 3)}}% Complete (danger)</span>
+                            <div class="progress-bar progress-bar-primary" id="progress4" role="progressbar" aria_valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:50%">
                             </div>
                         </div>
                     </div>
@@ -166,8 +171,7 @@ function getPercentage($num)
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
-                            <div class="progress-bar progress-bar-info" id="progress3" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                <span class="sr-only">{{$this->getPercentage(2)}}% Complete (danger)</span>
+                            <div class="progress-bar progress-bar-info" id="progress3" role="progressbar" aria_valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:50%">                              
                             </div>
                         </div>
                     </div>
@@ -180,8 +184,7 @@ function getPercentage($num)
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
-                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{getPercentage($array_recensioni, $array_valutazioni, 1)}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (getPercentage($array_recensioni, $array_valutazioni, 1) + '%')}">
-                                <span class="sr-only">{{getPercentage($array_recensioni, $array_valutazioni, 1)}}% Complete (danger)</span>
+                            <div class="progress-bar progress-bar-warning" id="progress2" role="progressbar" aria_valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:50%">
                             </div>
                         </div>
                     </div>
@@ -194,8 +197,7 @@ function getPercentage($num)
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
-                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{getPercentage($array_recensioni, $array_valutazioni, 0)}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (getPercentage($array_recensioni, $array_valutazioni, 0) + '%')}">
-                                <span class="sr-only">{{getPercentage($array_recensioni, $array_valutazioni, 0)}}% Complete (danger)</span>
+                            <div class="progress-bar progress-bar-danger" id="progress1" role="progressbar" aria_valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:50%">
                             </div>
                         </div>
                     </div>
@@ -211,19 +213,19 @@ function getPercentage($num)
                 <div class="review-block">
 
                     <?php
-                   
-                   foreach($array_recensioni as $item_rec){
-                      
-                    if (is_object($item_rec) && $item_rec instanceof Review) {
-                    echo '<div class="row">
+
+                    foreach ($array_recensioni as $item_rec) {
+
+                        if (is_object($item_rec) && $item_rec instanceof Review) {
+                            echo '<div class="row">
                         <div class="col-sm-3">
                             <img src="images\userIcon.png">
                             <div class="review-block-name"><a href="#">&nbsp';
                             //ricerca nome turista che ha fatto la recensione
                             $trovato = false;
-                            for($i = 0;$trovato == false && $i < count($array_turisti) ;$i++){
+                            for ($i = 0; $trovato == false && $i < count($array_turisti); $i++) {
                                 if (is_object($array_turisti[$i]) && $array_turisti[$i] instanceof Turista) {
-                                    if($item_rec->getId_turista() == $array_turisti[$i]->getId()){
+                                    if ($item_rec->getId_turista() == $array_turisti[$i]->getId()) {
                                         echo $array_turisti[$i]->getName();
                                     }
                                 }
@@ -233,27 +235,27 @@ function getPercentage($num)
                         <div class="col-sm-9">
                             <div class="review-block-rate">';
 
-                                //stampa valutazione in stelle
-                                //stampa stelle gialle
-                                for($i = 1; $i <= $item->getValutation(); $i++ ){
-                                    echo'<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                            //stampa valutazione in stelle
+                            //stampa stelle gialle
+                            for ($i = 1; $i <= $item->getValutation(); $i++) {
+                                echo '<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
                                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                         </button>';
-                                }
-                                //stampa stelle grigie
-                                for($i = $item->getValutation(); $i<5; $i++){
-                                    echo'<button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                            }
+                            //stampa stelle grigie
+                            for ($i = $item->getValutation(); $i < 5; $i++) {
+                                echo '<button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
                                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                    </button>';                                                   
-                                }
+                                    </button>';
+                            }
                             echo '</div>
-                            <div class="review-block-title"><h4>'. $item->getTitle().'</h4></div>
-                            <div class="review-block-description">'.$item->getText().'</div>
+                            <div class="review-block-title"><h4>' . $item->getTitle() . '</h4></div>
+                            <div class="review-block-description">' . $item->getText() . '</div>
                         </div>
                     </div>
                     <hr />';
-                    }//end if
-                   }//end foreach
+                        } //end if
+                    } //end foreach
                     ?>
 
                 </div>
@@ -270,9 +272,19 @@ function getPercentage($num)
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap.js"></script>
+  
     <script>
-        
-        $('#progress3').attr('aria-valuenow', $this->getPercentage(2)).css('width', $this->getPercentage(2) + '%');
+        var percentage5 = parseInt(<?php echo $perc5?>);
+        var percentage4 = parseInt(<?php echo $perc4?>);
+        var percentage3 = parseInt(<?php echo $perc3?>);
+        var percentage2 = parseInt(<?php echo $perc2?>);
+        var percentage1 = parseInt(<?php echo $perc1?>);
+
+        $('#progress5').attr('aria-valuenow', percentage5 ).css('width', percentage5  + '%');
+        $('#progress4').attr('aria-valuenow', percentage4 ).css('width', percentage4  + '%');
+        $('#progress3').attr('aria-valuenow', percentage3 ).css('width', percentage3  + '%');
+        $('#progress2').attr('aria-valuenow', percentage2 ).css('width', percentage2  + '%');
+        $('#progress1').attr('aria-valuenow', percentage1 ).css('width', percentage1  + '%');
     </script>
 
 </body>
