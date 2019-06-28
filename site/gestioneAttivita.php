@@ -10,7 +10,6 @@ session_start();
 $cicerone = $_SESSION['utente'];
 
 require_once '../classi/users/Cicerone.php'; // includo la classe cicerone
-session_start();
 
 ?>
 
@@ -60,7 +59,7 @@ if ($num > 0) {
       <table class="table">
 		<thead>
 			<tr>
-				<th scope="col">#</th>
+				<th scope="col">Titolo</th>
 				<th scope="col">Citta</th>
 				<th scope="col">Data</th>
 				<th scope="col">Costo €</th>
@@ -76,7 +75,7 @@ if ($num > 0) {
         $i ++;
         ?>
                   <tr>
-				<th scope="row"><?php echo $riga['id_attivita'];//stampo il campo citta dell'array $riga ?></th>
+				<th scope="row"><?php echo $riga['titolo'];//stampo il campo citta dell'array $riga ?></th>
 				<td><?php echo $riga['citta'];?></td>
 				<td><?php echo $riga['data_attivita'];?></td>
 				<td><?php echo $riga['costo'];?></td>

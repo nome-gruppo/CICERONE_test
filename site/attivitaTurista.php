@@ -36,6 +36,7 @@ $turista = $_SESSION['utente'];
             <table class="table">
             <thead>
               <tr>
+                <th scope="col">Titolo</th>
                 <th scope="col">Citta</th>
                 <th scope="col">Data</th>
                 <th scope="col">Nome Cicerone</th>
@@ -50,6 +51,7 @@ $turista = $_SESSION['utente'];
                   while($riga= mysqli_fetch_assoc($result)){//assoccio il risultato della funzione(record per record)a un array riga fin quando il record non sarà zero e quindi $riga diventerà false
               ?>
                         <tr>
+                        <th scope="row"><?php echo $riga['titolo']; ?></th>
                         <th scope="row"><?php echo $riga['citta'];//stampo il campo citta dell'array $riga ?></th>
                         <td><?php echo $riga['data_attivita'];?></td>
                         <td><?php echo $riga['nomeCicerone'];?></td>

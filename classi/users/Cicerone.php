@@ -25,7 +25,7 @@ class Cicerone extends User
     {
         $database=new Database();
         $link=$database->getConnection();
-        $query = "SELECT * from attivita WHERE id_cicerone={$this->getId()}";
+        $query = "SELECT * from attivita WHERE id_cicerone={$this->getId()} order by(data_attivita)";
         $result = mysqli_query($link, $query) or die("Errore connessione");
         mysqli_close($link);
         return $result;
