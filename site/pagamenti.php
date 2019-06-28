@@ -37,40 +37,37 @@ if (isset($_POST["pagamento_carta"])) {
 
     while ($tentativo <= MAX_TENTATIVI && !$codice_ok) {
 
-        if (($functions->code_control($_POST["num_carta"], $pagamento->getCodeSize()) == true) &&
-        ($functions->code_control($_POST["cvv_code"], $pagamento->getCvvSize()) == true)) {
-
-        if (($functions->code_control($_POST["num_carta"], $pagamento::CODE_SIZE)) &&
-        ($functions->code_control($_POST["cvv_code"], $pagamento::CVV_SIZE))) {
+            if (($functions->code_control($_POST["num_carta"], $pagamento::CODE_SIZE)) &&
+            ($functions->code_control($_POST["cvv_code"], $pagamento::CVV_SIZE))) {
 
 
-            $pagamento->setCode($_POST["num_carta"]);
-            $pagamento->setCvv($_POST["cvv_code"]);
-            $codice_ok = true;
+                $pagamento->setCode($_POST["num_carta"]);
+                $pagamento->setCvv($_POST["cvv_code"]);
+                $codice_ok = true;
 
-            //cambio data premium
-    $utente->setPremiumDate(date("Y-m-d"));
+                //cambio data premium
+                $utente->setPremiumDate(date("Y-m-d"));
 
-    $query = "UPDATE ciceroni SET data_premium='{$utente->getPremiumDate()}' where id_cicerone = '{$utente->getId()}'";
-    $result = mysqli_query($link, $query) or die("Errore nella modifica data premium!");
+                $query = "UPDATE ciceroni SET data_premium='{$utente->getPremiumDate()}' where id_cicerone = '{$utente->getId()}'";
+                $result = mysqli_query($link, $query) or die("Errore nella modifica data premium!");
 
-        } else {
+            } else {
 
-            if($tentativo < MAX_TENTATIVI){
-            echo "<div class='alert alert-danger' role='alert'>
-                <a href='site\pagamenti.php' class='alert-link'>Codici carta non validi!<br>
-                Ti restano ". MAX_TENTATIVI - $tentativo ."tentativi, altrimenti sarà effettuato il logout. Click per riprovare</a>
-                </div>";
-                $tentativo++;
-            }else{
-                header("location:logout.php");
+                if($tentativo < MAX_TENTATIVI){
+                echo "<div class='alert alert-danger' role='alert'>
+                    <a href='site\pagamenti.php' class='alert-link'>Codici carta non validi!<br>
+                    Ti restano ". MAX_TENTATIVI - $tentativo ."tentativi, altrimenti sarà effettuato il logout. Click per riprovare</a>
+                    </div>";
+                    $tentativo++;
+                }else{
+                    header("location:logout.php");
+                }
             }
         }
-    }
 
-    if($codice_ok){
-        $pagamento->sendPayment($costo_premium);
-    }
+        if($codice_ok){
+            $pagamento->sendPayment($costo_premium);
+        }
 } else {  //pagamento paypal
     $pagamento = new PaypalPayment($utente->getContact()->getMail());
     $pagamento->sendPayment($costo_premium);
