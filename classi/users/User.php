@@ -26,7 +26,7 @@ class User {
     public function setPassword($password)
     {
         if(is_string($password)){
-            $this->password =  ucfirst(strtolower(trim($password)));
+            $this->password =  $password;
         } else{
             trigger_error('errore di tipo');
         }

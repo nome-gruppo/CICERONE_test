@@ -1,4 +1,5 @@
 <?php
+
 namespace classi\users;
 
 require_once '../classi/users/Cicerone.php';
@@ -14,8 +15,8 @@ use classi\activities\Activity;
 
 session_start();
 ?>
-<link rel="stylesheet" href="css/bootstrap.min.css"/>
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="style.css" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -88,6 +89,8 @@ if (isset($_POST["modifica_dati"])) {
         }
 
 
+        $password_ok = true;
+        $passcript = sha1(md5(sha1($_POST['vecchia_password'])));
 
         //se almeno un campo password è stato compilato
         if (($_POST['vecchia_password'] != "") || ($_POST['nuova_password'] != "") || ($_POST['ripeti_password'] != "")) {
@@ -103,22 +106,26 @@ if (isset($_POST["modifica_dati"])) {
 
                     //altrimenti se non è stata inserita la vecchia password
                 } elseif ($_POST['vecchia_password'] == "") {
+                    $password_ok = false;
                     echo "<div class='alert alert-danger' role='alert'>
                     <a href='ilMioProfilo.php' class='alert-link'>Compila tutti i campi password! Click per riprovare</a>
                     </div>";
 
                     //altrimenti i nuovi campi non coincidono
-                } elseif(sha1(md5(sha1($_POST['vecchia_password']))) != $utente->getPassword()) {
+                } elseif (sha1(md5(sha1($_POST['vecchia_password']))) != $utente->getPassword()) {
+                    $password_ok = false;
                     echo "<div class='alert alert-danger' role='alert'>
                     <a href='ilMioProfilo.php' class='alert-link'>Campo vecchia password errato! Click per riprovare</a>
                     </div>";
-                }else{
+                } else {
+                    $password_ok = false;
                     echo "<div class='alert alert-danger' role='alert'>
                     <a href='ilMioProfilo.php' class='alert-link'>Le password non corrispondono! Click per riprovare</a>
                     </div>";
                 }
                 //altrimenti non è stato compilato qualche campo nuova password
             } else {
+                $password_ok = false;
                 echo "<div class='alert alert-danger' role='alert'>
                     <a href='ilMioProfilo.php' class='alert-link'>Compila tutti i campi password! Click per riprovare</a>
                     </div>";
@@ -126,25 +133,26 @@ if (isset($_POST["modifica_dati"])) {
         }
 
 
+        if ($password_ok) {
+            if ($utente instanceof Cicerone) {
 
-        if ($utente instanceof Cicerone) {
-
-            $query = "UPDATE ciceroni SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}',
+                $query = "UPDATE ciceroni SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}',
                provincia = '{$utente->getAddress()->getCounty()}', citta = '{$utente->getAddress()->getCity()}', indirizzo = '{$utente->getAddress()->getStreet()}', cap ='{$utente->getAddress()->getCAP()}' WHERE id_cicerone = '{$utente->getId()}'";
-        } else {
-            $query = "UPDATE turista SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}',
+            } else {
+                $query = "UPDATE turista SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}',
                 provincia = '{$utente->getAddress()->getCounty()}', citta = '{$utente->getAddress()->getCity()}', indirizzo = '{$utente->getAddress()->getStreet()}', cap ='{$utente->getAddress()->getCAP()}' where id_turista = '{$utente->getId()}'";
-        }
+            }
 
-        $result = mysqli_query($link, $query) or die("Errore nella modifica dei dati!");
+            $result = mysqli_query($link, $query) or die("Errore nella modifica dei dati!");
 
-        if ($result) {
-            echo "<div class='alert alert-success' role='alert'>
+            if ($result) {
+                echo "<div class='alert alert-success' role='alert'>
                 <a href='ilMioProfilo.php' class='alert-link'>Modifica dati effettuata con successo!</a>
                 </div>";
+            }
         }
     }
-}//end if modifica dati
+} //end if modifica dati
 
 if (isset($_POST["elimina_account"])) {
 
@@ -159,10 +167,10 @@ if (isset($_POST["elimina_account"])) {
 
     if ($result) {
         echo "<div class='alert alert-success' role='alert'>
-                <a href='homepage.html' class='alert-link'>Il tuo account è stato eliminato correttamente</a>
+                <a href='logout.php' class='alert-link'>Il tuo account è stato eliminato correttamente</a>
                 </div>";
     }
-}//end if elimina account
+} //end if elimina account
 
 if (isset($_POST["disdici_premium"])) {
 
@@ -175,7 +183,7 @@ if (isset($_POST["disdici_premium"])) {
     while ($row = mysqli_fetch_array($result)) {
 
         if ($row['id_cicerone'] == $utente->getId()) {
-            $attivita = new Activity($row['id_cicerone'],$row['titolo'], $row['citta'], $row['costo'], $row['descrizione'], $row['lingua'], $row['data_attivita']);
+            $attivita = new Activity($row['id_cicerone'], $row['titolo'], $row['citta'], $row['costo'], $row['descrizione'], $row['lingua'], $row['data_attivita']);
             $attivita->setIdAttivita($row['id_attivita']);
             $array_attivita[] = $attivita;
         }
@@ -186,7 +194,7 @@ if (isset($_POST["disdici_premium"])) {
 
     foreach ($array_attivita as $item) {
         if (is_object($item) && $item instanceof Activity) {
-            if ($functions->dateDiff($item->getData(),date("Y-m-d"), "%a") >= 0) {
+            if ($item->getData >= date("Y-m-d")) {
                 $array_attivita_future[] = $item;
             }
         }
@@ -226,7 +234,7 @@ if (isset($_POST["disdici_premium"])) {
                 <a href='cicerone.php' class='alert-link'>La tua disdetta non è andata a buon fine</a>
                 </div>";
     }
-}//end if disdici premium
+} //end if disdici premium
 
 if (isset($_POST["diventa_premium"])) {
     echo '<form action="pagamenti.php" method="post">
@@ -257,7 +265,7 @@ if (isset($_POST["diventa_premium"])) {
                                     <br /><br />
 
                                     <div class="row">
-                                        <strong>&nbsp&nbsp&nbsp&nbspImporto €'. $costo_premium .'</strong>
+                                        <strong>&nbsp&nbsp&nbsp&nbspImporto €' . $costo_premium . '</strong>
                                     </div>
                                     <br />
 
@@ -291,7 +299,7 @@ if (isset($_POST["diventa_premium"])) {
                                     <br /><br />
 
                                     <div class="row">
-                                        <strong>&nbsp&nbsp&nbsp&nbspImporto €'. $costo_premium .'</strong>
+                                        <strong>&nbsp&nbsp&nbsp&nbspImporto €' . $costo_premium . '</strong>
                                     </div>
                                     <br />
 
@@ -322,8 +330,7 @@ if (isset($_POST["diventa_premium"])) {
             </div>
             <!--fine container-->
         </form>';
-
-}//end if diventa premium
+} //end if diventa premium
 
 mysqli_close($link);
 ?>

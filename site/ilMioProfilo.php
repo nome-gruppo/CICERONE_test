@@ -1,6 +1,9 @@
 <?php
+
 namespace classi\users;
+
 use classi\utilities\Functions;
+
 require_once '../classi/users/Turista.php';
 require_once '../classi/users/Cicerone.php';
 require_once '../classi/utilities/Functions.php';
@@ -34,46 +37,11 @@ $functions = new Functions();
 
 <body>
 
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <h2> Il mio profilo </h2>
-      </div>
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $utente->getName(); ?></a>
-            <ul class="dropdown-menu">
-              <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
-              <?php
-              if ($utente instanceof Cicerone) {
-                echo '<li><a href="gestioneAttivita.php">Le mie attività</a></li>';
-                echo '<li><a href="recensioniCicerone.php">Recensioni utenti</a></li>';
-              } else {
-                echo '  <li><a href="#">Attività in programma</a></li>
-                    <li><a href="#">Attività svolte</a></li>';
-              }
-              ?>
-              <li role="separator" class="divider"></li>
-              <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <br />
-
-<?php if($utente instanceof Turista){
-  $functions->stampaNavbarTurista($utente->getName());
-}else{
-  $functions->stampaNavbarCicerone($utente->getName());
-} ?>
-
+  <?php if ($utente instanceof Turista) {
+    $functions->stampaNavbarTurista($utente->getName());
+  } else {
+    $functions->stampaNavbarCicerone($utente->getName());
+  } ?>
 
   <div class="container-fluid">
     <form action="modificaDati.php" method="post">
@@ -446,35 +414,10 @@ $functions = new Functions();
                 </div>
               </td>
             </tr>
-            <?php
-            if ($utente instanceof Cicerone) {
-              echo '<tr>';
-              echo    '<th>Valutazione utenti</th>';
-              echo    '<td>' . $utente->getValutazione() . '</td>';
-              echo '</tr>';
-              echo '<tr>';
-              echo    '<th>Info premium</th>';
-              echo    '<td>';
-              echo '<div class="row">';
-              echo '<div class="col-sm-7 col-xs-7">';
 
-              if ($utente->getPremiumDate() == '0000-00-00') {
-
-                echo 'Non sei ancora premium';
-                echo '</div>';
-                echo '<div class="col-sm-3 col-xs-3">';
-                echo '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#premium">Diventa premium</button></div></td>';
-              } else {
-
-                echo $utente->getPremiumDate();
-                echo '</div>';
-                echo '<div class="col-sm-3 col-xs-3">';
-                echo '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#premium">Disdici premium</button></div></td>';
-              }
-            }
-            ?>
           </tbody>
         </table>
+
 
         <!-- Tasti -->
         <div class="row">
@@ -497,107 +440,124 @@ $functions = new Functions();
       <div class="col-sm-2 col-xs-1">
       </div>
 
-      <!-- Modal premium -->
-      <div class="modal fade" id="premium" tabindex="-1" role="dialog" aria-labelledby="premiumLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <!--header modal-->
-            <div class="modal-header">
-              <?php
+      <?php
+      if ($utente instanceof Cicerone) {
+        ?>
 
-              if ($utente->getPremiumDate() == '0000-00-00') {
-                echo '<h3 class="modal-title" id="premiumLabel">Vuoi diventare premium?</h3>';
-                echo '</div>';  //fine header modal
-                echo '<div class="modal-body">';
-                echo "Il costo dell'abbonamento premium è di €" . COSTO_PREMIUM . " al mese.<br>";
-                echo "L'abbonamento ti consentirà di inserire un numero illimitato di attività.";
-                echo "L'abbonamento premium ha un costo mensile di €" . COSTO_PREMIUM . ".<br>";
-                echo "Ti consentirà di inserire un numero illimitato di attività e potrai disdirlo in qualsiasi momento.";
-                echo '</div>';
-              } else {
-                echo '<h3 class="modal-title" id="premiumLabel">Sicuro di voler disdire il tuo abbonamento premium?</h3>';
-                echo '</div>';  //fine header modal
-                echo '<div class="modal-body">';
-                echo 'Ci dispiace che tu voglia disdire il tuo abbonamento premium.<br>';
-                echo 'Ti ricordiamo che verranno conservate solo le 3 attività future create per prime.';
-                echo '</div>';
-              }
-              ?>
-
-              <br />
-              <!--Tasti modal-->
-              <div class="modal-footer">
-                <div class="row">
-                  <div class="col-sm-2 col-xs-2">
-                  </div>
-
-                  <div class="col-sm-3 col-xs-3">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                  </div>
-                  <div class="col-sm-3 col-xs-3">
-                    <?php
-                    if ($utente->getPremiumDate() == '0000-00-00') {
-                      echo '<button type="submit" class="btn btn-primary" name="diventa_premium">Diventa premium</button>';
-                    } else {
-                      echo '<button type="submit" class="btn btn-primary" name="disdici_premium">Disdici premium</button>';
-                    }
-                    ?>
-                  </div>
-
-                  <div class="col-sm-2 col-xs-2">
-                  </div>
-
-                  <div class="col-sm-2 col-xs-1">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--Fine Modal premium-->
-        <!--i div sono corretti anche per se il compilatore no (a causa dei div degli echo)-->
-
-
-        <!-- Modal elimina account -->
-        <div class="modal fade" id="eliminaAccount" tabindex="-1" role="dialog" aria-labelledby="eliminaAccountLabel" aria-hidden="true">
+        <!-- Modal premium -->
+        <div class="modal fade" id="premium" tabindex="-1" role="dialog" aria-labelledby="premiumLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <!--header modal-->
               <div class="modal-header">
-                <h3 class="modal-title" id="eliminaAccountLabel">Sicuro di voler eliminare l'account?</h3>
-              </div>
-              <!-- fine header modal-->
+                <?php
+
+                if ($utente->getPremiumDate() == '0000-00-00') {
+                  ?>
+                  <h3 class="modal-title" id="premiumLabel">Vuoi diventare premium?</h3>
+                </div>
+                <!--fine header modal-->
+                <div class="modal-body">
+                  L'abbonamento premium ha un costo mensile di €<?php echo COSTO_PREMIUM ?>.<br>
+                  Ti consentirà di inserire un numero illimitato di attività e potrai disdirlo in qualsiasi momento.
+                </div>
+              <?php
+              } else {
+                ?>
+                <h3 class="modal-title" id="premiumLabel">Sicuro di voler disdire il tuo abbonamento premium?</h3>
+              </div>';
+              <!--fine header modal-->
               <div class="modal-body">
-                Una volta eliminato l'account sarà impossibile recuperare i tuoi dati
+                Ci dispiace che tu voglia disdire il tuo abbonamento premium.<br>
+                Ti ricordiamo che verranno conservate solo le 3 attività future create per prime.
               </div>
-              <br />
-              <div class="modal-footer">
-                <div class="row">
-                  <div class="col-sm-2 col-xs-2">
-                  </div>
+            <?php
+            }
+            ?>
 
-                  <div class="col-sm-3 col-xs-3">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                  </div>
-                  <div class="col-sm-3 col-xs-3">
-                    <button type="submit" class="btn btn-danger" name="elimina_account">Elimina account</button>
-                  </div>
+            <br />
+            <!--Tasti modal-->
+            <div class="modal-footer">
+              <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                </div>
 
-                  <div class="col-sm-2 col-xs-2">
-                  </div>
-                  <div class="col-sm-2 col-xs-1">
-                  </div>
+                <div class="col-sm-3 col-xs-3">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <?php
+                  if ($utente->getPremiumDate() == '0000-00-00') {
+                    echo '<button type="submit" class="btn btn-primary" name="diventa_premium">Diventa premium</button>';
+                  } else {
+                    echo '<button type="submit" class="btn btn-primary" name="disdici_premium">Disdici premium</button>';
+                  }
+                  ?>
+                </div>
+
+                <div class="col-sm-2 col-xs-2">
+                </div>
+
+                <div class="col-sm-2 col-xs-1">
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!--Fine Modal elimina account-->
 
+        <!--Fine Modal premium-->
+
+      <?php
+      }
+      ?>
+
+
+
+
+
+
+
+
+
+      <!-- Modal elimina account -->
+      <div class="modal fade" id="eliminaAccount" tabindex="-1" role="dialog" aria-labelledby="eliminaAccountLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <!--header modal-->
+            <div class="modal-header">
+              <h3 class="modal-title" id="eliminaAccountLabel">Sicuro di voler eliminare l'account?</h3>
+            </div>
+            <!-- fine header modal-->
+            <div class="modal-body">
+              Una volta eliminato l'account sarà impossibile recuperare i tuoi dati
+            </div>
+            <br />
+            <div class="modal-footer">
+              <div class="row">
+                <div class="col-sm-2 col-xs-2">
+                </div>
+
+                <div class="col-sm-3 col-xs-3">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                </div>
+                <div class="col-sm-3 col-xs-3">
+                  <button type="submit" class="btn btn-danger" name="elimina_account">Elimina account</button>
+                </div>
+
+                <div class="col-sm-2 col-xs-2">
+                </div>
+                <div class="col-sm-2 col-xs-1">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Fine Modal elimina account-->
 
     </form>
   </div>
-
+  <!--End container -->
 
 
 

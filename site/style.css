@@ -39,3 +39,7 @@ k {
 	margin-right: 40%;
 }
 
+.ignore-my-css{
+	all:unset;
+}
+

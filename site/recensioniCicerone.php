@@ -103,7 +103,7 @@ $perc1 = getPercentage(0);
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Fixed Top Navbar Example for Bootstrap</title>
+    <title>Recensioni</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
