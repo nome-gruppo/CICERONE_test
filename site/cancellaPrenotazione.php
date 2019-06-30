@@ -46,5 +46,16 @@ $turista=$_SESSION['utente'];//prendo l'oggetto turista precedentemente messo in
 $functions=new Functions();
 $url= $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 $id_attivita=(parse_url($url, PHP_URL_QUERY));
+$result=$turista->deletePrenotazione($id_attivita);
+if($result){
+  echo "<div class='alert alert-success' role='alert'>
+    <a href='turista.php' class='alert-link'>Prenotazione cancellata con successo! Click per tornare all'area riservata</a>
+  </div>";
+}
+else{
+echo "<div class='alert alert-danger' role='alert'>
+  <a href='turista.php' class='alert-link'>Problema con la cancellazione della prenotazione! Click per tornare all'area riservata</a>
+</div>";
+}
 
 ?>

@@ -53,15 +53,21 @@ $turista = $_SESSION['utente'];
           <option>cinese</option>
         </select>
       </div>
-      <div class="form-group col-md-4">
-        <label for="inputDate">Data attività</label>
-        <div class='input-group date' id="data">
-          <input type='text' class="form-control" placeholder="gg/mm/aaaa" name="data" /> <span
+      <div class="form-group col-md-2">
+        <label for="inputDate">Data ricerca da</label>
+        <div class='input-group date' id="dataInizio">
+          <input type='text' class="form-control" placeholder="gg/mm/aaaa" name="dataInizio" /> <span
+            class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> </span>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputDate">Data ricerca a</label>
+        <div class='input-group date' id="dataFine">
+          <input type='text' class="form-control" placeholder="gg/mm/aaaa" name="dataFine" /> <span
             class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> </span>
         </div>
       </div>
       <br />
-    <br 7>
         <div class="form-group">
           <div class="text-center">
             <button type="submit" class="btn btn-primary" name="ricercaAttivita">CERCA   <span class="  glyphicon glyphicon-zoom-in"></span></button>
@@ -78,7 +84,18 @@ $turista = $_SESSION['utente'];
           crossorigin="anonymous"></script>
         <script>
           jQuery(function () {
-            jQuery('#data').datepicker({
+            jQuery('#dataInizio').datepicker({
+              format: 'dd/mm/yyyy',
+              startDate: '+1d',
+              orientation: "bottom auto",
+              autoclose: true
+            });
+
+          });
+        </script>
+        <script>
+          jQuery(function () {
+            jQuery('#dataFine').datepicker({
               format: 'dd/mm/yyyy',
               startDate: '+1d',
               orientation: "bottom auto",

@@ -33,9 +33,9 @@ $turista = $_SESSION['utente'];
   $functions->stampaNavbarTurista($turista->getName());
   $result = null;
   if (isset($_GET["inProgramma"])) { //se l'utente clicca su attivita in programma
-    $result = $turista->inProgramma($turista->getId());
+    $result = $turista->inProgramma();
   } else if (isset($_GET["attivitaSvolte"])) {//se l'utente clicca su attivita svolte
-    $result = $turista->attivitaSvolte($turista->getId());
+    $result = $turista->attivitaSvolte();
   }
   $num = mysqli_num_rows($result); //conto il numero di righe restituite dalla funzione
   if ($num > 0) {
