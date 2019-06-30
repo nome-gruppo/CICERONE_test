@@ -21,11 +21,6 @@ $turista = $_SESSION['utente'];
   <title>Lista attività</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-<<<<<<< HEAD
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-=======
->>>>>>> 414c10fc362c36e1f3504d17983ca57e3cea0ed5
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!--ottimizza la visione su mobile dello slider-->
@@ -105,78 +100,7 @@ $turista = $_SESSION['utente'];
   }
   ?>
 
-<<<<<<< HEAD
-  
-=======
-  <form action="recensione.php" method="post">
 
-    <!-- Modal elimina account -->
-    <div class="modal fade" id="recensione" tabindex="-1" role="dialog" aria-labelledby="recensioneLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <!--header modal-->
-          <div class="modal-header">
-            <h3 class="modal-title" id="recensioneLabel">Scrivi la tua recensione</h3>
-          </div>
-          <!-- fine header modal-->
-          <!--Modal body-->
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="rating-block">
-                  <h4>Average user rating</h4>
-                  <div class="ignore-my-css">
-                  <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-          <!--Fine modal body-->
-          <br />
-          <!--Tasti modal-->
-          <div class="modal-footer">
-            <div class="row">
-              <div class="col-sm-2 col-xs-2">
-              </div>
-
-              <div class="col-sm-3 col-xs-3">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-              </div>
-              <div class="col-sm-3 col-xs-3">
-                <button type="submit" class="btn btn-primary" name="elimina_account">Scrivi recensione</button>
-              </div>
-
-              <div class="col-sm-2 col-xs-2">
-              </div>
-              <div class="col-sm-2 col-xs-1">
-              </div>
-            </div>
-          </div>
-          <!--Fine tasti modal-->
-        </div>
-      </div>
-    </div>
-    <!--Fine Modal elimina account-->
-
-  </form>
->>>>>>> 414c10fc362c36e1f3504d17983ca57e3cea0ed5
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -186,7 +110,7 @@ $turista = $_SESSION['utente'];
       var fired_button = $(this).val();
 
       $.post('recensione.php', {variable: fired_button});
-      
+
     })
   </script>
 

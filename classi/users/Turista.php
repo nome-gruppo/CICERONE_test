@@ -47,10 +47,6 @@ class Turista extends User
     }
     public function attivitaSvolte(){
       $database=new Database();
-<<<<<<< HEAD
-      $link=$database->getConnection($idTurista);
-      $query="SELECT attivita.id_attivita, attivita.id_cicerone, attivita.titolo, attivita.citta, attivita.data_attivita, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua, attivita.costo FROM(((attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)inner join partecipazione on attivita.id_attivita=partecipazione.id_attivita)inner join turista on partecipazione.id_turista=turista.id_turista)WHERE((data_attivita<CURRENT_DATE()) AND (partecipazione.id_turista=$idTurista))";
-=======
       $link=$database->getConnection();
       $query="SELECT attivita.id_attivita, attivita.titolo, attivita.citta, attivita.data_attivita, ciceroni.nome as nomeCicerone, ciceroni.cognome as cognomeCicerone, attivita.descrizione, attivita.lingua, attivita.costo FROM(((attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)inner join partecipazione on attivita.id_attivita=partecipazione.id_attivita)inner join turista on partecipazione.id_turista=turista.id_turista)WHERE((data_attivita<CURRENT_DATE()) AND (partecipazione.id_turista={$this->getId()}))ORDER BY(data_attivita)";
       $result = mysqli_query($link, $query) or die("Errore connessione");
@@ -61,7 +57,6 @@ class Turista extends User
       $database=new Database();
       $link=$database->getConnection();
       $query="DELETE from partecipazione WHERE id_attivita=$id_attivita and id_turista={$this->getId()}";
->>>>>>> 414c10fc362c36e1f3504d17983ca57e3cea0ed5
       $result = mysqli_query($link, $query) or die("Errore connessione");
       mysqli_close($link);
       return $result;
