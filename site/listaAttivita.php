@@ -25,8 +25,9 @@ $turista = $_SESSION['utente'];
   if(isset($_POST["ricercaAttivita"])){//se l'utente clicca su ricerca
     $citta =  ucfirst(strtolower(trim($_POST['citta'])));
     $lingua=$_POST['lingua'];
-    $data=($functions->writeDateDb( $_POST['data']));
-    $result=$turista->searchActivity($citta, $lingua, $data, $turista->getId());//chiamo la funzione cercaAttivita
+    $dataInizio=($functions->writeDateDb( $_POST['dataInizio']));
+    $dataFine=($functions->writeDateDb( $_POST['dataFine']));
+    $result=$turista->searchActivity($citta, $lingua, $dataInizio, $dataFine);//chiamo la funzione cercaAttivita
     $num=mysqli_num_rows($result);//conto il numero di righe restituite dalla funzione
   if($num>0){
     ?>
