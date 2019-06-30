@@ -11,6 +11,7 @@ $cicerone = new Cicerone();
 $functions = new Functions();
 $cicerone=$_SESSION['utente'];
 ?>
+
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <?php
       $numeroAttivita=$cicerone->contaAttivita();

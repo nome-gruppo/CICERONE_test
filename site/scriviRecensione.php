@@ -18,6 +18,7 @@ $turista = $_SESSION['utente'];
 
 $functions = new Functions();
 ?>
+<!DOCTYPE html>
 <html lang="it">
 
 <head>

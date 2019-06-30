@@ -8,7 +8,7 @@ $functions=new Functions();
 session_start();
 $cicerone = $_SESSION['utente'];
 ?>
-
+<!DOCTYPE html>
 <html lang="it">
 
 <head>

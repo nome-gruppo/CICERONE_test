@@ -4,6 +4,7 @@ require_once '..\classi\users\Turista.php'; //includo la classe turista
 require_once '..\classi\utilities\Functions.php';
 require_once '..\classi\utilities\Mail.php';
 ?>
+<!DOCTYPE html>
 <html lang="it">
   <head>
     <meta charset="UTF-8">

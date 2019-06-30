@@ -36,6 +36,7 @@ if (isset($_POST["pagamento_carta"])) {
     $tentativo = 1;
     $codice_ok = false;
 
+
     while ($tentativo <= MAX_TENTATIVI && !$codice_ok) {
 
         if (($functions->code_control($_POST["num_carta"], $pagamento::CODE_SIZE)) && ($functions->code_control($_POST["cvv_code"], $pagamento::CVV_SIZE))
@@ -71,6 +72,12 @@ if (isset($_POST["pagamento_carta"])) {
 } else {  //pagamento paypal
     $pagamento = new PaypalPayment($utente->getContact()->getMail());
     $pagamento->sendPayment($costo_premium);
+
+    //cambio data premium
+    $utente->setPremiumDate(date("Y-m-d"));
+
+    $query = "UPDATE ciceroni SET data_premium='{$utente->getPremiumDate()}' where id_cicerone = '{$utente->getId()}'";
+    $result = mysqli_query($link, $query) or die("Errore nella modifica data premium!");
 }
 mysqli_close($link);
 ?>

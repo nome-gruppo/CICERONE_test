@@ -13,7 +13,7 @@ session_start();
 
 $turista = $_SESSION['utente'];
 ?>
-
+<!DOCTYPE html>
 <html lang="it">
 
 <head>

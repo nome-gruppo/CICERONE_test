@@ -3,6 +3,7 @@ namespace classi\users;
 require_once '..\classi\users\Cicerone.php'; //includo la classe cicerone
 require_once '..\classi\utilities\Functions.php';
 ?>
+<!DOCTYPE html>
 <html lang="it">
   <head>
     <meta charset="UTF-8">

@@ -4,7 +4,12 @@ use classi\utilities\Database;
 require_once '../classi/users/Turista.php';
 require_once '../classi/users/Cicerone.php';
 require_once '../classi/utilities/Database.php';
+?>
 
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+
+<?php
 
 // connessione database
 session_start();
@@ -78,10 +83,16 @@ if (isset($_POST["login"])) {
                 header("location:turista.php");
 
             } else {
-                echo "Errore di accesso! Controlla di aver inserito correttamente mail e password";
+                echo "<div class='alert alert-danger' role='alert'>
+                <a href='homepage.html' class='alert-link'>Controlla di aver inserito correttamente mail e password! Click per riprovare</a>
+                </div>";
             }
         }
         mysqli_close($link);
     }
 }
 ?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+

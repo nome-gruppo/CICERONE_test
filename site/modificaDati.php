@@ -15,6 +15,7 @@ use classi\activities\Activity;
 
 session_start();
 ?>
+
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="style.css" />
 
@@ -237,6 +238,7 @@ if (isset($_POST["disdici_premium"])) {
 } //end if disdici premium
 
 if (isset($_POST["diventa_premium"])) {
+
     echo '<form action="pagamenti.php" method="post">
             <!-- container-->
             <div class="container-fluid">
@@ -256,7 +258,7 @@ if (isset($_POST["diventa_premium"])) {
                     <!--tab-->
                     <div class="tab-content clearfix">
                         <!-- Carta -->
-                        <div class="tab-panel active" id="carta">                                                                     
+                        <div class="tab-pane active" id="carta">                                                                     
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
@@ -285,18 +287,18 @@ if (isset($_POST["diventa_premium"])) {
                                         </div>
                                     </div>
                                 </div>
-                            < /div>                            
+                            </div>                            
                         </div>
                         <!-- Fine carta -->
 
 
                         <!-- paypal -->
-                        <div class="tab-panel" id="paypal">                     
+                        <div class="tab-pane" id="paypal">                     
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
                                     <img src="images\paypalLogo.png">
-                                    <br /><br />
+                                    <br />
 
                                     <div class="row">
                                         <strong>&nbsp&nbsp&nbsp&nbspImporto €' . $costo_premium . '</strong>
@@ -308,7 +310,7 @@ if (isset($_POST["diventa_premium"])) {
                                             <input type="email" class="form-control" placeholder="Email PayPal" name="mail_paypal">
                                         </div>
                                         <br /><br />
-                                        <br /><br /><br />
+                                        <br /><br />
                                         <div class="col-sm-8 col-xs-8">
                                         </div>
                                         <div class="col-sm-4 col-xs-4">

@@ -13,7 +13,7 @@ $utente = $_SESSION['utente'];
 $_SESSION['costo_premium'] = COSTO_PREMIUM;
 $functions = new Functions();
 ?>
-
+<!DOCTYPE html>
 <html lang="it">
 
 <head>
@@ -414,7 +414,33 @@ $functions = new Functions();
                 </div>
               </td>
             </tr>
+            <?php
+            if ($utente instanceof Cicerone) {
+              echo '<tr>';
+              echo    '<th>Valutazione utenti</th>';
+              echo    '<td>' . $utente->getValutazione() . '</td>';
+              echo '</tr>';
+              echo '<tr>';
+              echo    '<th>Info premium</th>';
+              echo    '<td>';
+              echo '<div class="row">';
+              echo '<div class="col-sm-7 col-xs-7">';
 
+              if ($utente->getPremiumDate() == '0000-00-00') {
+
+                echo 'Non sei ancora premium';
+                echo '</div>';
+                echo '<div class="col-sm-3 col-xs-3">';
+                echo '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#premium">Diventa premium</button></div></td>';
+              } else {
+
+                echo $utente->getPremiumDate();
+                echo '</div>';
+                echo '<div class="col-sm-3 col-xs-3">';
+                echo '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#premium">Disdici premium</button></div></td>';
+              }
+            }
+            ?>
           </tbody>
         </table>
 
@@ -510,14 +536,6 @@ $functions = new Functions();
       <?php
       }
       ?>
-
-
-
-
-
-
-
-
 
       <!-- Modal elimina account -->
       <div class="modal fade" id="eliminaAccount" tabindex="-1" role="dialog" aria-labelledby="eliminaAccountLabel" aria-hidden="true">

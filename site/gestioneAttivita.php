@@ -12,7 +12,7 @@ $cicerone = $_SESSION['utente'];
 require_once '../classi/users/Cicerone.php'; // includo la classe cicerone
 
 ?>
-
+<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">

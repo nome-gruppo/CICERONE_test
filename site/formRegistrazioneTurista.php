@@ -3,7 +3,7 @@ require_once '../classi/utilities/Functions.php';
 use classi\utilities\Functions;
 $functions=new Functions();
 ?>
-
+<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">

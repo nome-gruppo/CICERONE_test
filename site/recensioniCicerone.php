@@ -86,8 +86,7 @@ $perc2 = getPercentage(1);
 $perc1 = getPercentage(0);
 ?>
 
-
-
+<!DOCTYPE html>
 <html lang="it">
 
 <head>
