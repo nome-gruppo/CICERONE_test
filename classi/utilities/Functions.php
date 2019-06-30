@@ -80,6 +80,7 @@ class Functions
                 <ul class="dropdown-menu">
                   <li><a href="ilMioProfilo.php">Il mio profilo</a></li>
                   <li><a href="gestioneAttivita.php">Le mie attività</a></li>
+                  <li><a href="recensioniCicerone.php">Recensioni utenti</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="logout.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
                 </ul>

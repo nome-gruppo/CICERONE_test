@@ -16,7 +16,7 @@ class Review
 
     public function getId_cicerone()
     {
-        return (int) $this->id_cicerone;
+        return $this->id_cicerone;
     }
 
     public function __construct($id_cicerone,$id_turista, $title, $valutation, $text){
@@ -24,7 +24,7 @@ class Review
             $this->id_cicerone = $id_cicerone;
             $this->id_turista = $id_turista;
             $this->title = ucfirst(strtolower(trim($title)));
-            $this->valutation = $valutation;
+            $this->valutation = intval($valutation);
             $this->text = trim($text);
         }else {
             trigger_error('errore di tipo');

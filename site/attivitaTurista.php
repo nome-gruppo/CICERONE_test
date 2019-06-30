@@ -21,7 +21,9 @@ $turista = $_SESSION['utente'];
   <title>Lista attività</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!--ottimizza la visione su mobile dello slider-->
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -29,6 +31,8 @@ $turista = $_SESSION['utente'];
 </head>
 
 <body>
+
+
   <?php
   $functions->stampaNavbarTurista($turista->getName());
   $result = null;
@@ -72,7 +76,9 @@ $turista = $_SESSION['utente'];
               <?php
               //se attività passata
               if ($riga['data_attivita'] < date('Y-m-d')) {
-                echo '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#recensione">Recensisci</button>';
+                ?>
+               <a href="scriviRecensione.php?id_cicerone=<?php echo $riga['id_cicerone'];?>"><button type="button" class="btn btn-primary btn-sm" >Recensisci</button></a>
+               <?php
               }
               ?>
             </td>
@@ -90,78 +96,19 @@ $turista = $_SESSION['utente'];
   }
   ?>
 
-  <form action="recensione.php" method="post">
-    
-    <!-- Modal elimina account -->
-    <div class="modal fade" id="recensione" tabindex="-1" role="dialog" aria-labelledby="recensioneLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <!--header modal-->
-          <div class="modal-header">
-            <h3 class="modal-title" id="recensioneLabel">Scrivi la tua recensione</h3>
-          </div>
-          <!-- fine header modal-->
-          <!--Modal body-->
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="rating-block">
-                  <h4>Average user rating</h4>
-                  <div class="ignore-my-css">
-                  <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                  </button>
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-          <!--Fine modal body-->
-          <br />
-          <!--Tasti modal-->
-          <div class="modal-footer">
-            <div class="row">
-              <div class="col-sm-2 col-xs-2">
-              </div>
-
-              <div class="col-sm-3 col-xs-3">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-              </div>
-              <div class="col-sm-3 col-xs-3">
-                <button type="submit" class="btn btn-primary" name="elimina_account">Scrivi recensione</button>
-              </div>
-
-              <div class="col-sm-2 col-xs-2">
-              </div>
-              <div class="col-sm-2 col-xs-1">
-              </div>
-            </div>
-          </div>
-          <!--Fine tasti modal-->
-        </div>
-      </div>
-    </div>
-    <!--Fine Modal elimina account-->
-
-  </form>
+  
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+   <script>
+    $("button").click(function() {
+      var fired_button = $(this).val();
+
+      $.post('recensione.php', {variable: fired_button});
+      
+    })
+  </script>
 
 </body>
 

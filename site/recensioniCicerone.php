@@ -31,15 +31,14 @@ while ($row = mysqli_fetch_array($result_search)) {
     $array_recensioni[] = $recensione;
 }
 
-//calcolo media valutazioni
-$media_valutazioni = 0;
-$array_valutazioni = array(0, 0, 0, 0, 0);      //array contenente il numero delle valutazioni con 1,2,3,4,5 stelle
+
+$array_valutazioni = array(0.0, 0.0, 0.0, 0.0, 0.0);      //array contenente il numero delle valutazioni con 1,2,3,4,5 stelle
 //se presente almeno una recensione
 if (count($array_recensioni) > 0) {
     $somma_valutazioni = 0;
     foreach ($array_recensioni as $item) {
         if (is_object($item) && $item instanceof Review) {
-            $somma_valutazioni += $item->getValutation();
+            
             if ($item->getValutation() == 1) {
                 $array_valutazioni[0]++;
             } elseif ($item->getValutation() == 2) {
@@ -53,9 +52,7 @@ if (count($array_recensioni) > 0) {
             }
         }
     }
-    $media_valutazioni = $somma_valutazioni / count($array_recensioni);
 }
-
 
 //query per nome turisti che hanno scritto una recensione
 $query_turista = "SELECT id_turista,nome from turista where id_turista in (SELECT id_turista from recensioni) ";
@@ -89,8 +86,7 @@ $perc2 = getPercentage(1);
 $perc1 = getPercentage(0);
 ?>
 
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!-- Include the above in your HEAD tag -->
+
 
 <html lang="it">
 
@@ -109,28 +105,30 @@ $perc1 = getPercentage(0);
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
 
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- Include the above in your HEAD tag -->
+
 </head>
 
 <body>
+    <?php
+    $functions->stampaNavbarCicerone($cicerone->getName());
+    ?>
+    <br /><br /><br />
     <div class="container">
 
         <div class="row">
             <div class="col-sm-3">
                 <!--Stampa media valutazioni-->
                 <div class="rating-block">
-                    <h4>Average user rating</h4>
+                    <h4>Media valutazione utenti</h4>
                     <br />
-                    <h2 class="bold padding-bottom-7">&nbsp
-                        <?php if ($media_valutazioni == 0) {
-                            echo $media_valutazioni;
-                        } else {
-                            echo number_format($media_valutazioni, 1);
-                        }
-                        ?> <small>/ 5</small></h2>
+                    <h2 class="bold padding-bottom-7">&nbsp&nbsp
+                        <?php echo number_format($cicerone->getValutazione(), 1);?> <small>/ 5</small></h2>
                 </div>
                 <!--Stampa numero recensioni-->
                 <div>
-                    <span class="glyphicon glyphicon-user"></span>
+                &nbsp&nbsp&nbsp<span class="glyphicon glyphicon-user"></span>
                     <?php echo count($array_recensioni); ?> recensioni
                 </div>
             </div>
@@ -141,7 +139,7 @@ $perc1 = getPercentage(0);
                 <!--5 stelle-->
                 <div class="pull-left">
                     <div class="pull-left" style="width:35px; line-height:1;">
-                        <div style="height:9px; margin:5px 0;">5 <span class="glyphicon glyphicon-star"></span></div>
+                        <div style="height:9px; margin:5px 0;">5 <span class="glyphicon glyphicon-star" style="color:#FFCA28"></span></div>
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
@@ -154,7 +152,7 @@ $perc1 = getPercentage(0);
                 <!--4 stelle-->
                 <div class="pull-left">
                     <div class="pull-left" style="width:35px; line-height:1;">
-                        <div style="height:9px; margin:5px 0;">4 <span class="glyphicon glyphicon-star"></span></div>
+                        <div style="height:9px; margin:5px 0;">4 <span class="glyphicon glyphicon-star" style="color:#FFCA28"></span></div>
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
@@ -167,7 +165,7 @@ $perc1 = getPercentage(0);
                 <!--3 stelle-->
                 <div class="pull-left">
                     <div class="pull-left" style="width:35px; line-height:1;">
-                        <div style="height:9px; margin:5px 0;">3 <span class="glyphicon glyphicon-star"></span></div>
+                        <div style="height:9px; margin:5px 0;">3 <span class="glyphicon glyphicon-star" style="color:#FFCA28"></span></div>
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
@@ -180,7 +178,7 @@ $perc1 = getPercentage(0);
                 <!--2 stelle-->
                 <div class="pull-left">
                     <div class="pull-left" style="width:35px; line-height:1;">
-                        <div style="height:9px; margin:5px 0;">2 <span class="glyphicon glyphicon-star"></span></div>
+                        <div style="height:9px; margin:5px 0;">2 <span class="glyphicon glyphicon-star" style="color:#FFCA28"></span></div>
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
@@ -193,7 +191,7 @@ $perc1 = getPercentage(0);
                 <!--1 stella-->
                 <div class="pull-left">
                     <div class="pull-left" style="width:35px; line-height:1;">
-                        <div style="height:9px; margin:5px 0;">1 <span class="glyphicon glyphicon-star"></span></div>
+                        <div style="height:9px; margin:5px 0;">1 <span class="glyphicon glyphicon-star" style="color:#FFCA28"></span></div>
                     </div>
                     <div class="pull-left" style="width:180px;">
                         <div class="progress" style="height:9px; margin:8px 0;">
@@ -209,6 +207,7 @@ $perc1 = getPercentage(0);
         <!--Recensioni-->
         <div class="row">
             <div class="col-sm-12">
+                <hr />
                 <hr />
                 <div class="review-block">
 
@@ -237,20 +236,18 @@ $perc1 = getPercentage(0);
 
                             //stampa valutazione in stelle
                             //stampa stelle gialle
-                            for ($i = 1; $i <= $item->getValutation(); $i++) {
-                                echo '<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                        </button>';
+                            for ($i = 1; $i <= $item_rec->getValutation(); $i++) {
+
+                                 echo '<span class="glyphicon glyphicon-star" aria-hidden="true" style="color:#FFCA28"></span>';
+                                        
                             }
                             //stampa stelle grigie
-                            for ($i = $item->getValutation(); $i < 5; $i++) {
-                                echo '<button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                    </button>';
+                            for ($i = $item_rec->getValutation(); $i < 5; $i++) {
+                                echo '<span class="glyphicon glyphicon-star" aria-hidden="true" style="color:#808080"></span>';
                             }
                             echo '</div>
-                            <div class="review-block-title"><h4>' . $item->getTitle() . '</h4></div>
-                            <div class="review-block-description">' . $item->getText() . '</div>
+                            <div class="review-block-title"><h4>' . $item_rec->getTitle() . '</h4></div>
+                            <div class="review-block-description">' . $item_rec->getText() . '</div>
                         </div>
                     </div>
                     <hr />';
@@ -271,7 +268,7 @@ $perc1 = getPercentage(0);
     </script>
 
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    
   
     <script>
         var percentage5 = parseInt(<?php echo $perc5?>);

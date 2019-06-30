@@ -69,23 +69,23 @@ if (isset($_POST["modifica_dati"])) {
         }
 
         if ($_POST['nazione'] != "") {
-            $utente->setAddress($_POST['nazione'], $utente->getAddress->getCounty(), $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
+            $utente->setAddress($_POST['nazione'], $utente->getAddress()->getCounty(), $utente->getAddress()->getCity(), $utente->getAddress()->getStreet(), $utente->getAddress()->getCAP());
         }
 
         if (trim($_POST['provincia']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $_POST['provincia'], $utente->getAddress->getCity(), $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
+            $utente->setAddress($utente->getAddress()->getNation(), $_POST['provincia'], $utente->getAddress()->getCity(), $utente->getAddress()->getStreet(), $utente->getAddress()->getCAP());
         }
 
         if (trim($_POST['citta']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $_POST['citta'], $utente->getAddress->getStreet(), $utente->getAddress->getCAP());
+            $utente->setAddress($utente->getAddress()->getNation(), $utente->getAddress()->getCounty(), $_POST['citta'], $utente->getAddress()->getStreet(), $utente->getAddress()->getCAP());
         }
 
         if (trim($_POST['indirizzo']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(), $_POST['indirizzo'], $utente->getAddress->getCAP());
+            $utente->setAddress($utente->getAddress()->getNation(), $utente->getAddress()->getCounty(), $utente->getAddress()->getCity(), $_POST['indirizzo'], $utente->getAddress()->getCAP());
         }
 
         if (trim($_POST['CAP']) != "") {
-            $utente->setAddress($utente->getAddress->getNation(), $utente->getAddress->getCounty(), $utente->getAddress->getCity(),  $utente->getAddress->getStreet(), $_POST['CAP']);
+            $utente->setAddress($utente->getAddress()->getNation(), $utente->getAddress()->getCounty(), $utente->getAddress()->getCity(),  $utente->getAddress()->getStreet(), $_POST['CAP']);
         }
 
 
