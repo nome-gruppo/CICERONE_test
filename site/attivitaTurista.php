@@ -109,7 +109,7 @@ $turista = $_SESSION['utente'];
     $("button").click(function() {
       var fired_button = $(this).val();
 
-      $.post('recensione.php', {variable: fired_button});
+      $.post('scriviRecensione.php', {variable: fired_button});
 
     })
   </script>
