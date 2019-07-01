@@ -33,7 +33,7 @@ $cicerone = $_SESSION['utente'];
       $result2=$functions->recuperaTitolo($riga['id_attivita']);
       $riga2=mysqli_fetch_assoc($result2);
     echo '  '.$riga2['titolo'] ;}?>
-      . Click per controllare</a>
+      . Click per controllare/rifiutare le prenotazioni</a>
     </div>
       <?php }  ?>
 

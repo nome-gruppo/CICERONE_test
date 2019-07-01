@@ -81,7 +81,7 @@ if ($num > 0) {
 				<td><?php echo $riga['costo'];?></td>
 				<td><?php echo $riga['lingua'];?></td>
 				<td><?php echo $riga['descrizione'];?></td>
-        <td><a href="visualizzaPrenotazioni.php?<?php echo $riga['id_attivita'];?>">VISUALIZZA</a></td>
+        <td><a href="visualizzaPrenotazioni.php?<?php echo $riga['id_attivita'];?>"><button class="btn btn-primary">VISUALIZZA</button></a></td>
 			</tr>
             <?php
     }
@@ -89,8 +89,6 @@ if ($num > 0) {
 
       </tbody>
 	</table>
-
-
     <?php
 } else {
     echo "<div class='alert alert-danger' role='alert'>

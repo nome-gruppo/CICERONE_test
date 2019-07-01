@@ -57,6 +57,7 @@ else eval("var "+param[i]+";");
             <th scope="col">Mail</th>
             <th scope="col">Telefono</th>
             <th scope="col">Nazione</th>
+            <th scope="col">Rifiuta</th>
           </tr>
         </thead>
         <tbody>
@@ -69,6 +70,7 @@ else eval("var "+param[i]+";");
                     <td><?php echo $riga['mail'];?></td>
                     <td><?php echo $riga['telefono'];?></td>
                     <td><?php echo $riga['nazione'];?></td>
+                    <td><a href="rifiutaPrenotazione.php?turista=<?php echo $riga['id_turista'];?>&attivita=<?php echo $riga['id_attivita'];?>"><span class="glyphicon glyphicon-remove"></span></a></td>
                   </tr>
               <?php
                 }

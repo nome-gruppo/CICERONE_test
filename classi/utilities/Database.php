@@ -12,7 +12,7 @@ class Database
     private $cicerone_table = "ciceroni(nome, cognome, data_nascita, telefono, mail, password, nazione, provincia, citta, indirizzo, cap, data_premium, valutazione)";
     private $activity_table = "attivita(id_cicerone,titolo,citta,data_attivita,costo,descrizione,lingua)";
     private $review_table = "recensioni(titolo,valutazione,testo,id_cicerone,id_turista)";
-    private $partecipazione_table="partecipazione(id_attivita, id_turista)";
+    private $partecipazione_table="partecipazione(id_attivita, id_turista, accettazione)";
     private $connection;
 
     public function __construct()
