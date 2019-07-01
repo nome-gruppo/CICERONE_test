@@ -9,6 +9,8 @@ class PaypalPayment extends AbPayment
 
     public function __construct($mail)
     {
+        parent::__construct();
+        
         if (is_string($mail)) {
             $this->mail = $mail;
         } else {

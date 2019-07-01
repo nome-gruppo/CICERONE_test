@@ -16,7 +16,7 @@ class CardPayment extends AbPayment
     }
 
     public function __construct(){
-
+        parent::__construct();
     }
     
     public function setCode($code)

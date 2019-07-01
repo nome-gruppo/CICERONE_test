@@ -434,7 +434,7 @@ $functions = new Functions();
                 echo '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#premium">Diventa premium</button></div></td>';
               } else {
 
-                echo $utente->getPremiumDate();
+                echo $functions->DateDb_to_Date($utente->getPremiumDate());
                 echo '</div>';
                 echo '<div class="col-sm-3 col-xs-3">';
                 echo '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#premium">Disdici premium</button></div></td>';

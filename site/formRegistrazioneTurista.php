@@ -54,13 +54,13 @@ $functions=new Functions();
 
 	<!--form di registrazione-->
 	<!-- Da modificare/eliminare -->
-	<k> <br />
-	Tipo registrazione</k>
+	<h4> <br>&nbsp
+	Tipo registrazione</h4>
 	<!-- fine da modificare/eliminare -->
 	<ul class="nav nav-pills">
-		<li role="presentation"><a href="formRegistrazione.html">Cicerone</a></li>
+		<li role="presentation"><a href="formRegistrazione.php">Cicerone</a></li>
 		<li role="presentation" class="active"><a
-			href="formRegistrazioneTurista.html">Turista</a></li>
+			href="formRegistrazioneTurista.php">Turista</a></li>
 	</ul>
 
 	<h1></h1>
@@ -75,6 +75,7 @@ $functions=new Functions();
 				name="cognome">
 		</div>
 	<div class="form-group col-md-6">
+	<label for="inputNation">Paese</label>
 		<?php $functions->stampaSelettoreNazione();?>
 	</div>
 

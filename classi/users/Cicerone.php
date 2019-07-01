@@ -19,7 +19,9 @@ class Cicerone extends User
 
 
     public function __construct()
-    {}
+    {
+        parent::__construct();
+    }
 
     public function segnalaPrenotazioni($idCicerone){
       $database=new Database();
@@ -72,153 +74,73 @@ class Cicerone extends User
         $this->premiumDate = $premiumDate;
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::getAddress()
-     */
     public function getAddress()
-    {
-        // TODO Auto-generated method stub
+    {      
         return parent::getAddress();
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::getBirthDate()
-     */
     public function getBirthDate()
     {
-        // TODO Auto-generated method stub
         return parent::getBirthDate();
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::getContact()
-     */
     public function getContact()
     {
-        // TODO Auto-generated method stub
         return parent::getContact();
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::getName()
-     */
     public function getName()
     {
-        // TODO Auto-generated method stub
         return parent::getName();
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::getPassword()
-     */
     public function getPassword()
     {
-        // TODO Auto-generated method stub
         return parent::getPassword();
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::getPayment()
-     */
-    public function getPayment()
-    {
-        // TODO Auto-generated method stub
-        return parent::getPayment();
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::getSurname()
-     */
     public function getSurname()
     {
-        // TODO Auto-generated method stub
         return parent::getSurname();
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::setAddress()
-     */
     public function setAddress($nation, $county, $city, $street, $CAP)
     {
       parent::setAddress($nation, $county, $city, $street, $CAP);
-
-
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::setBirthDate()
-     */
     public function setBirthDate($birthDate)
     {
         parent::setBirthDate($birthDate);
 
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::setContact()
-     */
     public function setContact($mail, $phone_num)
     {
         parent::setContact($mail, $phone_num);
 
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::setName()
-     */
     public function setName($name)
     {
         parent::setName($name);
 
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::setPassword()
-     */
     public function setPassword($password)
     {
         parent::setPassword($password);
 
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::setPayment()
-     */
-    public function setPayment($payment)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::setSurname()
-     */
     public function setSurname($surname)
     {
         parent::setSurname($surname);
 
     }
-    /**
-     * {@inheritDoc}
-     * @see \classi\users\User::getId()
-     */
+   
     public function getId()
     {
-        // TODO Auto-generated method stub
         return parent::getId();
     }
 

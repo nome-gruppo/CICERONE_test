@@ -22,4 +22,9 @@ abstract class AbPayment{
             trigger_error('errore di tipo');
         }
     }
+
+    public function __construct()
+    {
+        
+    }
 }

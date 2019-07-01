@@ -110,9 +110,6 @@ class User {
         $this->contact = new Contact($mail, $phone_num);
     }
 
-    /**
-     * @return int
-     */
     public function getId()
     {
         return $this->id;
