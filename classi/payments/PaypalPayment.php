@@ -18,10 +18,5 @@ class PaypalPayment extends AbPayment
         }
     }
 
-    public function sendPayment($import)
-    {
-        parent::sendPayment($import);
- 
-    }
 }
 

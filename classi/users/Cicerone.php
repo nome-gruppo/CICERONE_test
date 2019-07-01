@@ -3,11 +3,8 @@ namespace classi\users;
 
 require_once 'User.php';
 require_once '..\classi\utilities\Database.php';
-require_once '..\classi\activities\Activity.php';
 
-use classi\utilities\Functions;
 use classi\utilities\Database;
-use classi\activities\Activity;
 
 class Cicerone extends User
 {
@@ -74,77 +71,4 @@ class Cicerone extends User
         $this->premiumDate = $premiumDate;
     }
 
-    public function getAddress()
-    {      
-        return parent::getAddress();
-    }
-
-    public function getBirthDate()
-    {
-        return parent::getBirthDate();
-    }
-
-    public function getContact()
-    {
-        return parent::getContact();
-    }
-
-    public function getName()
-    {
-        return parent::getName();
-    }
-
-    public function getPassword()
-    {
-        return parent::getPassword();
-    }
-
-    public function getSurname()
-    {
-        return parent::getSurname();
-    }
-
-    public function setAddress($nation, $county, $city, $street, $CAP)
-    {
-      parent::setAddress($nation, $county, $city, $street, $CAP);
-    }
-
-    public function setBirthDate($birthDate)
-    {
-        parent::setBirthDate($birthDate);
-
-    }
-
-    public function setContact($mail, $phone_num)
-    {
-        parent::setContact($mail, $phone_num);
-
-    }
-
-    public function setName($name)
-    {
-        parent::setName($name);
-
-    }
-
-    public function setPassword($password)
-    {
-        parent::setPassword($password);
-
-    }
-
-    public function setSurname($surname)
-    {
-        parent::setSurname($surname);
-
-    }
-   
-    public function getId()
-    {
-        return parent::getId();
-    }
-
-    public function setId($id){
-        parent::setId($id);
-    }
 }

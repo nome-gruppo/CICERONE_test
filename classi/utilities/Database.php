@@ -1,7 +1,6 @@
 <?php
 namespace classi\utilities;
 
-
 define('SERVER', 'localhost');
 define('USERNAME', 'root');
 define('PASSWORD', 'root');
@@ -16,8 +15,6 @@ class Database
     private $partecipazione_table="partecipazione(id_attivita, id_turista)";
     private $connection;
 
-
-
     public function __construct()
     {
         $this->connection = mysqli_connect(SERVER, USERNAME, PASSWORD, DATABASE) or die("Errore di connessione!");
@@ -26,17 +23,12 @@ class Database
     public function getConnection(){
         return $this->connection;
     }
-    /**
-     * @return string
-     */
+
     public function getTurista_table()
     {
         return $this->turista_table;
     }
 
-    /**
-     * @return string
-     */
     public function getCicerone_table()
     {
         return $this->cicerone_table;

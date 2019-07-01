@@ -10,10 +10,6 @@ class CardPayment extends AbPayment
     const CODE_SIZE = 16;    // lunghezza codice identificativo carta di credito
     const CVV_SIZE = 3;    // lunghezza codice cvv
 
-    public function sendPayment($import)
-    {
-        parent::sendPayment($import);
-    }
 
     public function __construct(){
         parent::__construct();

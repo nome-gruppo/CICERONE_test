@@ -14,9 +14,6 @@ class User {
     private $contact;
     private $password;
 
-    /**
-     * @return \classi\utilities\Place
-     */
     public function getAddress()
     {
         return $this->address;
@@ -33,17 +30,11 @@ class User {
 
     }
 
-    /**
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getSurname()
     {
         return $this->surname;
@@ -57,7 +48,7 @@ class User {
             trigger_error('errore di tipo');
         }
     }
-
+    
     public function setSurname($surname)
     {
         if(is_string($surname)){
@@ -70,7 +61,6 @@ class User {
     public function __construct() {
 
     }
-
 
     public function getBirthDate()
     {
