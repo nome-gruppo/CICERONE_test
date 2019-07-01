@@ -2,7 +2,7 @@
 namespace classi\users;
 require_once '..\classi\users\Turista.php'; //includo la classe turista
 require_once '..\classi\utilities\Functions.php';
-require_once '..\classi\utilities\Mail.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -39,10 +39,10 @@ else eval("var "+param[i]+";");
 
 <?php
 use classi\utilities\Functions;
-use classi\utilities\Mail;
+
 session_start();
 $turista=new Turista();
-$mail=new Mail();
+
 $turista=$_SESSION['utente'];//prendo l'oggetto turista precedentemente messo in sessione
 $functions=new Functions();
 $url= $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
