@@ -227,6 +227,7 @@ if (isset($_POST["disdici_premium"])) {
     }
 
     //modifica data_premium del cicerone
+    $utente->setPremiumDate('0000-00-00');
     $query = "UPDATE ciceroni SET data_premium = '0000-00-00' WHERE id_cicerone = '{$utente->getId()}'";
     $result = mysqli_query($link, $query) or die("Errore modifica data!");
 
