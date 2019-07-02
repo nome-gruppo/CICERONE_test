@@ -6,6 +6,7 @@ require_once '..\classi\users\Turista.php';
 require_once '..\classi\utilities\Functions.php';
 
 define('RIGA_DATA', 'data_attivita');
+define('IN_PROGRAMMA', 'inProgramma');
 
 use classi\utilities\Functions;
 
@@ -36,7 +37,7 @@ $turista = $_SESSION['utente'];
   <?php
   $functions->stampaNavbarTurista($turista->getName());
   $result = null;
-  if (isset($_GET["inProgramma"])) { //se l'utente clicca su attivita in programma
+  if (isset($_GET[IN_PROGRAMMA])) { //se l'utente clicca su attivita in programma
     $result = $turista->inProgramma();
   } else if (isset($_GET["attivitaSvolte"])) {//se l'utente clicca su attivita svolte
     $result = $turista->attivitaSvolte();
@@ -56,7 +57,7 @@ $turista = $_SESSION['utente'];
           <th scope="col">Costo</th>
           <th scope="col">Lingua</th>
           <th scope="col">Descrizione</th>
-          <?php if (isset($_GET["inProgramma"])) { ?>
+          <?php if (isset($_GET[IN_PROGRAMMA])) { ?>
           <th scope="col">Cancella prenotazione</th>
         <?php } ?>
         </tr>
@@ -78,8 +79,9 @@ $turista = $_SESSION['utente'];
             <td><?php echo wordwrap($riga['descrizione'], 30, "<br>\n");?></td>
             <td>
               <?php //la variabile diff restituisce una differenza dove ogni giorno vale '86400' quindi io voglio un diff che sia maggiore di 5 giorni=86400*5=432000
-                $diff=strtotime($riga[RIGA_DATA])-strtotime(date('Y-m-d'));if ((isset($_GET["inProgramma"]))&&($diff>432000)){ ?>
-              <a href="cancellaPrenotazione.php?<?php echo $riga['id_attivita'];?>"><button class="btn btn-primary"> CANCELLA <?php } ?></button></a></td>
+                $diff=strtotime($riga[RIGA_DATA])-strtotime(date('Y-m-d'));if ((isset($_GET[IN_PROGRAMMA]))&&($diff>432000)){ ?>
+              <a href="cancellaPrenotazione.php?<?php echo $riga['id_attivita'];?>"><button class="btn btn-primary"> CANCELLA <?php 
+            } ?></button></a></td>
             <td>
               <?php
               //se attività passata

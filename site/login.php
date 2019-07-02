@@ -4,6 +4,7 @@ use classi\utilities\Database;
 require_once '../classi/users/Turista.php';
 require_once '../classi/users/Cicerone.php';
 require_once '../classi/utilities/Database.php';
+define('CAMPO_PASSWORD', 'password');
 ?>
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -20,7 +21,7 @@ if (isset($_POST["login"])) {
 
 
     $mail = trim($_POST['mail']);
-    $password = $_POST['password'];
+    $password = $_POST[CAMPO_PASSWORD];
 
     if ($mail == "" || $password == "") {
         echo "Non tutti i campi sono stati compilati";
@@ -45,7 +46,7 @@ if (isset($_POST["login"])) {
             $utente->setBirthDate($row['data_nascita']);
             $utente->setContact($row['mail'], $row['telefono']);
             $utente->setAddress($row['nazione'], $row['provincia'], $row['citta'],$row['indirizzo'], $row['cap']);
-            $utente->setPassword($row['password']);
+            $utente->setPassword($row[CAMPO_PASSWORD]);
             $utente->setValutazione($row['valutazione']);
             $utente->setPremiumDate($row['data_premium']);
 
@@ -74,7 +75,7 @@ if (isset($_POST["login"])) {
                 $utente->setBirthDate($row['data_nascita']);
                 $utente->setContact($row['mail'], $row['telefono']);
                 $utente->setAddress($row['nazione'], $row['provincia'], $row['citta'],$row['indirizzo'], $row['cap']);
-                $utente->setPassword($row['password']);
+                $utente->setPassword($row[CAMPO_PASSWORD]);
 
                 $_SESSION['utente'] = $utente;
 

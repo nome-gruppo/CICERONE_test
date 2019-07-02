@@ -3,8 +3,8 @@ namespace classi\utilities;
 
 require_once '..\classi\utilities\Database.php';
 
-define('ERROR_TYPE', 'Errore di tipo');
-define('ERROR_MESSAGE', 'Errore di connessione');
+define('ERROR_TYPE_FU', 'Errore di tipo');
+define('ERROR_MESSAGE_FU', 'Errore di connessione');
 
 use classi\utilities\Database;
 
@@ -279,7 +279,7 @@ class Functions
       $database=new Database();
       $link=$database->getConnection();
       $query="SELECT titolo from attivita where id_attivita=$id_attivita";
-      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE);
+      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE_FU);
       mysqli_close($link);
       return $result;
     }
@@ -287,7 +287,7 @@ class Functions
       $database=new Database();
       $link=$database->getConnection();
       $query="SELECT mail from(ciceroni inner join attivita on ciceroni.id_cicerone=attivita.id_cicerone)where attivita.id_attivita=$id_attivita";
-      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE);
+      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE_FU);
       $result2 = $result->fetch_row();
       mysqli_close($link);
       return $result2;
@@ -368,7 +368,7 @@ class Functions
 
             return $correct;
         } else {
-            trigger_error(ERROR_TYPE);
+            trigger_error(ERROR_TYPE_FU);
         }
     }
 
@@ -385,7 +385,7 @@ class Functions
 
         return implode('-', array_reverse($pieces));
         }else{
-            trigger_error(ERROR_TYPE);
+            trigger_error(ERROR_TYPE_FU);
         }
     }
 
@@ -396,7 +396,7 @@ class Functions
 
             return implode('/', array_reverse($pieces));
             }else{
-                trigger_error(ERROR_TYPE);
+                trigger_error(ERROR_TYPE_FU);
             }
     }
 }

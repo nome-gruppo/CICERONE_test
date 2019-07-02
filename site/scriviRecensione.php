@@ -8,12 +8,14 @@
 
 require_once '../classi/utilities/Functions.php';
 require_once '../classi/users/Turista.php';
+define('ID_CICERONE', 'id_cicerone');
 
 use classi\utilities\Functions;
 use classi\users\Turista;
 
 session_start();
 
+$turista = new Turista();
 $turista = $_SESSION['utente'];
 
 $functions = new Functions();
@@ -39,9 +41,9 @@ $functions = new Functions();
     <?php
     $functions->stampaNavbarTurista($turista->getName());
 
-    if (isset($_GET["id_cicerone"])) {
+    if (isset($_GET[ID_CICERONE])) {
 
-        $_SESSION['id_cicerone'] = $_GET["id_cicerone"];
+        $_SESSION[ID_CICERONE] = $_GET[ID_CICERONE];
     }
     ?>
     <form action="salvaRecensione.php" method="post">

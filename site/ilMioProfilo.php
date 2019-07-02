@@ -8,6 +8,7 @@ require_once '../classi/users/Turista.php';
 require_once '../classi/users/Cicerone.php';
 require_once '../classi/utilities/Functions.php';
 define('COSTO_PREMIUM', 9.99);
+define('NULL_DATE', '0000-00-00');
 session_start();
 $utente = $_SESSION['utente'];
 $_SESSION['costo_premium'] = COSTO_PREMIUM;
@@ -426,7 +427,7 @@ $functions = new Functions();
               echo '<div class="row">';
               echo '<div class="col-sm-7 col-xs-7">';
 
-              if ($utente->getPremiumDate() == '0000-00-00') {
+              if ($utente->getPremiumDate() == NULL_DATE) {
 
                 echo 'Non sei ancora premium';
                 echo '</div>';
@@ -478,7 +479,7 @@ $functions = new Functions();
               <div class="modal-header">
                 <?php
 
-                if ($utente->getPremiumDate() == '0000-00-00') {
+                if ($utente->getPremiumDate() == NULL_DATE) {
                   ?>
                   <h3 class="modal-title" id="premiumLabel">Vuoi diventare premium?</h3>
                 </div>
@@ -513,7 +514,7 @@ $functions = new Functions();
                 </div>
                 <div class="col-sm-3 col-xs-3">
                   <?php
-                  if ($utente->getPremiumDate() == '0000-00-00') {
+                  if ($utente->getPremiumDate() == NULL_DATE) {
                     echo '<button type="submit" class="btn btn-primary" name="diventa_premium">Diventa premium</button>';
                   } else {
                     echo '<button type="submit" class="btn btn-primary" name="disdici_premium">Disdici premium</button>';

@@ -11,6 +11,7 @@ use classi\utilities\Functions;
 require_once '../classi/users/Turista.php';
 require_once '../classi/utilities/Database.php';
 require_once '../classi/utilities/Functions.php';
+define('ERR_TURISTA', 'Errore di registrazione!');
 
 // connessione database
 $database = new Database();
@@ -34,10 +35,10 @@ if (isset($_POST["invia_dati_turista"])) {
 
   // controllo presenza mail in tabelle ciceroni e turista
   $query_mail_ciceroni = "SELECT * from ciceroni WHERE mail = '{$turista->getContact()->getMail()}'";
-  $result_mail_ciceroni = mysqli_query($link, $query_mail_ciceroni) or die("Errore di registrazione!");
+  $result_mail_ciceroni = mysqli_query($link, $query_mail_ciceroni) or die(ERR_TURISTA);
 
   $query_mail_turisti = "SELECT * from turista WHERE mail = '{$turista->getContact()->getMail()}'";
-  $result_mail_turisti = mysqli_query($link, $query_mail_turisti) or die("Errore di registrazione!");
+  $result_mail_turisti = mysqli_query($link, $query_mail_turisti) or die(ERR_TURISTA);
 
   if (mysqli_num_rows($result_mail_ciceroni) == 1 || mysqli_num_rows($result_mail_turisti) == 1) {
     echo "<div class='alert alert-danger' role='alert'>
@@ -47,10 +48,10 @@ if (isset($_POST["invia_dati_turista"])) {
 
     //controllo presenza numero telefono in tabelle ciceroni e turista
     $query_phone_ciceroni = "SELECT * from ciceroni WHERE telefono = '{$turista->getContact()->getPhone_num()}'";
-    $result_phone_ciceroni = mysqli_query($link, $query_phone_ciceroni) or die("Errore di registrazione!");
+    $result_phone_ciceroni = mysqli_query($link, $query_phone_ciceroni) or die(ERR_TURISTA);
 
     $query_phone_turisti = "SELECT * from turista WHERE telefono = '{$turista->getContact()->getPhone_num()}'";
-    $result_phone_turisti = mysqli_query($link, $query_phone_turisti) or die("Errore di registrazione!");
+    $result_phone_turisti = mysqli_query($link, $query_phone_turisti) or die(ERR_TURISTA);
 
     if (mysqli_num_rows($result_phone_ciceroni) == 1 || mysqli_num_rows($result_phone_turisti) == 1) {
       echo "<div class='alert alert-danger' role='alert'>
@@ -83,7 +84,7 @@ if (isset($_POST["invia_dati_turista"])) {
                             '{$turista->getPassword()}', '{$turista->getAddress()->getNation()}', '{$turista->getAddress()->getCounty()}', '{$turista->getAddress()->getCity()}',
                             '{$turista->getAddress()->getStreet()}', '{$turista->getAddress()->getCAP()}')";
 
-        $result = mysqli_query($link, $query) or die("Errore di registrazione!");
+        $result = mysqli_query($link, $query) or die(ERR_TURISTA);
 
         if ($result) {
           echo "<div class='alert alert-success' role='alert'>

@@ -13,6 +13,12 @@ use classi\utilities\Database;
 use classi\utilities\Functions;
 use classi\activities\Activity;
 
+define('TELEFONO', 'telefono');
+define('CITTA', 'citta');   
+define('VECCHIA_PASSWORD', 'vecchia_password');
+define('NUOVA_PASSWORD', 'nuova_password');
+define('RIPETI_PASSWORD', 'ripeti_password');
+
 session_start();
 ?>
 
@@ -37,8 +43,8 @@ if (isset($_POST["modifica_dati"])) {
 
     $telefono_ok = true;
 
-    if (trim($_POST['telefono']) != "") {
-        $telefono = trim($_POST['telefono']);
+    if (trim($_POST[TELEFONO]) != "") {
+        $telefono = trim($_POST[TELEFONO]);
         //controllo presenza numero telefono in tabelle ciceroni e turista
         $query_phone_ciceroni = "SELECT *from ciceroni WHERE telefono = '$telefono'";
         $result_phone_ciceroni = mysqli_query($link, $query_phone_ciceroni) or die("Errore di registrazione!");
@@ -52,11 +58,11 @@ if (isset($_POST["modifica_dati"])) {
                      <a href='ilMioProfilo.php' class='alert-link'>Esiste già un account con questo numero di telefono! Click per riprovare</a>
                  </div>";
         } else {
-            $utente->setContact($utente->getContact()->getMail(), trim($_POST['telefono']));
+            $utente->setContact($utente->getContact()->getMail(), trim($_POST[TELEFONO]));
         }
     }
 
-    if ($telefono_ok == true) {
+    if ($telefono_ok) {
         if (trim($_POST['nome']) != "") {
             $utente->setName($_POST['nome']);
         }
@@ -77,8 +83,8 @@ if (isset($_POST["modifica_dati"])) {
             $utente->setAddress($utente->getAddress()->getNation(), $_POST['provincia'], $utente->getAddress()->getCity(), $utente->getAddress()->getStreet(), $utente->getAddress()->getCAP());
         }
 
-        if (trim($_POST['citta']) != "") {
-            $utente->setAddress($utente->getAddress()->getNation(), $utente->getAddress()->getCounty(), $_POST['citta'], $utente->getAddress()->getStreet(), $utente->getAddress()->getCAP());
+        if (trim($_POST[CITTA]) != "") {
+            $utente->setAddress($utente->getAddress()->getNation(), $utente->getAddress()->getCounty(), $_POST[CITTA], $utente->getAddress()->getStreet(), $utente->getAddress()->getCAP());
         }
 
         if (trim($_POST['indirizzo']) != "") {
@@ -91,29 +97,29 @@ if (isset($_POST["modifica_dati"])) {
 
 
         $password_ok = true;
-        $passcript = sha1(md5(sha1($_POST['vecchia_password'])));
+        $passcript = sha1(md5(sha1($_POST[VECCHIA_PASSWORD])));
 
         //se almeno un campo password è stato compilato
-        if (($_POST['vecchia_password'] != "") || ($_POST['nuova_password'] != "") || ($_POST['ripeti_password'] != "")) {
+        if (($_POST[VECCHIA_PASSWORD] != "") || ($_POST[NUOVA_PASSWORD] != "") || ($_POST[RIPETI_PASSWORD] != "")) {
 
             //controlla i campi della nuova password
-            if (($_POST['nuova_password'] != "") && ($_POST['ripeti_password'] != "")) {
+            if (($_POST[NUOVA_PASSWORD] != "") && ($_POST[RIPETI_PASSWORD] != "")) {
 
                 //se tutti i campi password sono corretti
-                if (((sha1(md5(sha1($_POST['vecchia_password'])))) == $utente->getPassword()) && ($_POST['nuova_password'] == $_POST['ripeti_password'])) {
+                if (((sha1(md5(sha1($_POST[VECCHIA_PASSWORD])))) == $utente->getPassword()) && ($_POST[NUOVA_PASSWORD] == $_POST[RIPETI_PASSWORD])) {
 
                     //cambia password
-                    $utente->setPassword(sha1(md5(sha1($_POST['nuova_password']))));
+                    $utente->setPassword(sha1(md5(sha1($_POST[NUOVA_PASSWORD]))));
 
                     //altrimenti se non è stata inserita la vecchia password
-                } elseif ($_POST['vecchia_password'] == "") {
+                } elseif ($_POST[VECCHIA_PASSWORD] == "") {
                     $password_ok = false;
                     echo "<div class='alert alert-danger' role='alert'>
                     <a href='ilMioProfilo.php' class='alert-link'>Compila tutti i campi password! Click per riprovare</a>
                     </div>";
 
                     //altrimenti i nuovi campi non coincidono
-                } elseif (sha1(md5(sha1($_POST['vecchia_password']))) != $utente->getPassword()) {
+                } elseif (sha1(md5(sha1($_POST[VECCHIA_PASSWORD]))) != $utente->getPassword()) {
                     $password_ok = false;
                     echo "<div class='alert alert-danger' role='alert'>
                     <a href='ilMioProfilo.php' class='alert-link'>Campo vecchia password errato! Click per riprovare</a>
@@ -182,7 +188,7 @@ if (isset($_POST["disdici_premium"])) {
     while ($row = mysqli_fetch_array($result)) {
 
         if ($row['id_cicerone'] == $utente->getId()) {
-            $attivita = new Activity($row['id_cicerone'], $row['titolo'], $row['citta'], $row['costo'], $row['descrizione'], $row['lingua'], $row['data_attivita']);
+            $attivita = new Activity($row['id_cicerone'], $row['titolo'], $row[CITTA], $row['costo'], $row['descrizione'], $row['lingua'], $row['data_attivita']);
             $attivita->setIdAttivita($row['id_attivita']);
             $array_attivita[] = $attivita;
         }
@@ -192,10 +198,10 @@ if (isset($_POST["disdici_premium"])) {
     $array_attivita_future = array();
 
     foreach ($array_attivita as $item) {
-        if (is_object($item) && $item instanceof Activity) {
-            if ($item->getData() >= date("Y-m-d")) {
+        if ((is_object($item) && $item instanceof Activity) && ($item->getData() >= date("Y-m-d"))) {
+           
                 $array_attivita_future[] = $item;
-            }
+            
         }
     }
 
@@ -224,7 +230,7 @@ if (isset($_POST["disdici_premium"])) {
     $query = "UPDATE ciceroni SET data_premium = '0000-00-00' WHERE id_cicerone = '{$utente->getId()}'";
     $result = mysqli_query($link, $query) or die("Errore modifica data!");
 
-    if (($errore_eliminazione == false) && $result) {
+    if ((!$errore_eliminazione) && $result) {
         echo "<div class='alert alert-success' role='alert'>
                 <a href='cicerone.php' class='alert-link'>Le attività sono state eliminate. Non sei più un Cicerone premium</a>
                 </div>";

@@ -4,7 +4,7 @@ namespace classi\users;
 require_once 'User.php';
 require_once '..\classi\utilities\Database.php';
 
-define('ERROR_MESSAGE', 'Errore di connessione');
+define('ERROR_MESSAGE_CIC', 'Errore di connessione');
 
 use classi\utilities\Database;
 
@@ -21,7 +21,7 @@ class Cicerone extends User
       $database=new Database();
       $link=$database->getConnection();
       $query="SELECT attivita.data_attivita, attivita.id_attivita from(partecipazione left join attivita on partecipazione.id_attivita=attivita.id_attivita)where id_cicerone=$idCicerone and attivita.data_attivita>CURRENT_DATE()";
-      $result=mysqli_query($link, $query) or die(ERROR_MESSAGE);
+      $result=mysqli_query($link, $query) or die(ERROR_MESSAGE_CIC);
       mysqli_close($link);
       return $result;
     }
@@ -30,7 +30,7 @@ class Cicerone extends User
         $database=new Database();
         $link=$database->getConnection();
         $query = "SELECT * from attivita WHERE id_cicerone={$this->getId()} order by(data_attivita)";
-        $result = mysqli_query($link, $query) or die(ERROR_MESSAGE);
+        $result = mysqli_query($link, $query) or die(ERROR_MESSAGE_CIC);
         mysqli_close($link);
         return $result;
     }
@@ -38,7 +38,7 @@ class Cicerone extends User
       $database=new Database();
       $link=$database->getConnection();
       $query="SELECT count(id_attivita)as numero from(attivita inner join ciceroni on attivita.id_cicerone=ciceroni.id_cicerone)group by attivita.id_cicerone";
-      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE);
+      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE_CIC);
       $result2 = $result->fetch_row();
       mysqli_close($link);
       return $result2;
@@ -47,7 +47,7 @@ class Cicerone extends User
       $database=new Database();
       $link=$database->getConnection();
       $query="SELECT *from(turista inner join partecipazione on turista.id_turista=partecipazione.id_turista)where partecipazione.id_attivita=$id_attivita and accettazione=true";
-      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE);
+      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE_CIC);
       mysqli_close($link);
       return $result;
     }
@@ -55,7 +55,7 @@ class Cicerone extends User
       $database=new Database();
       $link=$database->getConnection();
       $query="UPDATE partecipazione SET accettazione=false WHERE id_turista=$id_turista and id_attivita=$id_attivita";
-      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE);
+      $result = mysqli_query($link, $query) or die(ERROR_MESSAGE_CIC);
       mysqli_close($link);
       return $result;
     }
