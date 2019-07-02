@@ -137,11 +137,9 @@ if (isset($_POST["modifica_dati"])) {
         if ($password_ok) {
             if ($utente instanceof Cicerone) {
 
-                $query = "UPDATE ciceroni SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}',
-               provincia = '{$utente->getAddress()->getCounty()}', citta = '{$utente->getAddress()->getCity()}', indirizzo = '{$utente->getAddress()->getStreet()}', cap ='{$utente->getAddress()->getCAP()}' WHERE id_cicerone = '{$utente->getId()}'";
+                $query = "UPDATE ciceroni SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}', provincia = '{$utente->getAddress()->getCounty()}', citta = '{$utente->getAddress()->getCity()}', indirizzo = '{$utente->getAddress()->getStreet()}', cap ='{$utente->getAddress()->getCAP()}' WHERE id_cicerone = '{$utente->getId()}'";
             } else {
-                $query = "UPDATE turista SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}',
-                provincia = '{$utente->getAddress()->getCounty()}', citta = '{$utente->getAddress()->getCity()}', indirizzo = '{$utente->getAddress()->getStreet()}', cap ='{$utente->getAddress()->getCAP()}' where id_turista = '{$utente->getId()}'";
+                $query = "UPDATE turista SET nome = '{$utente->getName()}', cognome = '{$utente->getSurname()}', data_nascita ='{$utente->getBirthDate()}',telefono = '{$utente->getContact()->getPhone_num()}',  password ='{$utente->getPassword()}', nazione = '{$utente->getAddress()->getNation()}', provincia = '{$utente->getAddress()->getCounty()}', citta = '{$utente->getAddress()->getCity()}', indirizzo = '{$utente->getAddress()->getStreet()}', cap ='{$utente->getAddress()->getCAP()}' where id_turista = '{$utente->getId()}'";
             }
 
             $result = mysqli_query($link, $query) or die("Errore nella modifica dei dati!");
@@ -195,7 +193,7 @@ if (isset($_POST["disdici_premium"])) {
 
     foreach ($array_attivita as $item) {
         if (is_object($item) && $item instanceof Activity) {
-            if ($item->getData >= date("Y-m-d")) {
+            if ($item->getData() >= date("Y-m-d")) {
                 $array_attivita_future[] = $item;
             }
         }
