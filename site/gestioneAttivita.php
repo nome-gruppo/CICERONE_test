@@ -1,15 +1,15 @@
 <?php
 namespace classi\users;
 
-require_once '../classi/users/Cicerone.php';
-require_once '../classi/utilities/Functions.php';
+require_once '..\classi\users\Cicerone.php';
+require_once '..\classi\utilities\Functions.php';
 use classi\utilities\Functions;
 $cicerone = new Cicerone();
 $functions=new Functions();
 session_start();
 $cicerone = $_SESSION['utente'];
 
-require_once '../classi/users/Cicerone.php'; // includo la classe cicerone
+require_once '..\classi\users\Cicerone.php'; // includo la classe cicerone
 
 ?>
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ if ($num > 0) {
 				<th scope="col">Titolo</th>
 				<th scope="col">Citta</th>
 				<th scope="col">Data</th>
-				<th scope="col">Costo €</th>
+				<th scope="col">Costo</th>
 				<th scope="col">Lingua</th>
 				<th scope="col">Descrizione</th>
 				<th scope="col">Partecipanti</th>
@@ -78,10 +78,10 @@ if ($num > 0) {
 				<th scope="row"><?php echo $riga['titolo'];//stampo il campo citta dell'array $riga ?></th>
 				<td><?php echo $riga['citta'];?></td>
 				<td><?php echo $riga['data_attivita'];?></td>
-				<td><?php echo $riga['costo'];?></td>
+				<td><?php echo "€ ".$riga['costo'];?></td>
 				<td><?php echo $riga['lingua'];?></td>
-				<td><?php echo $riga['descrizione'];?></td>
-        <td><a href="visualizzaPrenotazioni.php?<?php echo $riga['id_attivita'];?>">VISUALIZZA</a></td>
+				<td><?php echo wordwrap($riga['descrizione'], 69, "<br>\n");?></td>
+        <td><a href="visualizzaPrenotazioni.php?<?php echo $riga['id_attivita'];?>"><button class="btn btn-primary">VISUALIZZA</button></a></td>
 			</tr>
             <?php
     }
@@ -89,8 +89,6 @@ if ($num > 0) {
 
       </tbody>
 	</table>
-
-
     <?php
 } else {
     echo "<div class='alert alert-danger' role='alert'>

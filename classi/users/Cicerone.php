@@ -18,7 +18,7 @@ class Cicerone extends User
     public function segnalaPrenotazioni($idCicerone){
       $database=new Database();
       $link=$database->getConnection();
-      $query="SELECT attivita.id_attivita from(partecipazione left join attivita on partecipazione.id_attivita=attivita.id_attivita)where id_cicerone=$idCicerone";
+      $query="SELECT attivita.data_attivita, attivita.id_attivita from(partecipazione left join attivita on partecipazione.id_attivita=attivita.id_attivita)where id_cicerone=$idCicerone and attivita.data_attivita>CURRENT_DATE()";
       $result=mysqli_query($link, $query) or die("Errore connessione");
       mysqli_close($link);
       return $result;
@@ -44,7 +44,15 @@ class Cicerone extends User
     public function visualizzaPartecipanti($id_attivita){
       $database=new Database();
       $link=$database->getConnection();
-      $query="SELECT *from(turista inner join partecipazione on turista.id_turista=partecipazione.id_turista)where partecipazione.id_attivita=$id_attivita";
+      $query="SELECT *from(turista inner join partecipazione on turista.id_turista=partecipazione.id_turista)where partecipazione.id_attivita=$id_attivita and accettazione=true";
+      $result = mysqli_query($link, $query) or die("Errore connessione");
+      mysqli_close($link);
+      return $result;
+    }
+    public function rifiutaPrenotazione($id_turista, $id_attivita){
+      $database=new Database();
+      $link=$database->getConnection();
+      $query="UPDATE partecipazione SET accettazione=false WHERE id_turista=$id_turista and id_attivita=$id_attivita";
       $result = mysqli_query($link, $query) or die("Errore connessione");
       mysqli_close($link);
       return $result;

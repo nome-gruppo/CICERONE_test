@@ -294,7 +294,7 @@ class Functions
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <a class="navbar-brand" href="turista.php" button type="button" class="btn btn-default btn-lg">
-          Benvenuto </a>
+          Area riservata </a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-right">
@@ -340,7 +340,7 @@ class Functions
         </div><!-- /.container-fluid -->
       </nav>';
 	}
-	
+
     /**
      * La funzione code_control controlla che la variabile $code sia una
      * stringa numerica e che la sua lunghezza sia pari a $size

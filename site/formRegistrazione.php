@@ -1,5 +1,5 @@
 <?php
-require_once '../classi/utilities/Functions.php';
+require_once '..\classi\utilities\Functions.php';
 use classi\utilities\Functions;
 $functions=new Functions();
 ?>

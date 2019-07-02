@@ -31,7 +31,19 @@ $turista = $_SESSION['utente'];
 
 </head>
 <body>
-  <?php $functions->stampaNavbarTurista($turista->getName()) ?>
+  <?php $functions->stampaNavbarTurista($turista->getName());
+    $result=$turista->controllaRifiuto();
+    $num=mysqli_num_rows($result);
+      if($num>0){
+          ?>
+          <div class='alert alert-warning' role='alert'>
+          La prenotazione per l'attività: <?php while($riga = mysqli_fetch_assoc($result)){
+              $result2=$functions->recuperaTitolo($riga['id_attivita']);
+              $riga2=mysqli_fetch_assoc($result2);
+            echo '  '.$riga2['titolo'] ;}?>
+              è stata rifiutata
+            </div>
+              <?php }  ?>
 
 
     <h1>Ricerca attivita</h1>
