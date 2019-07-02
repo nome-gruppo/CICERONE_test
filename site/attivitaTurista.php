@@ -2,8 +2,8 @@
 
 namespace classi\users;
 
-require_once '../classi/users/Turista.php';
-require_once '../classi/utilities/Functions.php';
+require_once '..\classi\users\Turista.php';
+require_once '..\classi\utilities\Functions.php';
 
 use classi\utilities\Functions;
 
@@ -49,8 +49,9 @@ $turista = $_SESSION['utente'];
           <th scope="col">Citta</th>
           <th scope="col">Data</th>
           <th scope="col">Nome Cicerone</th>
-          <th scope="col">Cognome</th>
-          <th scope="col">Costo €</th>
+          <th scope="col">Cognome Cicerone</th>
+          <th scope="col">Valutazione Cicerone </th>
+          <th scope="col">Costo</th>
           <th scope="col">Lingua</th>
           <th scope="col">Descrizione</th>
           <?php if (isset($_GET["inProgramma"])) { ?>
@@ -69,9 +70,10 @@ $turista = $_SESSION['utente'];
             <td><?php echo $riga['data_attivita']; ?></td>
             <td><?php echo $riga['nomeCicerone']; ?></td>
             <td><?php echo $riga['cognomeCicerone']; ?></td>
-            <td><?php echo $riga['costo']; ?></td>
+            <td><?php echo $riga['valutazione']; ?></td>
+            <td><?php echo "€ ".$riga['costo']; ?></td>
             <td><?php echo $riga['lingua']; ?></td>
-            <td><?php echo $riga['descrizione']; ?></td>
+            <td><?php echo wordwrap($riga['descrizione'], 30, "<br>\n");?></td>
             <td>
               <?php //la variabile diff restituisce una differenza dove ogni giorno vale '86400' quindi io voglio un diff che sia maggiore di 5 giorni=86400*5=432000
                 $diff=strtotime($riga['data_attivita'])-strtotime(date('Y-m-d'));if ((isset($_GET["inProgramma"]))&&($diff>432000)){ ?>

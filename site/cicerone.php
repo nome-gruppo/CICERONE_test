@@ -1,7 +1,7 @@
 <?php
 namespace classi\users;
-require_once '../classi/users/Cicerone.php';
-require_once '../classi/utilities/Functions.php';
+require_once '..\classi\users\Cicerone.php';
+require_once '..\classi\utilities\Functions.php';
 use classi\utilities\Functions;
 $cicerone = new Cicerone();
 $functions=new Functions();
@@ -32,7 +32,7 @@ $cicerone = $_SESSION['utente'];
     <a href='gestioneAttivita.php' class='alert-link'>Sono presenti delle prenotazioni nelle attivita:<?php while($riga = mysqli_fetch_assoc($result)){
       $result2=$functions->recuperaTitolo($riga['id_attivita']);
       $riga2=mysqli_fetch_assoc($result2);
-    echo '  '.$riga2['titolo'] ;}?>
+    echo ' | '.$riga2['titolo']." | ";}?>
       . Click per controllare/rifiutare le prenotazioni</a>
     </div>
       <?php }  ?>
@@ -41,7 +41,7 @@ $cicerone = $_SESSION['utente'];
 
   <h1>Benvenuto nell'area riservata!</h1><br /><br />
   <div class="text-center">
-    <a href="formAttivita.php" class="btn btn-primary" .btn{font-size: 30px;}>
+    <a href="formAttivita.php" class="btn btn-primary">
       <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> CREA ATTIVITÀ</a>
   </div>
 

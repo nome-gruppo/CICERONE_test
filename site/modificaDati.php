@@ -52,7 +52,7 @@ if (isset($_POST["modifica_dati"])) {
                      <a href='ilMioProfilo.php' class='alert-link'>Esiste già un account con questo numero di telefono! Click per riprovare</a>
                  </div>";
         } else {
-            $utente->setContact($utente->getMail(), trim($_POST['telefono']));
+            $utente->setContact($utente->getContact()->getMail(), trim($_POST['telefono']));
         }
     }
 
@@ -258,7 +258,7 @@ if (isset($_POST["diventa_premium"])) {
                     <!--tab-->
                     <div class="tab-content clearfix">
                         <!-- Carta -->
-                        <div class="tab-pane active" id="carta">                                                                     
+                        <div class="tab-pane active" id="carta">
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
@@ -287,13 +287,13 @@ if (isset($_POST["diventa_premium"])) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         <!-- Fine carta -->
 
 
                         <!-- paypal -->
-                        <div class="tab-pane" id="paypal">                     
+                        <div class="tab-pane" id="paypal">
                             <div class="panel panel-default">
                                 <!-- Default panel contents -->
                                 <div class="panel-body">
@@ -318,15 +318,15 @@ if (isset($_POST["diventa_premium"])) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         <!-- Fine paypal -->
                     </div>
-                    <!-- Fine tab-->                             
-                    
+                    <!-- Fine tab-->
+
                 </div>
                 <!--end col-->
-                
+
                 <div class="col-sm-3 col-xs-2">
                 </div>
             </div>

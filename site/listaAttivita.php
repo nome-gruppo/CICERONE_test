@@ -39,8 +39,9 @@ $turista = $_SESSION['utente'];
             <th scope="col">Citta</th>
             <th scope="col">Data</th>
             <th scope="col">Nome Cicerone</th>
-            <th scope="col">Cognome</th>
-            <th scope="col">Costo €</th>
+            <th scope="col">Cognome Cicerone</th>
+            <th scope="col">Valutazione Cicerone</th>
+            <th scope="col">Costo</th>
             <th scope="col">Lingua</th>
             <th scope="col">Descrizione</th>
             <th scope="col">Prenota</th>
@@ -56,9 +57,10 @@ $turista = $_SESSION['utente'];
               <td><?php echo $riga['data_attivita']; ?></td>
               <td><?php echo $riga['nomeCicerone']; ?></td>
               <td><?php echo $riga['cognomeCicerone']; ?></td>
-              <td><?php echo $riga['costo']; ?></td>
+              <td><?php echo $riga['valutazione']; ?></td>
+              <td><?php echo "€ ".$riga['costo']; ?></td>
               <td><?php echo $riga['lingua']; ?></td>
-              <td><?php echo $riga['descrizione']; ?></td>
+              <td><?php echo wordwrap($riga['descrizione'], 30, "<br>\n");?></td>
               <td><a href="prenotazione.php?<?php echo $riga['id_attivita'];?>"><button class="btn btn-primary">PRENOTA</button></a></td>
             </tr>
           <?php
