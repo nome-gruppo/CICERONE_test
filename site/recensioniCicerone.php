@@ -221,7 +221,7 @@ $perc1 = getPercentage(0);
                             <div class="review-block-name"><a href="#">&nbsp';
                             //ricerca nome turista che ha fatto la recensione
                             $trovato = false;
-                            for ($i = 0; $trovato == false && $i < count($array_turisti); $i++) {
+                            for ($i = 0; !$trovato && $i < count($array_turisti); $i++) {
                                 if (is_object($array_turisti[$i]) && $array_turisti[$i] instanceof Turista) {
                                     if ($item_rec->getId_turista() == $array_turisti[$i]->getId()) {
                                         echo $array_turisti[$i]->getName();

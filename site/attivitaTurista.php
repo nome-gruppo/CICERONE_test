@@ -5,6 +5,8 @@ namespace classi\users;
 require_once '..\classi\users\Turista.php';
 require_once '..\classi\utilities\Functions.php';
 
+define('RIGA_DATA', 'data_attivita');
+
 use classi\utilities\Functions;
 
 $turista = new Turista();
@@ -67,7 +69,7 @@ $turista = $_SESSION['utente'];
             <th scope="row"><?php echo $riga['titolo']; ?></th>
             <th scope="row"><?php echo $riga['citta']; //stampo il campo citta dell'array $riga
                             ?></th>
-            <td><?php echo $riga['data_attivita']; ?></td>
+            <td><?php echo $riga[RIGA_DATA]; ?></td>
             <td><?php echo $riga['nomeCicerone']; ?></td>
             <td><?php echo $riga['cognomeCicerone']; ?></td>
             <td><?php echo $riga['valutazione']; ?></td>
@@ -76,12 +78,12 @@ $turista = $_SESSION['utente'];
             <td><?php echo wordwrap($riga['descrizione'], 30, "<br>\n");?></td>
             <td>
               <?php //la variabile diff restituisce una differenza dove ogni giorno vale '86400' quindi io voglio un diff che sia maggiore di 5 giorni=86400*5=432000
-                $diff=strtotime($riga['data_attivita'])-strtotime(date('Y-m-d'));if ((isset($_GET["inProgramma"]))&&($diff>432000)){ ?>
+                $diff=strtotime($riga[RIGA_DATA])-strtotime(date('Y-m-d'));if ((isset($_GET["inProgramma"]))&&($diff>432000)){ ?>
               <a href="cancellaPrenotazione.php?<?php echo $riga['id_attivita'];?>"><button class="btn btn-primary"> CANCELLA <?php } ?></button></a></td>
             <td>
               <?php
               //se attività passata
-              if ($riga['data_attivita'] < date('Y-m-d')) {
+              if ($riga[RIGA_DATA] < date('Y-m-d')) {
                 ?>
                <a href="scriviRecensione.php?id_cicerone=<?php echo $riga['id_cicerone'];?>"><button type="button" class="btn btn-primary btn-sm" >Recensisci</button></a>
                <?php

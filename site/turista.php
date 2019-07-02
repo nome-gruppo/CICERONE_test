@@ -40,7 +40,8 @@ $turista = $_SESSION['utente'];
           La prenotazione per l'attività: <?php while($riga = mysqli_fetch_assoc($result)){
               $result2=$functions->recuperaTitolo($riga['id_attivita']);
               $riga2=mysqli_fetch_assoc($result2);
-            echo '  '.$riga2['titolo'] ;}?>
+            echo '  '.$riga2['titolo'];
+            }?>
               è stata rifiutata
             </div>
               <?php }  ?>

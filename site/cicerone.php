@@ -32,7 +32,8 @@ $cicerone = $_SESSION['utente'];
     <a href='gestioneAttivita.php' class='alert-link'>Sono presenti delle prenotazioni nelle attivita:<?php while($riga = mysqli_fetch_assoc($result)){
       $result2=$functions->recuperaTitolo($riga['id_attivita']);
       $riga2=mysqli_fetch_assoc($result2);
-    echo ' | '.$riga2['titolo']." | ";}?>
+    echo ' | '.$riga2['titolo']." | ";
+    }?>
       . Click per controllare/rifiutare le prenotazioni</a>
     </div>
       <?php }  ?>

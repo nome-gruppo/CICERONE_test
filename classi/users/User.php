@@ -2,6 +2,9 @@
 namespace classi\users;
 require_once 'Contact.php';
 require_once '..\classi\utilities\Place.php';
+
+define('ERROR_TYPE', 'Errore di tipo');
+
 use classi\utilities\Place;
 
 class User {
@@ -25,7 +28,7 @@ class User {
         if(is_string($password)){
             $this->password =  $password;
         } else{
-            trigger_error('errore di tipo');
+            trigger_error(ERROR_TYPE);
         }
 
     }
@@ -45,7 +48,7 @@ class User {
         if(is_string($name)){
         $this->name =  ucfirst(strtolower(trim($name)));
         } else{
-            trigger_error('errore di tipo');
+            trigger_error(ERROR_TYPE);
         }
     }
     
@@ -54,7 +57,7 @@ class User {
         if(is_string($surname)){
             $this->surname =  ucfirst(strtolower(trim($surname)));
         } else{
-            trigger_error('errore di tipo');
+            trigger_error(ERROR_TYPE);
         }
     }
 
@@ -91,7 +94,7 @@ class User {
         if(is_string($birthDate)){
         $this->birthDate = $birthDate;
         }else{
-            trigger_error('errore di tipo');
+            trigger_error(ERROR_TYPE);
         }
     }
 
