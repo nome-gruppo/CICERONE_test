@@ -33,16 +33,17 @@ $functions = new Functions();
 if (isset($_POST["pagamento_carta"])) {
 
     $pagamento = new CardPayment();
-    $tentativo = 1;
+    $tentativo = $_SESSION['tentativo'];
+    $tentativo++;
     $codice_ok = false;
+    
 
-
-    while ($tentativo <= MAX_TENTATIVI && !$codice_ok) {
+    if ($tentativo <= MAX_TENTATIVI && !$codice_ok) {
 
         if (($functions->code_control($_POST["num_carta"], $pagamento::CODE_SIZE)) && ($functions->code_control($_POST["cvv_code"], $pagamento::CVV_SIZE))
         ) {
 
-
+            
             $pagamento->setCode($_POST["num_carta"]);
             $pagamento->setCvv($_POST["cvv_code"]);
             $codice_ok = true;
@@ -53,13 +54,16 @@ if (isset($_POST["pagamento_carta"])) {
             $query = "UPDATE ciceroni SET data_premium='{$utente->getPremiumDate()}' where id_cicerone = '{$utente->getId()}'";
             $result = mysqli_query($link, $query) or die("Errore nella modifica data premium!");
         } else {
-
+           
             if ($tentativo < MAX_TENTATIVI) {
+               
+                $_SESSION['tentativo'] = $tentativo;
+
                 echo "<div class='alert alert-danger' role='alert'>
-                    <a href='site\pagamenti.php' class='alert-link'>Codici carta non validi!<br>
-                    Ti restano " . MAX_TENTATIVI - $tentativo . "tentativi, altrimenti sarà effettuato il logout. Click per riprovare</a>
+                    <a href='javascript:history.back(1);' class='alert-link'>Codici carta non validi!<br>
+                    Ti restano " . (MAX_TENTATIVI - $tentativo) . " tentativi, altrimenti sarà effettuato il logout. Click per riprovare</a>
                     </div>";
-                $tentativo++;
+                    
             } else {
                 header("location:logout.php");
             }

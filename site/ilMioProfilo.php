@@ -13,6 +13,10 @@ session_start();
 $utente = $_SESSION['utente'];
 $_SESSION['costo_premium'] = COSTO_PREMIUM;
 $functions = new Functions();
+
+$tentativo_pagamento = 0;
+$_SESSION['tentativo'] = $tentativo_pagamento;
+
 ?>
 <!DOCTYPE html>
 <html lang="it">
