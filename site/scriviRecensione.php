@@ -57,7 +57,7 @@ $functions = new Functions();
 
                     <div class="col-sm-3 col-xs-6">
                         <fieldset class="rating">
-                            <legend>Rating</legend>
+                            <legend>Voto</legend>
                             <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5"></label>
                             <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4"></label>
                             <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3"></label>

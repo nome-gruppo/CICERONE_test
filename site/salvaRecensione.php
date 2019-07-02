@@ -20,13 +20,12 @@ use classi\users\Turista;
 
 session_start();
 
+$turista = new Turista();
 $turista = $_SESSION['utente'];
 $id_cicerone = $_SESSION['id_cicerone'];
 // connessione database
 $database = new Database();
 $link = $database->getConnection();
-
-$functions = new Functions();
 
 
 if (isset($_POST["scrivi_recensione"])){

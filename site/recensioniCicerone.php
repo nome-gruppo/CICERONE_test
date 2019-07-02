@@ -35,7 +35,7 @@ while ($row = mysqli_fetch_array($result_search)) {
 $array_valutazioni = array(0.0, 0.0, 0.0, 0.0, 0.0);      //array contenente il numero delle valutazioni con 1,2,3,4,5 stelle
 //se presente almeno una recensione
 if (count($array_recensioni) > 0) {
-    $somma_valutazioni = 0;
+    
     foreach ($array_recensioni as $item) {
         if (is_object($item) && $item instanceof Review) {
             

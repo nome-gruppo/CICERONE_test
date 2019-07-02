@@ -11,9 +11,6 @@ class CardPayment extends AbPayment
     const CVV_SIZE = 3;    // lunghezza codice cvv
 
 
-    public function __construct(){
-        parent::__construct();
-    }
     
     public function setCode($code)
     {

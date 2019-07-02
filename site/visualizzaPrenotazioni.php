@@ -38,7 +38,7 @@ else eval("var "+param[i]+";");
   <?php
   session_start();
   use classi\utilities\Functions;
-  use classi\users\Cicerone;
+ 
   $cicerone=new Cicerone();
   $functions=new Functions();
   $cicerone=$_SESSION['utente'];//prendo l'oggetto turista precedentemente messo in sessione
@@ -65,7 +65,7 @@ else eval("var "+param[i]+";");
           ?>
                     <tr>
                     <th scope="row"><?php echo $riga['nome'];?></th>
-                    <th scope="row"><?php echo $riga['cognome'];?></td>
+                    <th scope="row"><?php echo $riga['cognome'];?></th>
                     <td><?php echo $riga['mail'];?></td>
                     <td><?php echo $riga['telefono'];?></td>
                     <td><?php echo $riga['nazione'];?></td>
